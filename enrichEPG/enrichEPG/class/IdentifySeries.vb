@@ -493,6 +493,13 @@ Public Class IdentifySeries
             End Try
         End Sub
 
+        Public Shared Sub ResetCoverAndFanartPath()
+            _SeriesPosterPath = String.Empty
+            _FanArtPath = String.Empty
+        End Sub
+        Public Shared Sub ResetEpisodeImagePath()
+            _EpisodeImagePath = String.Empty
+        End Sub
     End Class
 
 End Class

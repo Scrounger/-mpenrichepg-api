@@ -648,6 +648,8 @@ Public Class EnrichEPG
                                 'Information pro Serie nur einmal laden
                                 If Not _lastSeriesName = _Result(i).Title Then
 
+                                    IdentifySeries.TheTvDb.ResetCoverAndFanartPath()
+
                                     MyLog.Info("enrichEPG: [EScannerImport]: TheTvDb.com: {0} searching...", _SeriesName)
                                     IdentifySeries.TheTvDb.SearchSeries(_Result(i).Title)
 
@@ -672,6 +674,8 @@ Public Class EnrichEPG
 
                                 'Information pro Episode nur einmal laden, wenn Serie gefunden
                                 If IdentifySeries.TheTvDb.SeriesFound = True And Not _lastEpisodeName = _Result(i).EpisodeName Then
+
+                                    IdentifySeries.TheTvDb.ResetEpisodeImagePath()
 
                                     IdentifySeries.TheTvDb.SearchEpisode(CInt(_Result(i).SeriesNum), CInt(_Result(i).EpisodeNum))
 
