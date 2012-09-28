@@ -1,0 +1,10 @@
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Release\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Release\enrichEPG.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Release\enrichEPG.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\ResolveAssemblyReference.cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\enrichEPG.Resources.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\enrichEPG.vbproj.GenerateResource.Cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\enrichEPG.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Release\enrichEPG.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Release\TvdbLib.dll
