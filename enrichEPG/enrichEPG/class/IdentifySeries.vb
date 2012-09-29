@@ -190,6 +190,15 @@ Public Class IdentifySeries
 
                         IdentifiedEpisode = SeriesLang.Episodes(y)
                         Return True
+                    Else
+                        Dim _variance As Integer = levenshtein(TheTvDbEpisodeName, EpgEpisodeName)
+
+                        If _variance <= 2 Then
+
+                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2})", _variance, EpgEpisodeName, TheTvDbEpisodeName)
+                            IdentifiedEpisode = SeriesLang.Episodes(y)
+                            Return True
+                        End If
                     End If
                 Next
             End If
@@ -203,6 +212,15 @@ Public Class IdentifySeries
 
                         IdentifiedEpisode = SeriesEN.Episodes(z)
                         Return True
+                    Else
+                        Dim _variance As Integer = levenshtein(TheTvDbEpisodeName, EpgEpisodeName)
+
+                        If _variance <= 2 Then
+
+                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2}", _variance, EpgEpisodeName, TheTvDbEpisodeName)
+                            IdentifiedEpisode = SeriesEN.Episodes(z)
+                            Return True
+                        End If
                     End If
                 Next
             End If
@@ -215,7 +233,51 @@ Public Class IdentifySeries
 
     End Function
     Private Shared Function ReplaceSearchingString(ByVal expression As String) As String
-        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*]", ""), " ", "")
+        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()]", ""), " ", "")
+    End Function
+    Private Shared Function levenshtein(ByVal a As [String], ByVal b As [String]) As Int32
+
+        If String.IsNullOrEmpty(a) Then
+            If Not String.IsNullOrEmpty(b) Then
+                Return b.Length
+            End If
+            Return 0
+        End If
+
+        If String.IsNullOrEmpty(b) Then
+            If Not String.IsNullOrEmpty(a) Then
+                Return a.Length
+            End If
+            Return 0
+        End If
+
+        Dim cost As Int32
+        Dim d As Int32(,) = New Integer(a.Length, b.Length) {}
+        Dim min1 As Int32
+        Dim min2 As Int32
+        Dim min3 As Int32
+
+        For i As Int32 = 0 To d.GetUpperBound(0)
+            d(i, 0) = i
+        Next
+
+        For i As Int32 = 0 To d.GetUpperBound(1)
+            d(0, i) = i
+        Next
+
+        For i As Int32 = 1 To d.GetUpperBound(0)
+            For j As Int32 = 1 To d.GetUpperBound(1)
+                cost = Convert.ToInt32(Not (a(i - 1) = b(j - 1)))
+
+                min1 = d(i - 1, j) + 1
+                min2 = d(i, j - 1) + 1
+                min3 = d(i - 1, j - 1) + cost
+                d(i, j) = Math.Min(Math.Min(min1, min2), min3)
+            Next
+        Next
+
+        Return d(d.GetUpperBound(0), d.GetUpperBound(1))
+
     End Function
 #End Region
 
