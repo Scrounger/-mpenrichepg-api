@@ -1,6 +1,15 @@
 ﻿Imports enrichEPG.TvDatabase
 Imports TvDatabase
 Imports System.IO
+Imports System
+Imports System.Collections.Generic
+Imports System.Data
+Imports System.Data.OleDb
+Imports System.Diagnostics
+Imports System.Text
+Imports System.Threading
+Imports System.Windows.Forms
+Imports System.Text.RegularExpressions
 
 Public Class IdentifySeries
 
@@ -175,7 +184,7 @@ Public Class IdentifySeries
 
             If SeriesLang.Episodes.Count > 0 Then
                 For y = 0 To SeriesLang.Episodes.Count - 1
-                    If UCase(SeriesLang.Episodes(y).EpisodeName) = UCase(program.EpisodeName) Then
+                    If ReplaceSearchingString(UCase(SeriesLang.Episodes(y).EpisodeName)) = ReplaceSearchingString(UCase(program.EpisodeName)) Then
 
                         IdentifiedEpisode = SeriesLang.Episodes(y)
                         Return True
@@ -185,7 +194,7 @@ Public Class IdentifySeries
             'falls nicht gefunden noch auf englisch TheTvDb.com suchen
             If SeriesEN.Episodes.Count > 0 Then
                 For z = 0 To SeriesEN.Episodes.Count - 1
-                    If UCase(SeriesEN.Episodes(z).EpisodeName) = UCase(program.EpisodeName) Then
+                    If ReplaceSearchingString(UCase(SeriesEN.Episodes(z).EpisodeName)) = ReplaceSearchingString(UCase(program.EpisodeName)) Then
 
                         IdentifiedEpisode = SeriesEN.Episodes(z)
                         Return True
@@ -199,6 +208,9 @@ Public Class IdentifySeries
             MyLog.[Error]("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
 
+    End Function
+    Private Shared Function ReplaceSearchingString(ByVal expression As String) As String
+        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*]", ""), " ", "")
     End Function
 #End Region
 
@@ -295,7 +307,7 @@ Public Class IdentifySeries
                 'Serien auf TheTvDB gefunden
                 If _SearchSeriesResult.Count > 0 Then
                     For i = 0 To _SearchSeriesResult.Count - 1
-                        If InStr(UCase(_SearchSeriesResult(i).SeriesName), UCase(SeriesName)) > 0 Then
+                        If InStr(ReplaceSearchingString(UCase(_SearchSeriesResult(i).SeriesName)), ReplaceSearchingString(UCase(SeriesName))) > 0 Then
                             'SerienName gefunden, Episoden laden
 
                             'MyLog.Debug("[SearchSeries]: found lang")
@@ -331,7 +343,7 @@ Public Class IdentifySeries
                     'Serien auf TheTvDB gefunden
                     If _SearchSeriesResult.Count > 0 Then
                         For d = 0 To _SearchSeriesResult.Count - 1
-                            If InStr(UCase(_SearchSeriesResult(d).SeriesName), UCase(SeriesName)) > 0 Then
+                            If InStr(ReplaceSearchingString(UCase(_SearchSeriesResult(d).SeriesName)), ReplaceSearchingString(UCase(SeriesName))) > 0 Then
                                 'SerienName gefunden, Episoden laden
 
                                 'MyLog.Debug("[SearchSeries]: found en")
@@ -500,6 +512,8 @@ Public Class IdentifySeries
         Public Shared Sub ResetEpisodeImagePath()
             _EpisodeImagePath = String.Empty
         End Sub
+
+        
     End Class
 
 End Class

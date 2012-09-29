@@ -25,6 +25,7 @@ Public Class Helper
     Public Shared Function allowedSigns(ByVal expression As String) As String
         Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?]", "_"), "'", "''")
     End Function
+
     Public Shared Function getTvMovieProgram(ByVal idProgram As Integer) As TVMovieProgram
         Try
             'idProgram in TvMovieProgram suchen & Daten aktualisieren
