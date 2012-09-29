@@ -181,10 +181,12 @@ Public Class IdentifySeries
     Public Shared Function TheTvDbEpisodeIdentify(ByVal program As Program) As Boolean
         Try
 
-
             If SeriesLang.Episodes.Count > 0 Then
                 For y = 0 To SeriesLang.Episodes.Count - 1
-                    If ReplaceSearchingString(UCase(SeriesLang.Episodes(y).EpisodeName)) = ReplaceSearchingString(UCase(program.EpisodeName)) Then
+                    Dim EpgEpisodeName As String = ReplaceSearchingString(UCase(SeriesLang.Episodes(y).EpisodeName))
+                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(program.EpisodeName))
+
+                    If InStr(TheTvDbEpisodeName, EpgEpisodeName) > 0 Then
 
                         IdentifiedEpisode = SeriesLang.Episodes(y)
                         Return True
@@ -194,7 +196,10 @@ Public Class IdentifySeries
             'falls nicht gefunden noch auf englisch TheTvDb.com suchen
             If SeriesEN.Episodes.Count > 0 Then
                 For z = 0 To SeriesEN.Episodes.Count - 1
-                    If ReplaceSearchingString(UCase(SeriesEN.Episodes(z).EpisodeName)) = ReplaceSearchingString(UCase(program.EpisodeName)) Then
+                    Dim EpgEpisodeName As String = ReplaceSearchingString(UCase(SeriesEN.Episodes(z).EpisodeName))
+                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(program.EpisodeName))
+
+                    If InStr(TheTvDbEpisodeName, EpgEpisodeName) > 0 Then
 
                         IdentifiedEpisode = SeriesEN.Episodes(z)
                         Return True
@@ -307,7 +312,9 @@ Public Class IdentifySeries
                 'Serien auf TheTvDB gefunden
                 If _SearchSeriesResult.Count > 0 Then
                     For i = 0 To _SearchSeriesResult.Count - 1
-                        If InStr(ReplaceSearchingString(UCase(_SearchSeriesResult(i).SeriesName)), ReplaceSearchingString(UCase(SeriesName))) > 0 Then
+                        Dim EpgSeriesName As String = ReplaceSearchingString(UCase(SeriesName))
+                        Dim TheTvDBSeriesName As String = ReplaceSearchingString(UCase(_SearchSeriesResult(i).SeriesName))
+                        If InStr(TheTvDBSeriesName, EpgSeriesName) > 0 Then
                             'SerienName gefunden, Episoden laden
 
                             'MyLog.Debug("[SearchSeries]: found lang")
@@ -343,7 +350,9 @@ Public Class IdentifySeries
                     'Serien auf TheTvDB gefunden
                     If _SearchSeriesResult.Count > 0 Then
                         For d = 0 To _SearchSeriesResult.Count - 1
-                            If InStr(ReplaceSearchingString(UCase(_SearchSeriesResult(d).SeriesName)), ReplaceSearchingString(UCase(SeriesName))) > 0 Then
+                            Dim EpgSeriesName As String = ReplaceSearchingString(UCase(SeriesName))
+                            Dim TheTvDBSeriesName As String = ReplaceSearchingString(UCase(_SearchSeriesResult(d).SeriesName))
+                            If InStr(TheTvDBSeriesName, EpgSeriesName) > 0 Then
                                 'SerienName gefunden, Episoden laden
 
                                 'MyLog.Debug("[SearchSeries]: found en")
