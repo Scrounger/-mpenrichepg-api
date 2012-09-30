@@ -38,12 +38,14 @@ Public Class TVSeriesDB
     Private disposed As Boolean = False
     Private Shared m_db As SQLiteClient = Nothing
     Private _EpisodeInfos As SQLiteResultSet
+    Private _AllEpisodesOfSeries As SQLiteResultSet
     Private Shared _SeriesInfos As SQLiteResultSet
     Private _TVSeriesThumbPath As String
     Private _TVSeriesFanArtPath As String
     Private _SeriesID As Integer
     Private _EpisodeID As String
     Private Shared _Index As Integer
+    Private Shared _logLevenstein As String
 
 #End Region
 
@@ -186,6 +188,9 @@ Public Class TVSeriesDB
     Public Function EpisodeFound(ByVal SeriesID As Integer, ByVal EpisodeName As String) As Boolean
 
         Try
+
+            _logLevenstein = String.Empty
+
             _EpisodeInfos = m_db.Execute( _
                             [String].Format("SELECT * FROM online_episodes WHERE SeriesID = '{0}' AND EpisodeName LIKE '{1}'", _
                             SeriesID, Helper.allowedSigns(EpisodeName)))
@@ -193,8 +198,37 @@ Public Class TVSeriesDB
             If _EpisodeInfos IsNot Nothing AndAlso _EpisodeInfos.Rows.Count > 0 Then
                 Return True
             Else
+
+                _AllEpisodesOfSeries = m_db.Execute( _
+                            [String].Format("SELECT * FROM online_episodes WHERE SeriesID = '{0}'", _
+                            SeriesID))
+
+                If _AllEpisodesOfSeries IsNot Nothing AndAlso _AllEpisodesOfSeries.Rows.Count > 0 Then
+
+                    Dim EpgEpisodeName As String = IdentifySeries.ReplaceSearchingString(UCase(EpisodeName))
+
+                    For i = 0 To _AllEpisodesOfSeries.Rows.Count - 1
+                        Dim TvSeriesDbEpisodeName As String = IdentifySeries.ReplaceSearchingString(UCase(DatabaseUtility.[Get](_AllEpisodesOfSeries, i, "EpisodeName")))
+
+                        Dim _variance As Integer = IdentifySeries.levenshtein(TvSeriesDbEpisodeName, EpgEpisodeName)
+
+                        If _variance <= 2 Then
+
+                            _logLevenstein = String.Format(", variance = {0}, TvSeriesDB: {1}", _variance, DatabaseUtility.[Get](_AllEpisodesOfSeries, i, "EpisodeName"))
+
+                            _EpisodeInfos = m_db.Execute( _
+                            [String].Format("SELECT * FROM online_episodes WHERE CompositeID = '{0}'", _
+                            DatabaseUtility.[Get](_AllEpisodesOfSeries, i, "CompositeID")))
+
+                            Return True
+                        End If
+                    Next
+
+                End If
+
                 Return False
             End If
+
 
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [EpisodeFound]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
@@ -365,6 +399,13 @@ Public Class TVSeriesDB
             End If
         End Get
     End Property
+
+    Public Shared ReadOnly Property logLevenstein() As String
+        Get
+            Return _logLevenstein
+        End Get
+    End Property
+
 #End Region
 
 #Region "IDisposable Members"

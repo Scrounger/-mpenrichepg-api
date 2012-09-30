@@ -181,13 +181,13 @@ Public Class IdentifySeries
     Public Shared Function TheTvDbEpisodeIdentify(ByVal program As Program) As Boolean
         Try
 
+            Dim EpgEpisodeName As String = ReplaceSearchingString(UCase(program.EpisodeName))
+
             If SeriesLang.Episodes.Count > 0 Then
                 For y = 0 To SeriesLang.Episodes.Count - 1
-                    Dim EpgEpisodeName As String = ReplaceSearchingString(UCase(SeriesLang.Episodes(y).EpisodeName))
-                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(program.EpisodeName))
+                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(SeriesLang.Episodes(y).EpisodeName))
 
-                    If InStr(TheTvDbEpisodeName, EpgEpisodeName) > 0 Then
-
+                    If TheTvDbEpisodeName = EpgEpisodeName Then
                         IdentifiedEpisode = SeriesLang.Episodes(y)
                         Return True
                     Else
@@ -195,21 +195,20 @@ Public Class IdentifySeries
 
                         If _variance <= 2 Then
 
-                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2})", _variance, EpgEpisodeName, TheTvDbEpisodeName)
+                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2})", _variance, program.EpisodeName, SeriesLang.Episodes(y).EpisodeName)
                             IdentifiedEpisode = SeriesLang.Episodes(y)
                             Return True
                         End If
                     End If
                 Next
             End If
+
             'falls nicht gefunden noch auf englisch TheTvDb.com suchen
             If SeriesEN.Episodes.Count > 0 Then
                 For z = 0 To SeriesEN.Episodes.Count - 1
-                    Dim EpgEpisodeName As String = ReplaceSearchingString(UCase(SeriesEN.Episodes(z).EpisodeName))
-                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(program.EpisodeName))
+                    Dim TheTvDbEpisodeName As String = ReplaceSearchingString(UCase(SeriesEN.Episodes(z).EpisodeName))
 
-                    If InStr(TheTvDbEpisodeName, EpgEpisodeName) > 0 Then
-
+                    If TheTvDbEpisodeName = EpgEpisodeName Then
                         IdentifiedEpisode = SeriesEN.Episodes(z)
                         Return True
                     Else
@@ -217,7 +216,7 @@ Public Class IdentifySeries
 
                         If _variance <= 2 Then
 
-                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2}", _variance, EpgEpisodeName, TheTvDbEpisodeName)
+                            MyLog.Debug("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: levenshtein variance = {0} (EPG: {1}, TheTvDb: {2})", _variance, program.EpisodeName, SeriesEN.Episodes(z).EpisodeName)
                             IdentifiedEpisode = SeriesEN.Episodes(z)
                             Return True
                         End If
@@ -232,10 +231,10 @@ Public Class IdentifySeries
         End Try
 
     End Function
-    Private Shared Function ReplaceSearchingString(ByVal expression As String) As String
-        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()]", ""), " ", "")
+    Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
+        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()_]", ""), " ", "")
     End Function
-    Private Shared Function levenshtein(ByVal a As [String], ByVal b As [String]) As Int32
+    Public Shared Function levenshtein(ByVal a As [String], ByVal b As [String]) As Int32
 
         If String.IsNullOrEmpty(a) Then
             If Not String.IsNullOrEmpty(b) Then
