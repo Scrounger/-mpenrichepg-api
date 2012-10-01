@@ -536,14 +536,11 @@ Public Class EnrichEPG
         Dim _Counter As Integer = 0
         Dim _SeriesDummyID As Integer = 0
         Dim _idSeries As Integer = 0
+        Dim _idEpisode As String = String.Empty
 
         Dim _CacheSeries As New ArrayList
 
         Try
-
-            'Serie suchen und in Liste packen
-            'Dim _SearchSeriesResult As List(Of TvdbLib.Data.TvdbSearchResult)
-            
 
             'Alle Programme mit EpisodenNummer laden
             Dim sb As New SqlBuilder(Gentle.Framework.StatementType.Select, GetType(Program))
@@ -647,7 +644,7 @@ Public Class EnrichEPG
                             'Daten ohne TheTvDb.com übergeben
                             _logSeriesFound = False
                             Dim _rating As Integer = _Result(i).StarRating
-                            Dim _idEpisode As String = String.Empty
+
 
                             'TheTvDb nutzen
                             If _useTheTvDb = True And ClickfinderProgramGuideImportEnable = True Then
@@ -706,6 +703,7 @@ Public Class EnrichEPG
 
                                 End If
                             Else
+                                _idEpisode = String.Empty
                                 _idSeries = _SeriesDummyID
                             End If
 
@@ -786,7 +784,7 @@ Public Class EnrichEPG
             End If
 
             MyLog.Info("")
-            MyLog.[Info]("enrichEPG: [EScannerImport]: Process success - {0} Episodes imported", _Counter)
+            MyLog.[Info]("enrichEPG: [EScannerImport]: Process success - {0} Episodes identifed by EpisodenScanner", _Counter)
 
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [EScannerImport]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
