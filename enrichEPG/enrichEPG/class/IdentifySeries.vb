@@ -232,7 +232,7 @@ Public Class IdentifySeries
 
     End Function
     Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
-        Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()_]", ""), " ", "")
+        Return System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()_]", "")
     End Function
     Public Shared Function levenshtein(ByVal a As [String], ByVal b As [String]) As Int32
 
