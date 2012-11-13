@@ -283,11 +283,12 @@ Public Class EnrichEPG
                 Try
                     Dim _EpisodeFoundCounter As Integer = 0
 
-                    Dim _Result As New ArrayList
-
                     'Zunächst nach alle Serien mit SerienName aus TvSeries DB suchen
-                    _SQLString = "Select idProgram from program WHERE title LIKE '" & Helper.allowedSigns(_TvSeriesDB(i).SeriesName) & "' ORDER BY episodeName"
-                    _Result.AddRange(Broker.Execute(_SQLString).TransposeToFieldList("idProgram", False))
+                    _SQLString = "Select * from program WHERE title LIKE '" & Helper.allowedSigns(_TvSeriesDB(i).SeriesName) & "' ORDER BY episodeName"
+
+                    _SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+                    Dim _SQLstate As SqlStatement = Broker.GetStatement(_SQLString)
+                    Dim _Result As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate.Execute())
 
                     MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0} ({1}): {2} episodes found", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID, _Result.Count)
 
@@ -317,117 +318,119 @@ Public Class EnrichEPG
                     End Try
 
                     'Alle im EPG gefundenen episoden der Serie durchlaufen
-                    For d As Integer = 0 To _Result.Count - 1
-                        Dim _program As Program = Program.Retrieve(CInt(_Result.Item(d)))
+                    For Each _program As Program In _Result
                         Dim _episodeFound As Boolean = False
                         Dim _logNewEpisode As Boolean = False
 
                         Try
+                            If Not String.IsNullOrEmpty(_program.EpisodeName) Then
+                                'Episode in TvSeries DB gefunden
+                                If _TvSeriesDB.EpisodeFound(_TvSeriesDB(i).SeriesID, Helper.allowedSigns(_program.EpisodeName)) = True Then
+                                    _episodeFound = True
 
-                            'Episode in TvSeries DB gefunden
-                            If _TvSeriesDB.EpisodeFound(_TvSeriesDB(i).SeriesID, Helper.allowedSigns(_program.EpisodeName)) = True Then
-                                _episodeFound = True
+                                    'Daten im EPG (program) updaten
+                                    IdentifySeries.UpdateEpgEpisode(_program, _TvSeriesDB, _TvSeriesDB(i).SeriesName)
 
-                                'Daten im EPG (program) updaten
-                                IdentifySeries.UpdateEpgEpisode(_program, _TvSeriesDB, _TvSeriesDB(i).SeriesName)
+                                    'Neue Episode -> im EPG Describtion kennzeichnen + Zähler hoch
+                                    IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
+                                    If _TvSeriesDB.EpisodeExistLocal = False Then
+                                        _logNewEpisode = True
+                                        _CounterNewEpisode = _CounterNewEpisode + 1
+                                    End If
 
-                                'Neue Episode -> im EPG Describtion kennzeichnen + Zähler hoch
-                                IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
-                                If _TvSeriesDB.EpisodeExistLocal = False Then
-                                    _logNewEpisode = True
-                                    _CounterNewEpisode = _CounterNewEpisode + 1
-                                End If
-                               
-                                'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                                IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
+                                    'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                                    IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
 
-                                _EpisodeFoundCounter = _EpisodeFoundCounter + 1
+                                    _EpisodeFoundCounter = _EpisodeFoundCounter + 1
 
-                                If Not _lastEpisodeName = _program.EpisodeName And _episodeFound = True Then
-                                    MyLog.Info("enrichEPG: [GetSeriesInfos]: TvSeriesDB: S{0}E{1} - {2} (newEpisode: {3}{4})", _
-                                  _TvSeriesDB.SeasonIndex, _TvSeriesDB.EpisodeIndex, _program.EpisodeName, _logNewEpisode, TVSeriesDB.logLevenstein)
-                                End If
+                                    If Not _lastEpisodeName = _program.EpisodeName And _episodeFound = True Then
+                                        MyLog.Info("enrichEPG: [GetSeriesInfos]: TvSeriesDB: S{0}E{1} - {2} (newEpisode: {3}{4})", _
+                                      _TvSeriesDB.SeasonIndex, _TvSeriesDB.EpisodeIndex, _program.EpisodeName, _logNewEpisode, TVSeriesDB.logLevenstein)
+                                    End If
 
-                            Else
-                                'Episode nicht in TvSeries DB gefunden
+                                Else
+                                    'Episode nicht in TvSeries DB gefunden
 
-                                'auf TheTvDb.com nach episode suchen (language: lang)
-                                If _useTheTvDb = True Then
+                                    'auf TheTvDb.com nach episode suchen (language: lang)
+                                    If _useTheTvDb = True Then
 
-                                    Try
-                                        If _NextSeries = True Then
-                                            'MyLog.Info("enrichEPG: [GetSeriesInfos]: Daten von TheTvDb.com holen: {0} (idSeries: {1})", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID)
-                                            _NextSeries = False
-                                            IdentifySeries.SeriesEN = MyTVDBen.TheTVdbHandler.GetSeries(_TvSeriesDB(i).SeriesID, MyTVDBen.DBLanguage, True, False, False)
-                                            IdentifySeries.SeriesLang = MyTVDBlang.TheTVdbHandler.GetSeries(_TvSeriesDB(i).SeriesID, MyTVDBlang.DBLanguage, True, False, False)
-                                        End If
-
-                                        _episodeFound = IdentifySeries.TheTvDbEpisodeIdentify(_program)
-
-                                        'Daten schreiben wenn gefunden
-                                        If _episodeFound = True Then
-                                            _TvSeriesDB.LoadEpisodeBySeriesID(_TvSeriesDB(i).SeriesID, IdentifySeries.IdentifiedEpisode.SeasonNumber, IdentifySeries.IdentifiedEpisode.EpisodeNumber)
-
-                                            'Daten im EPG (program) updaten
-                                            IdentifySeries.UpdateEpgEpisode(_program, _TvSeriesDB, _TvSeriesDB(i).SeriesName)
-
-                                            'Neue Episode -> im EPG Describtion kennzeichnen
-                                            IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
-                                            If _TvSeriesDB.EpisodeExistLocal = False Then
-                                                _logNewEpisode = True
-                                                _CounterNewEpisode = _CounterNewEpisode + 1
+                                        Try
+                                            If _NextSeries = True Then
+                                                'MyLog.Info("enrichEPG: [GetSeriesInfos]: Daten von TheTvDb.com holen: {0} (idSeries: {1})", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID)
+                                                _NextSeries = False
+                                                IdentifySeries.SeriesEN = MyTVDBen.TheTVdbHandler.GetSeries(_TvSeriesDB(i).SeriesID, MyTVDBen.DBLanguage, True, False, False)
+                                                IdentifySeries.SeriesLang = MyTVDBlang.TheTVdbHandler.GetSeries(_TvSeriesDB(i).SeriesID, MyTVDBlang.DBLanguage, True, False, False)
                                             End If
 
-                                            'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                                            IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
+                                            _episodeFound = IdentifySeries.TheTvDbEpisodeIdentify(_program)
 
-                                            _EpisodeFoundCounter = _EpisodeFoundCounter + 1
+                                            'Daten schreiben wenn gefunden
+                                            If _episodeFound = True Then
+                                                _TvSeriesDB.LoadEpisodeBySeriesID(_TvSeriesDB(i).SeriesID, IdentifySeries.IdentifiedEpisode.SeasonNumber, IdentifySeries.IdentifiedEpisode.EpisodeNumber)
 
-                                        End If
+                                                'Daten im EPG (program) updaten
+                                                IdentifySeries.UpdateEpgEpisode(_program, _TvSeriesDB, _TvSeriesDB(i).SeriesName)
 
-                                        If Not _lastEpisodeName = _program.EpisodeName And _episodeFound = True Then
-                                            MyLog.Info("enrichEPG: [GetSeriesInfos]: TheTvDb.com ({0}): S{1}E{2} - {3} (newEpisode: {4})", IdentifySeries.IdentifiedEpisode.Language.Abbriviation, _
-                                          IdentifySeries.IdentifiedEpisode.SeasonNumber, IdentifySeries.IdentifiedEpisode.EpisodeNumber, _program.EpisodeName, _logNewEpisode)
-                                        End If
+                                                'Neue Episode -> im EPG Describtion kennzeichnen
+                                                IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
+                                                If _TvSeriesDB.EpisodeExistLocal = False Then
+                                                    _logNewEpisode = True
+                                                    _CounterNewEpisode = _CounterNewEpisode + 1
+                                                End If
 
-                                    Catch exTheTvDB As Exception
-                                        MyLog.[Error]("enrichEPG: [GetSeriesInfos]: Error in TheTvDb.com fkt.")
-                                        MyLog.[Error]("enrichEPG: [GetSeriesInfos]: exception err:{0} stack:{1}", exTheTvDB.Message, exTheTvDB.StackTrace)
-                                    End Try
-                                End If
-                            End If
+                                                'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                                                IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
 
-                            'Episode identifiziert -> idProgram speichern, benötigt damit CheckEpisodenscanner nicht ncohmal ausgeführt wird
-                            If _episodeFound = True Then
-                                _IdentifiedPrograms.Add(_program.IdProgram)
-                            End If
+                                                _EpisodeFoundCounter = _EpisodeFoundCounter + 1
 
-                            'Episode letztendlich nicht identfiziert -> als neu markieren
-                            If _episodeFound = False Then
+                                            End If
 
-                                _program.SeriesNum = String.Empty
-                                _program.EpisodeNum = String.Empty
+                                            If Not _lastEpisodeName = _program.EpisodeName And _episodeFound = True Then
+                                                MyLog.Info("enrichEPG: [GetSeriesInfos]: TheTvDb.com ({0}): S{1}E{2} - {3} (newEpisode: {4})", IdentifySeries.IdentifiedEpisode.Language.Abbriviation, _
+                                              IdentifySeries.IdentifiedEpisode.SeasonNumber, IdentifySeries.IdentifiedEpisode.EpisodeNumber, _program.EpisodeName, _logNewEpisode)
+                                            End If
 
-                                'EPG SerienName schreiben
-                                IdentifySeries.UpdateEpgEpisodeSeriesName(_program, _TvSeriesDB(i).SeriesName)
-
-                                IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
-
-                                If _TvSeriesDB.EpisodeExistLocal = False Then
-                                    _CounterNewEpisode = _CounterNewEpisode + 1
+                                        Catch exTheTvDB As Exception
+                                            MyLog.[Error]("enrichEPG: [GetSeriesInfos]: Error in TheTvDb.com fkt.")
+                                            MyLog.[Error]("enrichEPG: [GetSeriesInfos]: exception err:{0} stack:{1}", exTheTvDB.Message, exTheTvDB.StackTrace)
+                                        End Try
+                                    End If
                                 End If
 
-                                'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                                IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
-
-                                If Not _lastEpisodeName = _program.EpisodeName Then
-                                    MyLog.Warn("enrichEPG: [GetSeriesInfos]: {0} ({1}, {2}), episode: {3} - not identified -> marked as New Episode", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID, _program.ReferencedChannel.DisplayName, _program.EpisodeName)
-                                    _EpisodeIdentified = False
+                                'Episode identifiziert -> idProgram speichern, benötigt damit CheckEpisodenscanner nicht ncohmal ausgeführt wird
+                                If _episodeFound = True Then
+                                    _IdentifiedPrograms.Add(_program.IdProgram)
                                 End If
-                            End If
 
-                            _ScheduldedDummyRecording = _program
-                            _lastEpisodeName = _program.EpisodeName
+                                'Episode letztendlich nicht identfiziert -> als neu markieren
+                                If _episodeFound = False Then
+
+                                    _program.SeriesNum = String.Empty
+                                    _program.EpisodeNum = String.Empty
+
+                                    'EPG SerienName schreiben
+                                    IdentifySeries.UpdateEpgEpisodeSeriesName(_program, _TvSeriesDB(i).SeriesName)
+
+                                    IdentifySeries.MarkEpgEpisodeAsNew(_program, _TvSeriesDB.EpisodeExistLocal)
+
+                                    If _TvSeriesDB.EpisodeExistLocal = False Then
+                                        _CounterNewEpisode = _CounterNewEpisode + 1
+                                    End If
+
+                                    'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                                    IdentifySeries.UpdateTvMovieProgram(_program, _TvSeriesDB, i, _episodeFound)
+
+                                    If Not _lastEpisodeName = _program.EpisodeName Then
+                                        MyLog.Warn("enrichEPG: [GetSeriesInfos]: {0} ({1}, {2}), episode: {3} - not identified -> marked as New Episode", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID, _program.ReferencedChannel.DisplayName, _program.EpisodeName)
+                                        _EpisodeIdentified = False
+                                    End If
+                                End If
+
+                                _ScheduldedDummyRecording = _program
+                                _lastEpisodeName = _program.EpisodeName
+                            Else
+                                MyLog.Warn("enrichEPG: [GetSeriesInfos]: No episodeName found (idProgram: {0}, channel: {1}, startTime: {2})", _program.IdProgram, _program.ReferencedChannel.DisplayName, _program.StartTime)
+                            End If
 
                         Catch ex As Exception
                             MyLog.[Error]("enrichEPG: [GetSeriesInfos]: title:{0} idchannel:{1} startTime: {2} episodeName: {3}", _program.Title, _program.ReferencedChannel.DisplayName, _program.StartTime, _program.EpisodeName)
@@ -806,11 +809,9 @@ Public Class EnrichEPG
 
                 Try
 
-                    Dim _Result As New ArrayList
-
                     'nach Mov.Pic Titel suchen
                     _SQLString = _
-                        "Select idProgram from program WHERE title LIKE '" & allowedSigns(_MovingPicturesDB(i).Title) & "' "
+                        "Select * from program WHERE title LIKE '" & allowedSigns(_MovingPicturesDB(i).Title) & "' "
 
                     'nach Mov.Pic Titel über Dateiname suchen
                     If Not String.IsNullOrEmpty(_MovingPicturesDB(i).TitlebyFilename) Then
@@ -824,15 +825,15 @@ Public Class EnrichEPG
                         "OR title LIKE '" & allowedSigns(_MovingPicturesDB(i).AlternateTitle) & "' "
                     End If
 
-                    _Result.AddRange(Broker.Execute(_SQLString).TransposeToFieldList("idProgram", False))
+                    _SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+                    Dim _SQLstate As SqlStatement = Broker.GetStatement(_SQLString)
+                    Dim _Result As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate.Execute())
 
                     If _Result.Count > 0 Then
                         MovieCounter = MovieCounter + 1
                     End If
 
-                    For d As Integer = 0 To _Result.Count - 1
-
-                        Dim _program As Program = Program.Retrieve(CInt(_Result.Item(d)))
+                    For Each _program As Program In _Result
 
                         Try
 
@@ -907,11 +908,10 @@ Public Class EnrichEPG
             For i As Integer = 0 To _VideoDB.Count - 1
 
                 Try
-                    Dim _Result As New ArrayList
 
                     'nach Mov.Pic Titel suchen
                     _SQLString = _
-                        "Select idProgram from program WHERE title LIKE '" & allowedSigns(_VideoDB(i).Title) & "' "
+                        "Select * from program WHERE title LIKE '" & allowedSigns(_VideoDB(i).Title) & "' "
 
                     'nach Mov.Pic Titel über Dateiname suchen
                     If Not String.IsNullOrEmpty(_VideoDB(i).TitlebyFileName) Then
@@ -920,15 +920,15 @@ Public Class EnrichEPG
                         "OR episodeName LIKE '" & allowedSigns(_VideoDB(i).TitlebyFileName) & "' "
                     End If
 
-                    _Result.AddRange(Broker.Execute(_SQLString).TransposeToFieldList("idProgram", False))
+                    _SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+                    Dim _SQLstate As SqlStatement = Broker.GetStatement(_SQLString)
+                    Dim _Result As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate.Execute())
 
                     If _Result.Count > 0 Then
                         MovieCounter = MovieCounter + 1
                     End If
 
-                    For d As Integer = 0 To _Result.Count - 1
-
-                        Dim _program As Program = Program.Retrieve(CInt(_Result.Item(d)))
+                    For Each _program As Program In _Result
 
                         Try
                             'Daten im EPG (program) updaten

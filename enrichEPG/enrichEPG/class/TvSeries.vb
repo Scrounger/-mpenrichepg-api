@@ -231,7 +231,7 @@ Public Class TVSeriesDB
 
 
         Catch ex As Exception
-            MyLog.[Error]("enrichEPG: [EpisodeFound]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+            MyLog.[Error]("enrichEPG: [EpisodeFound]: episodeName: {0} - exception err:{1} stack:{2}", EpisodeName, ex.Message, ex.StackTrace)
             OpenTvSeriesDB()
         End Try
 
