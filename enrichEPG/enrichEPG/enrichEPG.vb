@@ -725,7 +725,6 @@ Public Class EnrichEPG
                                 Dim _TvMovieProgram As TVMovieProgram = getTvMovieProgram(_Result(i).IdProgram)
                                 _TvMovieProgram.idSeries = _idSeries
                                 _TvMovieProgram.idEpisode = _idEpisode
-                                _TvMovieProgram.needsUpdate = True
                                 _TvMovieProgram.local = False
                                 _TvMovieProgram.TVMovieBewertung = 6
 
@@ -865,7 +864,6 @@ Public Class EnrichEPG
                                     _TvMovieProgram.FileName = _MovingPicturesDB(i).Filename
                                 End If
 
-                                _TvMovieProgram.needsUpdate = True
                                 _TvMovieProgram.Persist()
 
                             End If
@@ -957,7 +955,6 @@ Public Class EnrichEPG
                                     _TvMovieProgram.FileName = _VideoDB(i).FileName
                                 End If
 
-                                _TvMovieProgram.needsUpdate = True
                                 _TvMovieProgram.Persist()
 
                             End If

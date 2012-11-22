@@ -143,7 +143,6 @@ Public Class IdentifySeries
                 _TvMovieProgram.idSeries = TvSeriesDB(indexTvSeriesDB).SeriesID
                 _TvMovieProgram.local = False
                 _TvMovieProgram.TVMovieBewertung = 6
-                _TvMovieProgram.needsUpdate = True
 
                 'Serien Poster Image
                 If Not String.IsNullOrEmpty(TvSeriesDB(indexTvSeriesDB).SeriesPosterImage) = True Then
