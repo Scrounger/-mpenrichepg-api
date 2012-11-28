@@ -172,14 +172,8 @@ Public Class EnrichEPG
             ClickfinderProgramGuideImportEnable = False
         End If
 
-        Dim oAssembly As System.Reflection.AssemblyName = _
-    System.Reflection.Assembly.GetExecutingAssembly().GetName
-
-        ' Versionsnummer
-        Dim sVersion As String = oAssembly.Version.ToString()
-
         'Log Ausgabe: Settings enrichEPG
-        MyLog.Info("enrichEPG Version: {0}", sVersion)
+        MyLog.Info("enrichEPG Version: {0}", Helper.Version)
         MyLog.Info("Server installed: {0}", ServerInstalled)
         MyLog.Info("Mediaportal Databases path: {0}", MpDatabasePath)
         MyLog.Info("Mediaportal Thumb path: {0}", MpThumbPath)

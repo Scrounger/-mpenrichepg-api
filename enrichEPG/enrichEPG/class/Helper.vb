@@ -73,4 +73,13 @@ Public Class Helper
             MyLog.[Error]("enrichEPG: [DeleteCPGcache]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
+    Public Shared ReadOnly Property Version() As String
+        Get
+            Dim oAssembly As System.Reflection.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName
+
+            ' Versionsnummer
+            Return oAssembly.Version.ToString()
+        End Get
+    End Property
+
 End Class
