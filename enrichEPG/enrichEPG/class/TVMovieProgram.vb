@@ -24,6 +24,7 @@ Imports Gentle.Framework
 Imports TvLibrary.Log
 Imports TvDatabase
 Imports System.Reflection
+Imports System.Threading
 
 Namespace TvDatabase
     ''' <summary>
@@ -553,15 +554,22 @@ Namespace TvDatabase
         'Sortieren nach Genre ASC & StarRating DESC
         Implements IComparer(Of TVMovieProgram)
         Public Function Compare(ByVal x As TVMovieProgram, ByVal y As TVMovieProgram) As Integer Implements System.Collections.Generic.IComparer(Of TVMovieProgram).Compare
-            If x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso y.ReferencedProgram.StarRating = x.ReferencedProgram.StarRating Then
-                Return 0
-            ElseIf x.ReferencedProgram.Title > y.ReferencedProgram.Title Then
-                Return 1
-            ElseIf x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso y.ReferencedProgram.StarRating > x.ReferencedProgram.StarRating Then
-                Return 1
-            Else
-                Return -1
-            End If
+            Try
+
+
+                If x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso y.ReferencedProgram.StarRating = x.ReferencedProgram.StarRating Then
+                    Return 0
+                ElseIf x.ReferencedProgram.Title > y.ReferencedProgram.Title Then
+                    Return 1
+                ElseIf x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso y.ReferencedProgram.StarRating > x.ReferencedProgram.StarRating Then
+                    Return 1
+                Else
+                    Return -1
+                End If
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer6")
+            End Try
         End Function
     End Class
 
@@ -570,12 +578,12 @@ Namespace TvDatabase
         Implements IComparer(Of TVMovieProgram)
         Public Function Compare(ByVal x As TVMovieProgram, ByVal y As TVMovieProgram) As Integer Implements System.Collections.Generic.IComparer(Of TVMovieProgram).Compare
             If x.ReferencedProgram.IsPartialRecordingSeriesPending > y.ReferencedProgram.IsPartialRecordingSeriesPending _
-               Or x.ReferencedProgram.IsRecording > y.ReferencedProgram.IsRecording _
-               Or x.ReferencedProgram.IsRecordingManual > y.ReferencedProgram.IsRecordingManual _
-               Or x.ReferencedProgram.IsRecordingOnce > y.ReferencedProgram.IsRecordingOnce _
-               Or x.ReferencedProgram.IsRecordingOncePending > y.ReferencedProgram.IsRecordingOncePending _
-               Or x.ReferencedProgram.IsRecordingSeries > y.ReferencedProgram.IsRecordingSeries _
-               Or x.ReferencedProgram.IsRecordingSeriesPending > y.ReferencedProgram.IsRecordingSeriesPending Then
+                   Or x.ReferencedProgram.IsRecording > y.ReferencedProgram.IsRecording _
+                   Or x.ReferencedProgram.IsRecordingManual > y.ReferencedProgram.IsRecordingManual _
+                   Or x.ReferencedProgram.IsRecordingOnce > y.ReferencedProgram.IsRecordingOnce _
+                   Or x.ReferencedProgram.IsRecordingOncePending > y.ReferencedProgram.IsRecordingOncePending _
+                   Or x.ReferencedProgram.IsRecordingSeries > y.ReferencedProgram.IsRecordingSeries _
+                   Or x.ReferencedProgram.IsRecordingSeriesPending > y.ReferencedProgram.IsRecordingSeriesPending Then
                 Return 1
             ElseIf x.ReferencedProgram.IsPartialRecordingSeriesPending < y.ReferencedProgram.IsPartialRecordingSeriesPending _
                 Or x.ReferencedProgram.IsRecording < y.ReferencedProgram.IsRecording _
@@ -588,6 +596,7 @@ Namespace TvDatabase
             Else
                 Return 0
             End If
+
         End Function
     End Class
 
@@ -689,15 +698,25 @@ Namespace TvDatabase
         Implements IEqualityComparer(Of TVMovieProgram)
         Private _PropertyInfo As PropertyInfo
         Public Function Equals1(ByVal x As TVMovieProgram, ByVal y As TVMovieProgram) As Boolean Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).Equals
-            If x.idSeries = y.idSeries Then
-                Return True
-            Else
-                Return False
-            End If
+            Try
+                If x.idSeries = y.idSeries Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer4")
+            End Try
         End Function
 
         Public Function GetHashCode1(ByVal obj As TVMovieProgram) As Integer Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).GetHashCode
-            Return obj.idSeries.GetHashCode()
+            Try
+                Return obj.idSeries.GetHashCode()
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer3")
+            End Try
         End Function
     End Class
     Public Class TVMovieProgram_GroupByEpisodeName
@@ -735,73 +754,93 @@ Namespace TvDatabase
         Implements IEqualityComparer(Of TVMovieProgram)
 
         Public Function Equals2(ByVal x As TVMovieProgram, ByVal y As TVMovieProgram) As Boolean Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).Equals
-            ' Check whether the compared objects reference the same data.
-            If [Object].ReferenceEquals(x, y) Then
-                Return True
-            End If
+            Try
+                ' Check whether the compared objects reference the same data.
+                If [Object].ReferenceEquals(x, y) Then
+                    Return True
+                End If
 
-            ' Check whether any of the compared objects is null.
-            If [Object].ReferenceEquals(x, Nothing) OrElse [Object].ReferenceEquals(y, Nothing) Then
-                Return False
-            End If
+                ' Check whether any of the compared objects is null.
+                If [Object].ReferenceEquals(x, Nothing) OrElse [Object].ReferenceEquals(y, Nothing) Then
+                    Return False
+                End If
 
-            ' Check whether the cars' properties are equal.
-            Return x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso x.ReferencedProgram.EpisodeName = y.ReferencedProgram.EpisodeName
+                ' Check whether the cars' properties are equal.
+                Return x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso x.ReferencedProgram.EpisodeName = y.ReferencedProgram.EpisodeName
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer2")
+            End Try
         End Function
 
         Public Function GetHashCode2(ByVal obj As TVMovieProgram) As Integer Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).GetHashCode
-            ' Check whether the object is null.
-            If [Object].ReferenceEquals(obj, Nothing) Then
-                Return 0
-            End If
 
-            ' Get the hash code for the ModelName field if it is not null.
-            Dim hashTitle As Integer = If(obj.ReferencedProgram.Title Is Nothing, 0, obj.ReferencedProgram.Title.GetHashCode())
+            Try ' Check whether the object is null.
+                If [Object].ReferenceEquals(obj, Nothing) Then
+                    Return 0
+                End If
 
-            ' Get the hash code for the price field.
-            Dim hashEpisodeName As Integer = obj.ReferencedProgram.EpisodeName.GetHashCode()
+                ' Get the hash code for the ModelName field if it is not null.
+                Dim hashTitle As Integer = If(obj.ReferencedProgram.Title Is Nothing, 0, obj.ReferencedProgram.Title.GetHashCode())
 
-            ' Calculate the hash code for the product.
-            Return hashTitle Xor hashEpisodeName
+                ' Get the hash code for the price field.
+                Dim hashEpisodeName As Integer = obj.ReferencedProgram.EpisodeName.GetHashCode()
+
+                ' Calculate the hash code for the product.
+                Return hashTitle Xor hashEpisodeName
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer2")
+            End Try
         End Function
     End Class
 
-    Public Class TVMovieProgram_GroupByTitleEpisodeNameIdChannelStarTime
+    Public Class TVMovieProgram_GroupByTitleEpisodeNameIdChannelStartTime
         Implements IEqualityComparer(Of TVMovieProgram)
 
         Public Function Equals1(ByVal x As TVMovieProgram, ByVal y As TVMovieProgram) As Boolean Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).Equals
-            ' Check whether the compared objects reference the same data.
-            If [Object].ReferenceEquals(x, y) Then
-                Return True
-            End If
+            Try
+                ' Check whether the compared objects reference the same data.
+                If [Object].ReferenceEquals(x, y) Then
+                    Return True
+                End If
 
-            ' Check whether any of the compared objects is null.
-            If [Object].ReferenceEquals(x, Nothing) OrElse [Object].ReferenceEquals(y, Nothing) Then
-                Return False
-            End If
+                ' Check whether any of the compared objects is null.
+                If [Object].ReferenceEquals(x, Nothing) OrElse [Object].ReferenceEquals(y, Nothing) Then
+                    Return False
+                End If
 
-            ' Check whether the cars' properties are equal.
-            Return x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso x.ReferencedProgram.EpisodeName = y.ReferencedProgram.EpisodeName AndAlso x.ReferencedProgram.IdChannel = y.ReferencedProgram.IdChannel AndAlso x.ReferencedProgram.StartTime = y.ReferencedProgram.StartTime
+                ' Check whether the cars' properties are equal.
+                Return x.ReferencedProgram.Title = y.ReferencedProgram.Title AndAlso x.ReferencedProgram.EpisodeName = y.ReferencedProgram.EpisodeName AndAlso x.ReferencedProgram.IdChannel = y.ReferencedProgram.IdChannel AndAlso x.ReferencedProgram.StartTime = y.ReferencedProgram.StartTime
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer1")
+            End Try
         End Function
 
         Public Function GetHashCode1(ByVal obj As TVMovieProgram) As Integer Implements System.Collections.Generic.IEqualityComparer(Of TVMovieProgram).GetHashCode
-            ' Check whether the object is null.
-            If [Object].ReferenceEquals(obj, Nothing) Then
-                Return 0
-            End If
+            Try
+                ' Check whether the object is null.
+                If [Object].ReferenceEquals(obj, Nothing) Then
+                    Return 0
+                End If
 
-            ' Get the hash code for the ModelName field if it is not null.
-            Dim hashTitle As Integer = If(obj.ReferencedProgram.Title Is Nothing, 0, obj.ReferencedProgram.Title.GetHashCode())
+                ' Get the hash code for the ModelName field if it is not null.
+                Dim hashTitle As Integer = If(obj.ReferencedProgram.Title Is Nothing, 0, obj.ReferencedProgram.Title.GetHashCode())
 
-            ' Get the hash code for the price field.
-            Dim hashEpisodeName As Integer = obj.ReferencedProgram.EpisodeName.GetHashCode()
+                ' Get the hash code for the price field.
+                Dim hashEpisodeName As Integer = obj.ReferencedProgram.EpisodeName.GetHashCode()
 
-            Dim hashIdChannel As Integer = obj.ReferencedProgram.IdChannel.GetHashCode
+                Dim hashIdChannel As Integer = obj.ReferencedProgram.IdChannel.GetHashCode
 
-            Dim hashStartTime As Integer = obj.ReferencedProgram.StartTime.GetHashCode
+                Dim hashStartTime As Integer = obj.ReferencedProgram.StartTime.GetHashCode
 
-            ' Calculate the hash code for the product.
-            Return hashTitle Xor hashEpisodeName Xor hashIdChannel Xor hashStartTime
+                ' Calculate the hash code for the product.
+                Return hashTitle Xor hashEpisodeName Xor hashIdChannel Xor hashStartTime
+            Catch ex As ThreadAbortException
+            Catch ex As Exception
+                MyLog.Error("icomparer1")
+            End Try
         End Function
     End Class
 #End Region

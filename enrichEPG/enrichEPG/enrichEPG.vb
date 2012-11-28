@@ -300,10 +300,12 @@ Public Class EnrichEPG
                             Dim _MappedSeriesNames As New ArrayList(Split(_TvMovieSeriesMapping.EpgTitle, "|"))
                             MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0}: manuel mapping found: {1}", _TvSeriesDB(i).SeriesName, Replace(_TvMovieSeriesMapping.EpgTitle, "|", ", "))
 
+                            'EPG nach gemappten Serien Namen durchsuchen
                             For z As Integer = 0 To _MappedSeriesNames.Count - 1
-                                Dim _MappedSeries As New ArrayList
-                                _SQLString = "Select idProgram from program WHERE title LIKE '" & Helper.allowedSigns(CStr(_MappedSeriesNames.Item(z))) & "' ORDER BY episodeName"
-                                _MappedSeries.AddRange(Broker.Execute(_SQLString).TransposeToFieldList("idProgram", False))
+                                _SQLString = "Select * from program WHERE title LIKE '" & Helper.allowedSigns(_MappedSeriesNames.Item(z)) & "' ORDER BY episodeName"
+                                _SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+                                Dim _SQLstate2 As SqlStatement = Broker.GetStatement(_SQLString)
+                                Dim _MappedSeries As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate2.Execute())
 
                                 If _MappedSeries.Count > 0 Then
                                     _Result.AddRange(_MappedSeries)
@@ -314,7 +316,8 @@ Public Class EnrichEPG
                         End If
 
                     Catch SeriesMappingEx As Exception
-
+                        'Exception wenn keine mappings gefunden
+                        'MyLog.[Info]("enrichEPG: [GetSeriesInfos]: SeriesMapping Error: {0}, stack: {1}", SeriesMappingEx.Message, SeriesMappingEx.StackTrace)
                     End Try
 
                     'Alle im EPG gefundenen episoden der Serie durchlaufen
