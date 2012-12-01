@@ -122,8 +122,6 @@ Namespace TvDatabase
 #End Region
 
 #Region "Constructors"
-
-
         'public TVMovieProgram(int idClickfinderMapping, int idProgram, string idSeries, string timeSharingStart, string timeSharingEnd)
         '{
         '  isChanged = true;
@@ -136,7 +134,6 @@ Namespace TvDatabase
         Public Sub New(ByVal idProgram As Integer)
             Me.m_idProgram = idProgram
         End Sub
-
 #End Region
 
 #Region "Public Properties"
@@ -408,6 +405,26 @@ Namespace TvDatabase
             End Set
         End Property
 
+
+        ''' <summary>
+        ''' Serie disabled (TvMovieSeriesMapping, sofern idseries > 0, sonst false)
+        ''' </summary>
+        Public ReadOnly Property SeriesDisabled() As Boolean
+            Get
+                If idSeries = 0 Then
+                    Return False
+                Else
+                    Try
+                        Return TvMovieSeriesMapping.Retrieve(idSeries).disabled
+                    Catch ex As Exception
+                        'wenn Serie nicht in TvMovieSeriesMapping vorhanden
+                        Return False
+                    End Try
+                End If
+            End Get
+        End Property
+
+
 #End Region
 
 #Region "Storage and Retrieval"
@@ -461,7 +478,6 @@ Namespace TvDatabase
         Public Function ReferencedProgram() As Program
             Return Program.Retrieve(idProgram)
         End Function
-
 #End Region
 
         Public Sub Delete()

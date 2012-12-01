@@ -342,6 +342,8 @@ Public Class TVSeriesDB
         Get
             If _EpisodeInfos IsNot Nothing AndAlso _EpisodeInfos.Rows.Count > 0 Then
                 Return CInt(Replace(DatabaseUtility.[Get](_EpisodeInfos, 0, "Rating"), ".", ","))
+            ElseIf _SeriesInfos IsNot Nothing AndAlso _SeriesInfos.Rows.Count > 0 Then
+                Return CInt(Replace(DatabaseUtility.[Get](_SeriesInfos, _Index, "Rating"), ".", ","))
             Else
                 Return 0
             End If

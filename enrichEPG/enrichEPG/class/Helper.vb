@@ -81,5 +81,18 @@ Public Class Helper
             Return oAssembly.Version.ToString()
         End Get
     End Property
+    Friend Shared Function MySqlDate(ByVal Datum As Date) As String
+        Try
+            If Gentle.Framework.Broker.ProviderName = "MySQL" Then
+                Return "'" & Datum.Year & "-" & Format(Datum.Month, "00") & "-" & Format(Datum.Day, "00") & " " & Format(Datum.Hour, "00") & ":" & Format(Datum.Minute, "00") & ":00'"
+            Else
+                Return "'" & Datum.Year & Format(Datum.Month, "00") & Format(Datum.Day, "00") & " " & Format(Datum.Hour, "00") & ":" & Format(Datum.Minute, "00") & ":" & Format(Datum.Second, "00") & "'"
+            End If
+
+        Catch ex As Exception
+            MyLog.Error("[Helper]: [MySqlDate]: exception err: {0} stack: {1}", ex.Message, ex.StackTrace)
+            Return ""
+        End Try
+    End Function
 
 End Class
