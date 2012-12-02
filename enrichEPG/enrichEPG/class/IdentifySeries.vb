@@ -175,12 +175,18 @@ Public Class IdentifySeries
         Try
             'False: lokal = 0 
             'True: local = 1
-            Dim _Local As Boolean = EpisodeExistLocal
+            Dim _Local As Boolean = False
 
-            'disabled = existiert
-            If TVMovieProgram.Retrieve(program.IdProgram).SeriesDisabled = True Then
-                _Local = True
-            End If
+            'TvMovieSeriesMapping: disabled = existiert
+            Try
+                If TvMovieSeriesMapping.Retrieve(TvSeriesDB(indexTvSeriesDB).SeriesID).disabled = True Then
+                    _Local = True
+                Else
+                    _Local = EpisodeExistLocal
+                End If
+            Catch ex As Exception
+                _Local = EpisodeExistLocal
+            End Try
 
             'Daten im EPG (program) updaten
             IdentifySeries.UpdateEpgEpisode(program, TvSeriesDB, TvSeriesDB(indexTvSeriesDB).SeriesName)

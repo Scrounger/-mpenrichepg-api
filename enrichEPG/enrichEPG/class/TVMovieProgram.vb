@@ -409,22 +409,6 @@ Namespace TvDatabase
         ''' <summary>
         ''' Serie disabled (TvMovieSeriesMapping, sofern idseries > 0, sonst false)
         ''' </summary>
-        Public ReadOnly Property SeriesDisabled() As Boolean
-            Get
-                If idSeries = 0 Then
-                    Return False
-                Else
-                    Try
-                        Return TvMovieSeriesMapping.Retrieve(idSeries).disabled
-                    Catch ex As Exception
-                        'wenn Serie nicht in TvMovieSeriesMapping vorhanden
-                        Return False
-                    End Try
-                End If
-            End Get
-        End Property
-
-
 #End Region
 
 #Region "Storage and Retrieval"

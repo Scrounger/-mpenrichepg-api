@@ -78,10 +78,6 @@ enrichEPG
 	<summary>
  Indicates whether the entity is changed and requires saving or not.
  </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.SeriesDisabled">
-	<summary>
- Serie disabled (TvMovieSeriesMapping, sofern idseries &gt; 0, sonst false)
- </summary>
 </member><member name="M:enrichEPG.TvDatabase.TVMovieProgram.ListAll">
 	<summary>
  Static method to retrieve all instances that are stored in the database in one call

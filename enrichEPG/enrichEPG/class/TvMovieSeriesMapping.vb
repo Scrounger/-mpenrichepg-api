@@ -49,8 +49,6 @@ Namespace TvDatabase
         <TableColumn("minSeasonNum", NotNull:=True)> _
            Private m_minSeasonNum As Integer
 
-
-
 #End Region
 
 #Region "Constructors"
