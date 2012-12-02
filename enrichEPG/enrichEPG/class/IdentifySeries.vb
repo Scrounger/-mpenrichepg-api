@@ -57,14 +57,21 @@ Public Class IdentifySeries
 #End Region
 
 #Region "Functions"
-    Public Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal TvSeriesDBname As String)
+    Public Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal TvSeriesDBname As String, ByVal episodeIdentfiy As Boolean)
         Try
-
             'Daten im EPG (program) updaten
-            program.SeriesNum = CStr(TvSeriesDB.SeasonIndex)
-            program.EpisodeNum = CStr(TvSeriesDB.EpisodeIndex)
+
+            If episodeIdentfiy = True Then
+                program.SeriesNum = CStr(TvSeriesDB.SeasonIndex)
+                program.EpisodeNum = CStr(TvSeriesDB.EpisodeIndex)
+            Else
+                program.SeriesNum = String.Empty
+                program.EpisodeNum = String.Empty
+            End If
+
             'keine Exception, weil alternativ Series Rating
             program.StarRating = TvSeriesDB.EpisodeRating
+
             program.Persist()
 
             UpdateEpgEpisodeSeriesName(program, TvSeriesDBname)
@@ -77,7 +84,6 @@ Public Class IdentifySeries
         Try
             'Daten im EPG (program) updaten
             If Not TvSeriesDBname = program.Title Then
-                Dim tmpProgramTitle As String = program.Title
                 program.Title = TvSeriesDBname
                 program.Persist()
 
@@ -127,7 +133,7 @@ Public Class IdentifySeries
             MyLog.[Error]("enrichEPG: [IdentifySeries] [MarkEpgEpisodeAsNew]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
-    Public Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistsLocal As Boolean)
+    Public Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistsLocal As Boolean, ByVal episodeIdentfiy As Boolean)
         Try
             If EnrichEPG.ClickfinderProgramGuideImportEnable = True Then
                 'Zunächst nur Serien Infos schreiben (episode in TvSeriesDB nicht gefunden)
@@ -135,30 +141,29 @@ Public Class IdentifySeries
                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
                 Dim _TvMovieProgram As TVMovieProgram = Helper.getTvMovieProgram(program.IdProgram)
                 _TvMovieProgram.idSeries = TvSeriesDB(indexTvSeriesDB).SeriesID
-                'erstmal auf local
                 _TvMovieProgram.local = EpisodeExistsLocal
                 _TvMovieProgram.TVMovieBewertung = 6
 
                 'Serien Poster Image
-                If Not String.IsNullOrEmpty(TvSeriesDB(indexTvSeriesDB).SeriesPosterImage) = True Then
-                    _TvMovieProgram.SeriesPosterImage = TvSeriesDB(indexTvSeriesDB).SeriesPosterImage
-                End If
-
+                _TvMovieProgram.SeriesPosterImage = TvSeriesDB(indexTvSeriesDB).SeriesPosterImage
                 'FanArt
-                If Not String.IsNullOrEmpty(TvSeriesDB(indexTvSeriesDB).FanArt) = True Then
-                    _TvMovieProgram.FanArt = TvSeriesDB(indexTvSeriesDB).FanArt
-                End If
+                _TvMovieProgram.FanArt = TvSeriesDB(indexTvSeriesDB).FanArt
 
-                'Episoden Infos schreiben -> in TvSeries DB gefunden
-                If EpisodeExistsLocal = True Then
+                'sonst von TvMovie actors
+                'If Not String.IsNullOrEmpty(TvSeriesDB(indexTvSeriesDB).Actors) = True Then
+                '    _TvMovieProgram.Actors = TvSeriesDB(indexTvSeriesDB).Actors
+                'End If
 
+                'Falls Episode geladen
+                If episodeIdentfiy = True Then
+                    'idEpisode
                     _TvMovieProgram.idEpisode = TvSeriesDB.EpisodeCompositeID
+                    'FileName
                     _TvMovieProgram.FileName = TvSeriesDB.EpisodeFilename
-
                     'Episoden Image
-                    If Not String.IsNullOrEmpty(TvSeriesDB.EpisodeImage) = True Then
-                        _TvMovieProgram.EpisodeImage = TvSeriesDB.EpisodeImage
-                    End If
+                    _TvMovieProgram.EpisodeImage = TvSeriesDB.EpisodeImage
+                Else
+                    _TvMovieProgram.idEpisode = String.Empty
                 End If
 
                 'MyLog.debug("{0}, {1},idseries: {2},idepisode: {3}, local: {4}", program.Title, program.EpisodeName, _TvMovieProgram.idSeries, _TvMovieProgram.idEpisode, _TvMovieProgram.local)
@@ -171,7 +176,7 @@ Public Class IdentifySeries
             MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateTvMovieProgram]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
-    Public Shared Function UpdateProgramAndTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistLocal As Boolean) As Boolean
+    Public Shared Function UpdateProgramAndTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistLocal As Boolean, ByVal episodeIdentfiy As Boolean) As Boolean
         Try
             'False: lokal = 0 
             'True: local = 1
@@ -189,13 +194,13 @@ Public Class IdentifySeries
             End Try
 
             'Daten im EPG (program) updaten
-            IdentifySeries.UpdateEpgEpisode(program, TvSeriesDB, TvSeriesDB(indexTvSeriesDB).SeriesName)
+            IdentifySeries.UpdateEpgEpisode(program, TvSeriesDB, TvSeriesDB(indexTvSeriesDB).SeriesName, episodeIdentfiy)
 
             'Neue Episode -> im EPG Describtion kennzeichnen
             IdentifySeries.MarkEpgEpisodeAsNew(program, _Local)
 
             'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-            IdentifySeries.UpdateTvMovieProgram(program, TvSeriesDB, indexTvSeriesDB, _Local)
+            IdentifySeries.UpdateTvMovieProgram(program, TvSeriesDB, indexTvSeriesDB, _Local, episodeIdentfiy)
 
             Return _Local
 

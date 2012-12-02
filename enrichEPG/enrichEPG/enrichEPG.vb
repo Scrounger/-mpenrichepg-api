@@ -338,7 +338,7 @@ Public Class EnrichEPG
                                         _EpisodeFoundCounter = _EpisodeFoundCounter + 1
 
                                         'UpdateProgramAndTvMovieProgram
-                                        If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal) = False Then
+                                        If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal, True) = False Then
                                             _logNewEpisode = True
                                             _CounterNewEpisode = _CounterNewEpisode + 1
                                         End If
@@ -375,7 +375,7 @@ Public Class EnrichEPG
 
                                             'UpdateProgramAndTvMovieProgram
                                             _TvSeriesDB.LoadEpisodeBySeriesID(_TvSeriesDB(i).SeriesID, IdentifySeries.IdentifiedEpisode.SeasonNumber, IdentifySeries.IdentifiedEpisode.EpisodeNumber)
-                                            If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal) = False Then
+                                            If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal, True) = False Then
                                                 _logNewEpisode = True
                                                 _CounterNewEpisode = _CounterNewEpisode + 1
                                             End If
@@ -414,7 +414,7 @@ Public Class EnrichEPG
 
                                             'UpdateProgramAndTvMovieProgram
                                             _TvSeriesDB.LoadEpisodeBySeriesID(_TvSeriesDB(i).SeriesID, _EpisodeMappingList(0).seriesNum, _EpisodeMappingList(0).episodeNum)
-                                            If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal) = False Then
+                                            If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, _TvSeriesDB.EpisodeExistLocal, True) = False Then
                                                 _logNewEpisode = True
                                                 _CounterNewEpisode = _CounterNewEpisode + 1
                                             End If
@@ -434,7 +434,7 @@ Public Class EnrichEPG
                                 '---------------- Nicht gefunden --------------------------------
                                 If _episodeFound = False Then
 
-                                    If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, False) = True Then
+                                    If IdentifySeries.UpdateProgramAndTvMovieProgram(_program, _TvSeriesDB, i, False, False) = True Then
                                         _logNewEpisode = True
                                         _CounterNewEpisode = _CounterNewEpisode + 1
                                     End If
@@ -643,7 +643,7 @@ Public Class EnrichEPG
                             End If
 
                             'Daten im EPG (program) updaten
-                            IdentifySeries.UpdateEpgEpisode(_Result(i), _TvSeriesDB, _SeriesName)
+                            IdentifySeries.UpdateEpgEpisode(_Result(i), _TvSeriesDB, _SeriesName, True)
 
                             'Neue Episode -> im EPG Describtion kennzeichnen
                             IdentifySeries.MarkEpgEpisodeAsNew(_Result(i), _TvSeriesDB.EpisodeExistLocal)
@@ -655,7 +655,7 @@ Public Class EnrichEPG
                             End If
 
                             'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                            IdentifySeries.UpdateTvMovieProgram(_Result(i), _TvSeriesDB, 0, True)
+                            IdentifySeries.UpdateTvMovieProgram(_Result(i), _TvSeriesDB, 0, True, True)
 
                             If Not _lastEpisodeName = _Result(i).EpisodeName Then
                                 MyLog.Info("enrichEPG: [EScannerImport]: {0}: S{1}E{2} - {3} found in MP-TvSeries DB (newEpisode: {4})", _

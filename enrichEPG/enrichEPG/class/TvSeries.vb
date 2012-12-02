@@ -286,12 +286,23 @@ Public Class TVSeriesDB
             End Get
         End Property
 
+        Public ReadOnly Property Actors() As String
+            Get
+                If _SeriesInfos IsNot Nothing AndAlso _SeriesInfos.Rows.Count > 0 Then
+                    Return DatabaseUtility.[Get](_SeriesInfos, _Index, "Actors")
+                Else
+                    Return String.Empty
+                End If
+            End Get
+        End Property
+
+
         Public ReadOnly Property SeriesPosterImage() As String
             Get
                 If _SeriesInfos IsNot Nothing AndAlso _SeriesInfos.Rows.Count > 0 Then
                     Return DatabaseUtility.[Get](_SeriesInfos, _Index, "PosterBannerFileName")
                 Else
-                    Return ""
+                    Return String.Empty
                 End If
             End Get
         End Property
@@ -310,9 +321,9 @@ Public Class TVSeriesDB
                             Exit Property
                         End If
                     Next
-                    Return ""
+                    Return String.Empty
                 Else
-                    Return ""
+                    Return String.Empty
                 End If
 
             End Get
@@ -385,7 +396,7 @@ Public Class TVSeriesDB
             If _EpisodeInfos IsNot Nothing AndAlso _EpisodeInfos.Rows.Count > 0 Then
                 Return DatabaseUtility.[Get](_EpisodeInfos, 0, "thumbFilename")
             Else
-                Return ""
+                Return String.Empty
             End If
         End Get
     End Property
