@@ -57,11 +57,11 @@ Public Class IdentifySeries
 #End Region
 
 #Region "Functions"
-    Public Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal TvSeriesDBname As String, ByVal episodeIdentfiy As Boolean)
+    Public Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal TvSeriesDBname As String, ByVal episodeIdentified As Boolean)
         Try
             'Daten im EPG (program) updaten
 
-            If episodeIdentfiy = True Then
+            If episodeIdentified = True Then
                 program.SeriesNum = CStr(TvSeriesDB.SeasonIndex)
                 program.EpisodeNum = CStr(TvSeriesDB.EpisodeIndex)
             Else
@@ -133,7 +133,7 @@ Public Class IdentifySeries
             MyLog.[Error]("enrichEPG: [IdentifySeries] [MarkEpgEpisodeAsNew]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
-    Public Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistsLocal As Boolean, ByVal episodeIdentfiy As Boolean)
+    Public Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal indexTvSeriesDB As Integer, ByVal EpisodeExistsLocal As Boolean, ByVal episodeIdentified As Boolean)
         Try
             If EnrichEPG.ClickfinderProgramGuideImportEnable = True Then
                 'Zunächst nur Serien Infos schreiben (episode in TvSeriesDB nicht gefunden)
@@ -155,7 +155,7 @@ Public Class IdentifySeries
                 'End If
 
                 'Falls Episode geladen
-                If episodeIdentfiy = True Then
+                If episodeIdentified = True Then
                     'idEpisode
                     _TvMovieProgram.idEpisode = TvSeriesDB.EpisodeCompositeID
                     'FileName

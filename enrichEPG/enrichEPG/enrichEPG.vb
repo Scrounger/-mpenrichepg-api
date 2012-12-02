@@ -643,7 +643,7 @@ Public Class EnrichEPG
                             End If
 
                             'Daten im EPG (program) updaten
-                            IdentifySeries.UpdateEpgEpisode(_Result(i), _TvSeriesDB, _SeriesName, True)
+                            IdentifySeries.UpdateEpgEpisode(_Result(i), _TvSeriesDB, _SeriesName, _TvSeriesDB.EpisodeExistLocal)
 
                             'Neue Episode -> im EPG Describtion kennzeichnen
                             IdentifySeries.MarkEpgEpisodeAsNew(_Result(i), _TvSeriesDB.EpisodeExistLocal)
@@ -655,7 +655,7 @@ Public Class EnrichEPG
                             End If
 
                             'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                            IdentifySeries.UpdateTvMovieProgram(_Result(i), _TvSeriesDB, 0, True, True)
+                            IdentifySeries.UpdateTvMovieProgram(_Result(i), _TvSeriesDB, 0, _TvSeriesDB.EpisodeExistLocal, True)
 
                             If Not _lastEpisodeName = _Result(i).EpisodeName Then
                                 MyLog.Info("enrichEPG: [EScannerImport]: {0}: S{1}E{2} - {3} found in MP-TvSeries DB (newEpisode: {4})", _
