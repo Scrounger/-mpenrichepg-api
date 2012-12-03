@@ -139,7 +139,7 @@ Public Class IdentifySeries
                 'Zunächst nur Serien Infos schreiben (episode in TvSeriesDB nicht gefunden)
 
                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
-                Dim _TvMovieProgram As TVMovieProgram = Helper.getTvMovieProgram(program.IdProgram)
+                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(program.IdProgram)
                 _TvMovieProgram.idSeries = TvSeriesDB(indexTvSeriesDB).SeriesID
                 _TvMovieProgram.local = EpisodeExistsLocal
                 _TvMovieProgram.TVMovieBewertung = 6

@@ -1,0 +1,85 @@
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ResolveAssemblyReference.cache
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\Clickfinder EPG Importer.vbproj.GenerateResource.Cache
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Common.Utils.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\SetupControls.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TvControl.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TVDatabase.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\log4net.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\DirectShowLib.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Gentle.Common.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TvLibrary.Interfaces.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Gentle.Framework.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\ClickfinderEPGImporter.pdb
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\PluginBase.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\SetupTv.exe
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TvBusinessLayer.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TVLibrary.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\TvLibrary.Utils.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\MySql.Data.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Interop.SHDocVw.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.SetupTv.Sections.ClickfinderEPGConfig.resources
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.Resources.resources
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.pdb
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Gentle.Provider.MySQL.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Gentle.Provider.SQLServer.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Gentle.config
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\obj\Debug\ClickfinderEPGImporter.frmEPGgrab.resources
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Databases.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\BassRegistration.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\edtftpnet-1.2.2.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\CSScriptLibrary.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Interop.WMPLib.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Ionic.Zip.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\MediaPortal.Support.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Utils.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Bass.Net.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\AxInterop.WMPLib.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\taglib-sharp.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\BassVisAPI.Net.dll
+Z:\Projekte\MediaPortal\Clickfinder EPG Importer\Clickfinder EPG Importer\Clickfinder EPG Importer\bin\Debug\Core.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.config
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.pdb
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Common.Utils.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Databases.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Common.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Framework.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Provider.MySQL.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Provider.SQLServer.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\PluginBase.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\SetupControls.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\SetupTv.exe
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvBusinessLayer.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvControl.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TVDatabase.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TVLibrary.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvLibrary.Interfaces.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvLibrary.Utils.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\BassRegistration.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\edtftpnet-1.2.2.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\CSScriptLibrary.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Interop.WMPLib.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Ionic.Zip.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\MediaPortal.Support.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\DirectShowLib.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Utils.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Bass.Net.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Interop.SHDocVw.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\AxInterop.WMPLib.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\taglib-sharp.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\BassVisAPI.Net.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\log4net.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Core.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\MySql.Data.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ResolveAssemblyReference.cache
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.SetupTv.Sections.NewTvServerPluginConfig.resources
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.Resources.resources
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\Clickfinder EPG Importer.vbproj.GenerateResource.Cache
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.pdb

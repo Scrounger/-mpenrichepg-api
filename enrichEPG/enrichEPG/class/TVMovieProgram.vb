@@ -405,10 +405,6 @@ Namespace TvDatabase
             End Set
         End Property
 
-
-        ''' <summary>
-        ''' Serie disabled (TvMovieSeriesMapping, sofern idseries > 0, sonst false)
-        ''' </summary>
 #End Region
 
 #Region "Storage and Retrieval"

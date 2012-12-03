@@ -25,17 +25,6 @@ Public Class Helper
     Public Shared Function allowedSigns(ByVal expression As String) As String
         Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\?]", "_"), "'", "''")
     End Function
-    Public Shared Function getTvMovieProgram(ByVal idProgram As Integer) As TVMovieProgram
-        Try
-            'idProgram in TvMovieProgram suchen & Daten aktualisieren
-            Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(idProgram)
-            Return _TvMovieProgram
-        Catch ex As Exception
-            'idProgram in TvMovieProgram nicht gefunden -> Daten neu anlegen
-            Dim _TvMovieProgram As New TVMovieProgram(idProgram)
-            Return _TvMovieProgram
-        End Try
-    End Function
     Public Shared Sub DeleteCPGcache(ByVal path As String, ByVal CachedSeries As ArrayList)
 
         Try

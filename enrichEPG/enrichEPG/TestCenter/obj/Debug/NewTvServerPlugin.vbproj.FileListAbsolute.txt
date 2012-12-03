@@ -1,0 +1,90 @@
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.pdb
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Common.Utils.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\PluginBase.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\SetupControls.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvControl.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TVDatabase.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\log4net.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\DirectShowLib.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Common.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvLibrary.Interfaces.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Gentle.Framework.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ResolveAssemblyReference.cache
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.SetupTv.Sections.NewTvServerPluginConfig.resources
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.Resources.resources
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\NewTvServerPlugin.vbproj.GenerateResource.Cache
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.xml
+Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.pdb
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvBusinessLayer.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TVLibrary.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\TvLibrary.Utils.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\MySql.Data.dll
+Z:\Projekte\MediaPortal\NewTvServer Plugin\bin\Debug\Interop.SHDocVw.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.pdb
+D:\Projekte\NewTvServer Plugin\bin\Debug\ClickfinderEPGImporter.xml
+D:\Projekte\NewTvServer Plugin\bin\Debug\Common.Utils.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\Gentle.Common.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\Gentle.Framework.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\PluginBase.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\SetupControls.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TvBusinessLayer.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TvControl.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TVDatabase.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TVLibrary.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TvLibrary.Interfaces.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\TvLibrary.Utils.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\log4net.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\DirectShowLib.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\MySql.Data.dll
+D:\Projekte\NewTvServer Plugin\bin\Debug\Interop.SHDocVw.dll
+D:\Projekte\NewTvServer Plugin\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.SetupTv.Sections.NewTvServerPluginConfig.resources
+D:\Projekte\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.Resources.resources
+D:\Projekte\NewTvServer Plugin\obj\Debug\NewTvServerPlugin.vbproj.GenerateResource.Cache
+D:\Projekte\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.dll
+D:\Projekte\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.xml
+D:\Projekte\NewTvServer Plugin\obj\Debug\ClickfinderEPGImporter.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Common.Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Gentle.Common.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Gentle.Framework.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\PluginBase.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\SetupControls.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvBusinessLayer.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvControl.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TVDatabase.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TVLibrary.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvLibrary.Interfaces.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvLibrary.Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Interop.SHDocVw.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\DirectShowLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\log4net.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvdbLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\MySql.Data.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\enrichEPG.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\enrichEPG.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\NewTvServerPlugin.vbproj.GenerateResource.Cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Databases.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\BassRegistration.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\edtftpnet-1.2.2.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\CSScriptLibrary.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Interop.WMPLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Bass.Net.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\AxInterop.WMPLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\taglib-sharp.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\BassVisAPI.Net.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Core.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Area51.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Area51.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Area51.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\Area51.SetupTv.Sections.NewTvServerPluginConfig.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\Area51.Resources.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\Area51.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\Area51.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Debug\Area51.pdb

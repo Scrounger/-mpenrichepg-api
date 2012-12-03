@@ -6,7 +6,89 @@ enrichEPG
 </name>
 </assembly>
 <members>
-<member name="M:enrichEPG.TvDatabase.TvMovieSeriesMapping.#ctor(System.Int32)">
+<member name="P:enrichEPG.MyTvSeries.EpisodesList">
+	<summary>
+ Alle Episoden der Serie (ggf. aus TvSeriesDB laden)
+ </summary>
+</member><member name="P:enrichEPG.MyTvSeries.Episode(System.Int32,System.Int32)">
+	<summary>
+ Episode der Serie (über SeriesNum und EpisodeNum)
+ </summary>
+</member><member name="P:enrichEPG.MyTvSeries.Episode(System.String)">
+	<summary>
+ Episode der Serie suchen (über EpisodenName)
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.GetFanArt">
+	<summary>
+ FanArt Pfad aus TvSeriesDB laden, nicht vorhanden = string.empty
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.ListAll">
+	<summary>
+ Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.Retrieve(System.Int32)">
+	<summary>
+ einzelne Serie über idSeries aus TvSeriesDB laden
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.Search(System.String)">
+	<summary>
+ einzelne Serie suchen (levenshtein)
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.ListAll(System.Int32)">
+	<summary>
+ Alle Episoden einer Serie laden (über idSeries)
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Retrieve(System.Int32,System.Int32,System.Int32)">
+	<summary>
+ Episode einer Serie laden (über idSeries, SeriesNum und EpisodeNum
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Retrieve(System.String)">
+	<summary>
+ Episode einer Serie laden (über idEpisode (CompositeID)) 
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Search(System.Int32,System.String)">
+	<summary>
+ Episode einer Serie suchen (über idSeries, EpisodeName (levenshtein))
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.Helper.GetSeries(System.String)">
+	<summary>
+ Daten aus table online_series laden
+ </summary>
+</member><member name="M:enrichEPG.MyTvSeries.Helper.GetEpisodes(System.String)">
+	<summary>
+ Daten aus table online_episodes laden
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32)">
+	<summary> 
+ Create an object from an existing row of data. This will be used by Gentle to 
+ construct objects from retrieved rows. 
+ </summary>
+</member><member name="P:enrichEPG.TvDatabase.TVMovieEpisodeMapping.IsChanged">
+	<summary>
+ Indicates whether the entity is changed and requires saving or not.
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.ListAll">
+	<summary>
+ Static method to retrieve all instances that are stored in the database in one call
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.Retrieve(System.String)">
+	<summary>
+ Retrieves an entity given it's id.
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.Retrieve(Gentle.Framework.Key)">
+	<summary>
+ Retrieves an entity given it's id, using Gentle.Framework.Key class.
+ This allows retrieval based on multi-column keys.
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.Persist">
+	<summary>
+ Persists the entity if it was never persisted or was changed.
+ </summary>
+</member><member name="T:enrichEPG.TvDatabase.TVMovieEpisodeMapping">
+	<summary>
+ Instances of this class represent the properties and methods of a row in the table <b>TvMovieEpisodeMapping</b>.
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TvMovieSeriesMapping.#ctor(System.Int32)">
 	<summary> 
  Create an object from an existing row of data. This will be used by Gentle to 
  construct objects from retrieved rows. 
@@ -36,37 +118,30 @@ enrichEPG
 	<summary>
  Persists the entity if it was never persisted or was changed.
  </summary>
+</member><member name="M:enrichEPG.TvDatabase.TvMovieSeriesMapping.ReferencedTvMovieProgramList">
+	<summary>
+ alle TvMovieProgram laden (Episoden im EPG)
+ </summary>
 </member><member name="T:enrichEPG.TvDatabase.TvMovieSeriesMapping">
 	<summary>
  Instances of this class represent the properties and methods of a row in the table <b>TvMovieSeriesMapping</b>.
  </summary>
+</member><member name="P:enrichEPG.My.Resources.Resources.ResourceManager">
+	<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member><member name="P:enrichEPG.My.Resources.Resources.Culture">
+	<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member><member name="T:enrichEPG.My.Resources.Resources">
+	<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
 </member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.IsChanged">
 	<summary>
  Indicates whether the entity is changed and requires saving or not.
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.idTVMovieProgram">
-	<summary>
- Property relating to database column idTVMovieProgram
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.TVMovieBewertung">
-	<summary>
- Property relating to database column TVMovieBewertung
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.idProgram">
-	<summary>
- Property relating to database column idProgram
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.idSeries">
-	<summary>
- Property relating to database column idSeries
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.idMovingPictures">
-	<summary>
- Property relating to database column idMovingPictures
- </summary>
-</member><member name="P:enrichEPG.TvDatabase.TVMovieProgram.idVideo">
-	<summary>
- Property relating to database column idVideo
  </summary>
 </member><member name="M:enrichEPG.TvDatabase.TVMovieProgram.ListAll">
 	<summary>

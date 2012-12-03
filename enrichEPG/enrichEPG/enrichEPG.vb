@@ -153,6 +153,8 @@ Public Class EnrichEPG
         _NewEpisodeString = NewEpisodeString
         _MPThumbPath = MediaPortalThumbsPath
         _EpisodeExistsString = EpisodeExistsString
+
+      
     End Sub
 
 #End Region
@@ -172,20 +174,7 @@ Public Class EnrichEPG
             ClickfinderProgramGuideImportEnable = False
         End If
 
-        'Log Ausgabe: Settings enrichEPG
-        MyLog.Info("enrichEPG Version: {0}", Helper.Version)
-        MyLog.Info("Server installed: {0}", ServerInstalled)
-        MyLog.Info("Mediaportal Databases path: {0}", MpDatabasePath)
-        MyLog.Info("Mediaportal Thumb path: {0}", MpThumbPath)
-        MyLog.Info("EpisodenScanner path: {0}", EpisodenScannerPath)
-        MyLog.Info("Series Import enabled: {0}", _SeriesEnabled)
-        MyLog.Info("Video Import enabled: {0}", _VideoEnabled)
-        MyLog.Info("MovPic Import enabled: {0}", _MovPicEnabled)
-        MyLog.Info("Use TheTvDb.com: {0}", _useTheTvDb)
-        MyLog.Info("log path: {0}", _LogFilePath)
-        MyLog.Info("TheTvDb.com language: {0}", _TheTvDbLanguage)
-        MyLog.Info("Clickfinder PG Import enabled: {0}", ClickfinderProgramGuideImportEnable)
-        MyLog.Info("")
+        
         Dim _lastDummyScheduledRecordings As Setting = Nothing
         Try
             Dim key As New Key(GetType(Setting), True, "tag", "enrichEPGlastScheduleRecordings")
@@ -244,6 +233,21 @@ Public Class EnrichEPG
 
         MyTVDBlang.TheTVdbHandler.CloseCache()
         MyTVDBen.TheTVdbHandler.CloseCache()
+
+        'Log Ausgabe: Settings enrichEPG
+        MyLog.Info("enrichEPG Version: {0}", Helper.Version)
+        MyLog.Info("Server installed: {0}", ServerInstalled)
+        MyLog.Info("Mediaportal Databases path: {0}", MpDatabasePath)
+        MyLog.Info("Mediaportal Thumb path: {0}", MpThumbPath)
+        MyLog.Info("EpisodenScanner path: {0}", EpisodenScannerPath)
+        MyLog.Info("Series Import enabled: {0}", _SeriesEnabled)
+        MyLog.Info("Video Import enabled: {0}", _VideoEnabled)
+        MyLog.Info("MovPic Import enabled: {0}", _MovPicEnabled)
+        MyLog.Info("Use TheTvDb.com: {0}", _useTheTvDb)
+        MyLog.Info("log path: {0}", _LogFilePath)
+        MyLog.Info("TheTvDb.com language: {0}", _TheTvDbLanguage)
+        MyLog.Info("Clickfinder PG Import enabled: {0}", ClickfinderProgramGuideImportEnable)
+        MyLog.Info("")
 
     End Sub
 
@@ -744,7 +748,7 @@ Public Class EnrichEPG
 
                             'Sofern Clickfinder Plugin aktiviert -> daten in TvMovieProgam schreiben mit Dummy idSeries
                             If ClickfinderProgramGuideImportEnable = True Then
-                                Dim _TvMovieProgram As TVMovieProgram = getTvMovieProgram(_Result(i).IdProgram)
+                                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_Result(i).IdProgram)
                                 _TvMovieProgram.idSeries = _idSeries
                                 _TvMovieProgram.idEpisode = _idEpisode
                                 _TvMovieProgram.local = False
@@ -870,7 +874,7 @@ Public Class EnrichEPG
                             If ClickfinderProgramGuideImportEnable = True Then
 
                                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
-                                Dim _TvMovieProgram As TVMovieProgram = getTvMovieProgram(_program.IdProgram)
+                                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
                                 _TvMovieProgram.idMovingPictures = _MovingPicturesDB(i).MovingPicturesID
                                 _TvMovieProgram.local = True
 
@@ -968,7 +972,7 @@ Public Class EnrichEPG
                             If ClickfinderProgramGuideImportEnable = True Then
 
                                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
-                                Dim _TvMovieProgram As TVMovieProgram = getTvMovieProgram(_program.IdProgram)
+                                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
                                 _TvMovieProgram.idVideo = _VideoDB(i).VideoID
                                 _TvMovieProgram.local = True
 

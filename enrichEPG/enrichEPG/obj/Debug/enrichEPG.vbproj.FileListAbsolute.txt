@@ -1,10 +1,10 @@
-D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.xml
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\ResolveAssemblyReference.cache
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.Resources.resources
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.vbproj.GenerateResource.Cache
-D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.xml
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TvdbLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.dll
