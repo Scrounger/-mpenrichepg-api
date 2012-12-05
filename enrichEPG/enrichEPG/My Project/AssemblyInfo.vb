@@ -33,5 +33,5 @@ Imports MediaPortal.Common.Utils
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.2.8.7")> 
-<Assembly: AssemblyFileVersion("1.2.8.7")> 
+<Assembly: AssemblyVersion("1.2.9.0")> 
+<Assembly: AssemblyFileVersion("1.2.9.0")> 

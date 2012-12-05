@@ -1,0 +1,808 @@
+<Data>
+  <Series>
+    <id>121361</id>
+    <Actors>|Peter Dinklage|Emilia Clarke|Kit Harington|Maisie Williams|Lena Headey|Nikolaj Coster-Waldau|Elyes Gabel|Nonso Anozie|Oona Chaplin|Kate Dickie|Peter Vaughan|Patrick Malahide|Rose Leslie|Charles Dance|Natalia Tena|Julian Glover|Joe Dempsie|Tom Wlaschiha|Finn Jones|Kristian Nairn|Donald Sumpter|Sibel Kekilli|John Bradley|Esmé Bianco|Gethin Anthony|Natalie Dormer|Jerome Flynn|Gwendoline Christie|Gemma Whelan|Liam Cunningham|Carice van Houten|Stephen Dillane|Conleth Hill|Sophie Turner|Rory McCann|Richard Madden|Mark Addy|Jack Gleeson|Iain Glen|Alfie Allen|Aidan Gillen|Harry Lloyd|Isaac Hempstead-Wright|Jason Momoa|Michelle Fairley|Sean Bean|</Actors>
+    <Airs_DayOfWeek>Sunday</Airs_DayOfWeek>
+    <Airs_Time>9:00 PM</Airs_Time>
+    <ContentRating>TV-MA</ContentRating>
+    <FirstAired>2011-04-17T00:00:00</FirstAired>
+    <Genre>|Action and Adventure|Drama|Fantasy|</Genre>
+    <IMDB_ID>tt0944947</IMDB_ID>
+    <Language>de</Language>
+    <Network>HBO</Network>
+    <Overview>König Robert Baratheon, der mit Cersei Lannister aus einer vermögenden aber korrupten Familie verheiratet ist, muss den fragwürdigen Tod seiner rechten Hand verdauen. Er bittet Lord Eddard „Ned“ Stark in den Süden zu reisen und ihm zu helfen, sein Königreich zu regieren. Doch es gibt eine Bedrohung für den Thron aus dem Osten. Die ins Exil verbannte, junge Prinzessin Daenery und ihr Bruder Visery, deren Familie die sieben Königreiche von Westeros für viele Jahre regiert hat, wollen den Thron zurück. Zudem gibt es Gerüchte über mysteriöse Ereignisse, die sich am nördlichen Rand des Königreichs hinter einer großen Mauer ereignen, wo Jon Schnee, Neds unehelicher Sohn, lebt und einer Bruderschaft angehört, die sich dem Schutz der sieben Königreiche verschworen hat.</Overview>
+    <Rating>9.4</Rating>
+    <Runtime>60</Runtime>
+    <SeriesID>77121</SeriesID>
+    <SeriesName>Game of Thrones</SeriesName>
+    <Status>Continuing</Status>
+    <banner>graphical/121361-g26.jpg</banner>
+    <fanart>fanart/original/121361-15.jpg</fanart>
+    <poster>posters/121361-4.jpg</poster>
+    <lastupdated>1354598891</lastupdated>
+    <zap2it_id>SH01389809</zap2it_id>
+  </Series>
+  <Episode>
+    <id>3226241</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>Inside Game of Thrones</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2010-12-05T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview>A short look into the film-making process for the production Game of Thrones</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,6</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3226241.jpg</filename>
+    <lastupdated>1305321193</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4045941</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>15-Minute Preview</EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>2011-04-03T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview>An approximately 15-minute preview of the first episode of Game of Thrones.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,8</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4045941.jpg</filename>
+    <lastupdated>1310428162</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4073401</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>3</DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>Making Game of Thrones</EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>2011-04-07T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview>An exclusive 30-minute feature including never-before-seen footage from the set and interviews from the cast and crew</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,4</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4073401.jpg</filename>
+    <lastupdated>1332099043</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4082317</id>
+    <Combined_episodenumber>4</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>El Juego Comienza</EpisodeName>
+    <EpisodeNumber>4</EpisodeNumber>
+    <FirstAired>2011-04-10T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview>A spanish "Canal +`" production with interviews to some famous spanish movie directors like Alex de La Iglesia and extracts from last special "Making Game Of Thrones"</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4082317.jpg</filename>
+    <lastupdated>1304928783</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4138149</id>
+    <Combined_episodenumber>5</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>2011 Comic Con Panel</EpisodeName>
+    <EpisodeNumber>5</EpisodeNumber>
+    <FirstAired>2011-07-21T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4138149.jpg</filename>
+    <lastupdated>1322167915</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4292422</id>
+    <Combined_episodenumber>6</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>You Win or You Die</EpisodeName>
+    <EpisodeNumber>6</EpisodeNumber>
+    <FirstAired>2012-03-24T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview>A prequel to Game of Thrones Season 2 which recaps on the first season and gives insight into what's to come.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,8</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode>1</airsbefore_episode>
+    <airsbefore_season>2</airsbefore_season>
+    <filename>episodes/121361/4292422.jpg</filename>
+    <lastupdated>1332616218</lastupdated>
+    <seasonid>137481</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3254641</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>1</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Tim Van Patten|</Director>
+    <EpisodeName>Der Winter naht</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2011-04-18T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1480055</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Ein Deserteur der Nachtwache bringt erschreckende Nachrichten von den Ländern nördlich der Mauer, und Lord Eddard "Ned" Stark soll die Hand des Königs Robert Baratheon werden.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>1</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3254641.jpg</filename>
+    <lastupdated>1352848547</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436411</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>2</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Tim Van Patten|</Director>
+    <EpisodeName>Der Königsweg</EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>2011-04-25T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1668746</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Ned Stark zieht als neue Hand des Königs mit Robert Baratheon und seinen Töchtern nach Süden. Das Schicksal seines Sohnes Bran bleibt ungewiss, und Jon Schnee schließt sich der Nachtwache an.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>2</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436411.jpg</filename>
+    <lastupdated>1352848620</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436421</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>3</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Brian Kirk|</Director>
+    <EpisodeName>Lord Schnee</EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>2011-05-02T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1829962</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Als neuer Berater des Königs wird Ned Stark vom Bruder der Königin feindselig behandelt. Jon Schnee muss sich gegen die anderen Männer der Nachtwache behaupten.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>3</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436421.jpg</filename>
+    <lastupdated>1352848666</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436431</id>
+    <Combined_episodenumber>4</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>4</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Brian Kirk|</Director>
+    <EpisodeName>Krüppel, Bastarde und Zerbrochenes</EpisodeName>
+    <EpisodeNumber>4</EpisodeNumber>
+    <FirstAired>2011-05-09T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1829963</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Ned Stark erfährt mehr über den Tod seines Vorgängers, und Catelyn verdächtigt Tyrion Lannister des versuchten Mordes an ihrem Sohn. Zwischen Viserys und Daenerys Targaryen kommt es zum Streit.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|Bryan Cogman|</Writer>
+    <absolute_number>4</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436431.jpg</filename>
+    <lastupdated>1352848724</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436441</id>
+    <Combined_episodenumber>5</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>5</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Brian Kirk|</Director>
+    <EpisodeName>Der Wolf und der Löwe</EpisodeName>
+    <EpisodeNumber>5</EpisodeNumber>
+    <FirstAired>2011-05-16T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1829964</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Catelyn Stark begibt sich mit Tyrion Lannister zur Burg ihrer Schwester. König Robert überwirft sich unterdessen mit Ned Stark, und Jamie Lannister versucht seinen Nutzen aus der Situation zu ziehen.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>5</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436441.jpg</filename>
+    <lastupdated>1352848767</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436451</id>
+    <Combined_episodenumber>6</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>6</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Daniel Minahan|</Director>
+    <EpisodeName>Eine goldene Krone</EpisodeName>
+    <EpisodeNumber>6</EpisodeNumber>
+    <FirstAired>2011-05-23T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1837862</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Ned Stark wird wieder als Hand des Königs eingesetzt und lüftet ein Geheimnis. Viserys Targaryen erhält von Khal Drogo als letzte Mitgift für Daenerys eine goldene Krone.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,2</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|Jane Espenson|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>6</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436451.jpg</filename>
+    <lastupdated>1352848804</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3436461</id>
+    <Combined_episodenumber>7</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>7</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Daniel Minahan|</Director>
+    <EpisodeName>Gewinn oder stirb</EpisodeName>
+    <EpisodeNumber>7</EpisodeNumber>
+    <FirstAired>2011-05-30T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1837863</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Als König Robert schwer verletzt von der Jagd zurückkehrt, ist es an der Zeit eine Nachfolgeregelung zu treffen. Der Konflikt zwischen den Lannisters und den Starks eskaliert.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,2</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>7</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3436461.jpg</filename>
+    <lastupdated>1352848854</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>3360391</id>
+    <Combined_episodenumber>8</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>8</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Daniel Minahan|</Director>
+    <EpisodeName>Das spitze Ende</EpisodeName>
+    <EpisodeNumber>8</EpisodeNumber>
+    <FirstAired>2011-06-06T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1837864</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Ned Stark weigert sich Joffrey als König anzuerkennen und wird in den Kerker geworfen. Sein Sohn Robb rüstet daraufhin ein Heer zur Befreiung des Vaters.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,1</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|George R. R. Martin|</Writer>
+    <absolute_number>8</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/3360391.jpg</filename>
+    <lastupdated>1352848903</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4063481</id>
+    <Combined_episodenumber>9</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>9</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Alan Taylor|</Director>
+    <EpisodeName>Baelor</EpisodeName>
+    <EpisodeNumber>9</EpisodeNumber>
+    <FirstAired>2011-06-13T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1851398</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Um Khal Drogo vor dem Tod zu bewahren, greift Daenerys zu einem letzten Mittel: Ein verbotener Zauber soll ihn retten. Indessen rücken die Armeen der Starks und der Lannisters gegeneinander vor.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,3</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>9</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4063481.jpg</filename>
+    <lastupdated>1352848939</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4063491</id>
+    <Combined_episodenumber>10</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>10</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director>|Alan Taylor|</Director>
+    <EpisodeName>Feuer und Blut</EpisodeName>
+    <EpisodeNumber>10</EpisodeNumber>
+    <FirstAired>2011-06-20T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1851397</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Das Reich zerfällt als Robb Stark zum neuen Herrscher des Nordens ausgerufen wird. Auch jenseits des Meeres deutet sich die Entstehung einer neuen Macht an.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,6</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer>|David Benioff|D. B. Weiss|</Writer>
+    <absolute_number>10</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4063491.jpg</filename>
+    <lastupdated>1352848971</lastupdated>
+    <seasonid>364731</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4161693</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>1</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Daniel Minahan|</Director>
+    <EpisodeName>Der Norden vergisst nicht</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2012-04-02T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt1971833</IMDB_ID>
+    <Language>de</Language>
+    <Overview>In den sieben Königreichen von Westeros tobt ein Bürgerkrieg, nachdem sich Stannis und Renly Baratheon gegen den neuen König Joffrey erhoben haben und der Norden sich unter Robb Stark für unabhängig erklärt hat. Da trifft Tyrion als neue rechte Hand des Königs am Hof in Königsmund ein.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|</Writer>
+    <absolute_number>11</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4161693.jpg</filename>
+    <lastupdated>1352849043</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245771</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>2</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Alan Taylor|</Director>
+    <EpisodeName>Die Nachtlande</EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>2012-04-09T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2069318</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Nach einer blutigen politischen Säuberung in Königsmund weist Tyrion, rechte Hand des Königs, Cersei zurecht, die die Untertanen des Königs zunehmend gegen sich aufbringt. Unterdessen teilt Ayra Stark auf ihrer Flucht gen Norden ein Geheimnis mit einem Rekruten der Nachtwache. Außerdem kehrt einer von Daenerys Kundschaftern mit beunruhigenden Neuigkeiten zurück.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|D.B. Weiss|</Writer>
+    <absolute_number>12</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245771.jpg</filename>
+    <lastupdated>1352849119</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245772</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>3</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Alik Sakharov|</Director>
+    <EpisodeName>Was tot ist, kann niemals sterben</EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>2012-04-16T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2070135</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Der Machtkampf um den eisernen Thron von Westeros geht weiter: Tyrion Lannister, Hand des Königs, knüpft in der roten Burg mit Heiratsversprechen neue Allianzen. Catelyn Stark, Witwe des hingerichteten Lord von Winterfell, erreicht derweil Sturmkap, um selbst ein Bündnis zu schmieden. Aber Renly Baratheon, Lord von Sturmkap, seine neue Frau Margaery und ihr Bruder Loras Tyrell haben andere Pläne.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|Bryan Cogman|</Writer>
+    <absolute_number>13</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245772.jpg</filename>
+    <lastupdated>1352849154</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245773</id>
+    <Combined_episodenumber>4</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>4</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|David Petrarca|</Director>
+    <EpisodeName>Der Garten der Knochen</EpisodeName>
+    <EpisodeNumber>4</EpisodeNumber>
+    <FirstAired>2012-04-23T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2069319</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Der junge König von Westeros, Joffrey bestraft Sansa für die Siege ihres Bruders Robb Stark, der im Norden gegen den Tyrannen rebelliert. Tyrion Lannister, rechte Hand des Königs, und sein treuer Leibwächter Bronn ringen darum, die Grausamkeit des Königs zu zähmen. Daenerys Targaryen erreicht unterdessen die Tore des prosperierenden Qarth.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|Vanessa Taylor|</Writer>
+    <absolute_number>14</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245773.jpg</filename>
+    <lastupdated>1352849197</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245774</id>
+    <Combined_episodenumber>5</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>5</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|David Petrarca|</Director>
+    <EpisodeName>Der Geist von Harrenhal</EpisodeName>
+    <EpisodeNumber>5</EpisodeNumber>
+    <FirstAired>2012-04-29T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2074658</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Eine neue Wendung im Machtkampf um Westeros: Das Ende der Rivalität der Baratheons zwingt Catelyn Stark zu fliehen und ihren Jugendfreund und Ratsmitglied Petyr "Kleinfinger" Baelish zum handeln. Tyrion Lannister, Hand des Königs, erfährt unterdessen von der mysteriösen Geheimwaffe der Königinmutter Cerseis. Und Daenerys Targaryen muss einen Verlust erleiden.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|D.B. Weiss|</Writer>
+    <absolute_number>15</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245774.jpg</filename>
+    <lastupdated>1352849233</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245775</id>
+    <Combined_episodenumber>6</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>6</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|David Nutter|</Director>
+    <EpisodeName>Alte und neue Götter</EpisodeName>
+    <EpisodeNumber>6</EpisodeNumber>
+    <FirstAired>2012-05-07T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2085238</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Das Machtgefüge in Westeros wankt: Theon Graufreud führt seinen riskanten Schachzug zu Ende und übernimmt die Macht in Winterfell. Mycrella Baratheon verlässt für ihre arangierte Hochzeit gerade noch rechtzeitig den Hof in Königsmund: Der junge König Joffrey provoziert mit brutaler Arroganz einen Aufstand, den selbst der kluge Tyrion Lannister nicht unter Kontrolle bringen kann.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|Vanessa Taylor|</Writer>
+    <absolute_number>16</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245775.jpg</filename>
+    <lastupdated>1352849277</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245776</id>
+    <Combined_episodenumber>7</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>7</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|David Nutter|</Director>
+    <EpisodeName>Ein Mann ohne Ehre</EpisodeName>
+    <EpisodeNumber>7</EpisodeNumber>
+    <FirstAired>2012-05-14T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2085239</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Osha hat Bran und dessen kleinen Bruder zur Flucht verholfen. Theon lässt nach den Ausreißern suchen. Er fürchtet, ansonsten zum Gespött zu werden. Daenerys ist unterdessen auf der Suche nach ihren gestohlenen Drachen. Jorah bittet sie um ihr Vertrauen. </Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7,9</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|D.B. Weiss|</Writer>
+    <absolute_number>17</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245776.jpg</filename>
+    <lastupdated>1352849321</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245777</id>
+    <Combined_episodenumber>8</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>8</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Alan Taylor|</Director>
+    <EpisodeName>Der Prinz von Winterfell</EpisodeName>
+    <EpisodeNumber>8</EpisodeNumber>
+    <FirstAired>2012-05-21T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2085240</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Theon Graufreud, Sohn des einstigen Revolutionärs Lord Balon Graufreud, hat Winterfell besetzt und empfängt dort seine Schwester Yara. Die fordert ihn auf, nach Hause zurückzukehren. König Robb Stark ist derweil immer noch überzeugt, dass seine Familie nicht sicher sein kann, solange noch ein Lannister lebt. Da muss er erfahren, dass seine Mutter Catelyn Jamie Lannister zur Flucht verholfen hat.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|D.B. Weiss|</Writer>
+    <absolute_number>18</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245777.jpg</filename>
+    <lastupdated>1352849351</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245778</id>
+    <Combined_episodenumber>9</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>9</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Neil Marshall|</Director>
+    <EpisodeName>Schwarzwasser</EpisodeName>
+    <EpisodeNumber>9</EpisodeNumber>
+    <FirstAired>2012-05-28T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2084342</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Der Krieg um den eisernen Thron von Westeros erreicht einen neuen Höhepunkt: Der listige Tyrion und sein Clan der Lannisters kämpfen um ihr Leben als die Flotte von Stannis Baratheon zweitjüngstem Bruder Robert Baratheons und Lord von Drachenstein, die Hauptstadt Königsmund angreift. Wer kann die Entscheidungsschlacht gewinnen?</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,4</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|George R. R. Martin|</Writer>
+    <absolute_number>19</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245778.jpg</filename>
+    <lastupdated>1352849383</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4245779</id>
+    <Combined_episodenumber>10</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>10</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Alan Taylor|</Director>
+    <EpisodeName>Valar Morghulis</EpisodeName>
+    <EpisodeNumber>10</EpisodeNumber>
+    <FirstAired>2012-06-04T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID>tt2112510</IMDB_ID>
+    <Language>de</Language>
+    <Overview>Die Schlacht von Schwarzwasser ist geschlagen: Stannis Baratheons (Stephen Dillane) Angriff wurde zurückgeworfen. Der junge König Joffrey (Jack Gleeson) belohnt die neuen Kriegshelden und hat Tyrion Lannister (Peter Dinlage) entmachtet. Lord Tywin (Charles Dance) wird statt seiner Hand des Königs. Loras Tyrell (Finn Jones) drängt auf eine noch engere Verbindung der Familien. Stannis Baratheon hadert derweil mit seiner Niederlage. Und erfährt, dass der Krieg um die eiserne Krone von Westeros noch lange nicht zu Ende ist. Im Norden erreicht das Reich eine neue Bedrohung.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,4</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer>|David Benioff|D.B. Weiss|</Writer>
+    <absolute_number>20</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/121361/4245779.jpg</filename>
+    <lastupdated>1352849459</lastupdated>
+    <seasonid>473271</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+  <Episode>
+    <id>4293685</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>3</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName>TBA</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2013-03-31T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>de</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>3</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename></filename>
+    <lastupdated>1342735660</lastupdated>
+    <seasonid>488434</seasonid>
+    <seriesid>121361</seriesid>
+  </Episode>
+</Data>

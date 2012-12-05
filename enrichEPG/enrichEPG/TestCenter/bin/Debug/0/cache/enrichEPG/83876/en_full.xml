@@ -1,0 +1,712 @@
+<Data>
+  <Series>
+    <id>83876</id>
+    <Actors></Actors>
+    <Airs_DayOfWeek>Sunday</Airs_DayOfWeek>
+    <Airs_Time>19.30</Airs_Time>
+    <ContentRating></ContentRating>
+    <FirstAired>2008-10-26T00:00:00</FirstAired>
+    <Genre>|Documentary|</Genre>
+    <IMDB_ID>tt1236350</IMDB_ID>
+    <Language>en</Language>
+    <Network>ZDF</Network>
+    <Overview></Overview>
+    <Rating>6.7</Rating>
+    <Runtime>45</Runtime>
+    <SeriesID>-99</SeriesID>
+    <SeriesName>Die Deutschen</SeriesName>
+    <Status>Ended</Status>
+    <banner>graphical/83876-g3.jpg</banner>
+    <fanart>fanart/original/83876-1.jpg</fanart>
+    <poster>posters/83876-2.jpg</poster>
+    <lastupdated>1339337176</lastupdated>
+    <zap2it_id></zap2it_id>
+  </Series>
+  <Episode>
+    <id>2920981</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName></EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2010-10-10T00:00:00</FirstAired>
+    <GuestStars>|Guido Knopp (Moderation)|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920981.jpg</filename>
+    <lastupdated>1286148091</lastupdated>
+    <seasonid>37780</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>3578191</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName></EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>0001-01-01T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename></filename>
+    <lastupdated>1325958563</lastupdated>
+    <seasonid>37780</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>3578201</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>0</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber></DVD_episodenumber>
+    <DVD_season></DVD_season>
+    <Director></Director>
+    <EpisodeName></EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>0001-01-01T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>0</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>-99</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename></filename>
+    <lastupdated>1325958781</lastupdated>
+    <seasonid>37780</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410821</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>1</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Otto und das Reich</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2008-10-26T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Die Geburtsstunde der Deutschen
+
+Im Kampf der deutschen Stämme gegen die Ungarn entstand unter Führung von König Otto I. so etwas wie ein Gemeinschaftsgefühl. Mit dem Erhalt der Kaiserwürde legte er den Grundstein für ein einmaliges Herrschaftssystem.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>9</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>1</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410821.jpg</filename>
+    <lastupdated>1293411060</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410822</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>2</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Heinrich und der Papst</EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>2008-10-28T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Der Gang nach Canossa
+
+Es ist ein Machtkampf, wie es ihn nie zuvor gegeben hat: König gegen Papst. Wer ist der Stärkere? Es geht um die Macht im Königreich der Deutschen und im christlichen Abendland - und um eine einzigartige Geste, wie es sie seitdem nicht wieder gegeben hat: um Heinrichs IV. "Gang nach Canossa".</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>8,3</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>2</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410822.jpg</filename>
+    <lastupdated>1293411021</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410823</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>3</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Barbarossa und der Löwe</EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>2008-11-02T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Rivalität in der Familie
+
+Er ist der König der Deutschen und will als Kaiser über das Abendland herrschen: der Staufer Friedrich Barbarossa. Das Reich erstreckt sich bis Süditalien. Doch seine Herrschaft ist umstritten. Mächtige Rivalen fordern den Monarchen heraus - auch sein einstiger Verbündeter Heinrich der Löwe.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>3</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410823.jpg</filename>
+    <lastupdated>1293411277</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410824</id>
+    <Combined_episodenumber>4</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>4</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Luther und die Nation</EpisodeName>
+    <EpisodeNumber>4</EpisodeNumber>
+    <FirstAired>2008-11-04T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Der Reformator und Förderer der deutschen Sprache
+
+Zunächst war er nur ein einfacher Mönch, ein zweifelnder und mit sich hadernder Theologe. Aus ihm wurde eine epochale Figur, die wie keine andere zuvor die Deutschen einte und spaltete - ohne dies zu wollen: Martin Luther.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>9</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>4</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410824.jpg</filename>
+    <lastupdated>1293411857</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410825</id>
+    <Combined_episodenumber>5</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>5</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Wallenstein und der Krieg</EpisodeName>
+    <EpisodeNumber>5</EpisodeNumber>
+    <FirstAired>2008-11-09T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Genialer Feldherr oder Verräter
+
+Es ist ein Kampf um die religiöse und politische Vorherrschaft im Reich und in Europa: Katholiken gegen Protestanten. Ein Mann soll für den Kaiser die Anhänger der Reformation besiegen: der Feldherr Albrecht von Wallenstein.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>5</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410825.jpg</filename>
+    <lastupdated>1293411879</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410826</id>
+    <Combined_episodenumber>6</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>6</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Preußens Friedrich und die Kaiserin</EpisodeName>
+    <EpisodeNumber>6</EpisodeNumber>
+    <FirstAired>2008-11-11T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Duell zwischen Preußen und Österreich
+
+Das "Heilige Römische Reich Deutscher Nation" glich nach dem Dreißigjährigen Krieg einem territorialen Puzzle. Weil eine zentrale Gewalt fehlte, bildeten sich neue Mächte an der Peripherie heraus: Preußen und Österreich.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>6</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410826.jpg</filename>
+    <lastupdated>1293411903</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410827</id>
+    <Combined_episodenumber>7</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>7</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Napoleon und die Deutschen</EpisodeName>
+    <EpisodeNumber>7</EpisodeNumber>
+    <FirstAired>2008-11-16T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Zwischen Freiheit und Repression
+
+Ausgerechnet ein fremder Kaiser ist es, der Deutschland in ein nationales Zeitalter katapultiert: Frankreichs Jahrhundertherrscher Napoleon. Durch seine Eroberungen und Reformen finden die Deutschen mehr denn je zueinander. Was ihm gelingt, hatte zuvor niemand erreicht: die politische Erweckung der "deutschen Nation".</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>7</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410827.jpg</filename>
+    <lastupdated>1293411925</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410828</id>
+    <Combined_episodenumber>8</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>8</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Robert Blum und die Revolution</EpisodeName>
+    <EpisodeNumber>8</EpisodeNumber>
+    <FirstAired>2008-11-18T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Ein unbekannter Held
+
+Eine Revolution - in Deutschland? Und zwar keineswegs, wie Lenin den Deutschen später süffisant nachsagte, mit einer ordnungsgemä­ßen Bahnsteigkarte in der Tasche! Im März 1848 wurden aus braven Untertanen entschiedene Barrikadenkämpfer. </Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>8</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410828.jpg</filename>
+    <lastupdated>1293411950</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410829</id>
+    <Combined_episodenumber>9</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>9</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Bismarck und das deutsche Reich</EpisodeName>
+    <EpisodeNumber>9</EpisodeNumber>
+    <FirstAired>2008-11-23T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Vom Kleinstaatler zum Nationalkämpfer
+
+Nach der Revolution von 1848, dem vergeblichen Versuch einer "Einheit von unten", kam es nun zur "Einheit von oben". Preußens Ministerpräsident Otto von Bismarck ebnete den Weg zum ersten deutschen Nationalstaat.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>7</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>9</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410829.jpg</filename>
+    <lastupdated>1293412038</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>410830</id>
+    <Combined_episodenumber>10</Combined_episodenumber>
+    <Combined_season>1</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>10</DVD_episodenumber>
+    <DVD_season>1</DVD_season>
+    <Director></Director>
+    <EpisodeName>Wilhelm und die Welt</EpisodeName>
+    <EpisodeNumber>10</EpisodeNumber>
+    <FirstAired>2008-11-25T00:00:00</FirstAired>
+    <GuestStars></GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview>Ein Monarch zwischen Größenwahn und Depression
+
+Das Deutsch Reich zu Beginn des 20. Jahrhunderts: Zu klein, um über andere zu herrschen und zu groß für die Balance der Mächte in Europa. Weltmacht sein, das will Kaiser Wilhelm II.</Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>1</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>10</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/410830.jpg</filename>
+    <lastupdated>1293411997</lastupdated>
+    <seasonid>37605</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920841</id>
+    <Combined_episodenumber>1</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>1</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Werner Biermann|</Director>
+    <EpisodeName>Karl der Grosse und die Sachsen</EpisodeName>
+    <EpisodeNumber>1</EpisodeNumber>
+    <FirstAired>2010-11-14T00:00:00</FirstAired>
+    <GuestStars>|Jens Schäfer (Karl der Große), Zoltan Butuc (Widukind)|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>11</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920841.jpg</filename>
+    <lastupdated>1293542833</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920851</id>
+    <Combined_episodenumber>2</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>2</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Christian Feyerabend, Daniel Sich|</Director>
+    <EpisodeName>Friedrich II und der Kreuzzug</EpisodeName>
+    <EpisodeNumber>2</EpisodeNumber>
+    <FirstAired>2010-11-16T00:00:00</FirstAired>
+    <GuestStars>|Michael Pink (Friedrich II.)|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>12</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920851.jpg</filename>
+    <lastupdated>1293542866</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920861</id>
+    <Combined_episodenumber>3</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>3</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Friederike Haedecke|</Director>
+    <EpisodeName>Hildegard von Bingen und die Macht der Frauen</EpisodeName>
+    <EpisodeNumber>3</EpisodeNumber>
+    <FirstAired>2010-11-21T00:00:00</FirstAired>
+    <GuestStars>|Deborah Kaufmann|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>13</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920861.jpg</filename>
+    <lastupdated>1293542886</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920871</id>
+    <Combined_episodenumber>4</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>4</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Georg Graffe, Bernhard von Dadelsen|</Director>
+    <EpisodeName>Karl IV und der Schwarze Tod</EpisodeName>
+    <EpisodeNumber>4</EpisodeNumber>
+    <FirstAired>2010-11-23T00:00:00</FirstAired>
+    <GuestStars>|Christoph Jacobi|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>14</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920871.jpg</filename>
+    <lastupdated>1293542908</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920881</id>
+    <Combined_episodenumber>5</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>5</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Martin Carazo Mendez|</Director>
+    <EpisodeName>Thomas Muentzer und der Krieg der Bauern</EpisodeName>
+    <EpisodeNumber>5</EpisodeNumber>
+    <FirstAired>2010-11-28T00:00:00</FirstAired>
+    <GuestStars>|Stéphane Lalloz|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>15</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920881.jpg</filename>
+    <lastupdated>1293542929</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920891</id>
+    <Combined_episodenumber>6</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>6</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Yury Winterberg, Jan Peter|</Director>
+    <EpisodeName>August der Starke und die Liebe</EpisodeName>
+    <EpisodeNumber>6</EpisodeNumber>
+    <FirstAired>2010-11-30T00:00:00</FirstAired>
+    <GuestStars>|Jirka Macháek|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>16</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920891.jpg</filename>
+    <lastupdated>1293542950</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920901</id>
+    <Combined_episodenumber>7</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>7</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Peter Hartl|</Director>
+    <EpisodeName>Karl Marx und der Klassenkampf</EpisodeName>
+    <EpisodeNumber>7</EpisodeNumber>
+    <FirstAired>2010-12-05T00:00:00</FirstAired>
+    <GuestStars>|Oliver Boysen|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>17</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920901.jpg</filename>
+    <lastupdated>1293542971</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920911</id>
+    <Combined_episodenumber>8</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>8</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Friedrich Klütsch|</Director>
+    <EpisodeName>Ludwig II und die Bayern</EpisodeName>
+    <EpisodeNumber>8</EpisodeNumber>
+    <FirstAired>2010-12-07T00:00:00</FirstAired>
+    <GuestStars>|André Kaczmarczyk|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>18</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920911.jpg</filename>
+    <lastupdated>1293542992</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920921</id>
+    <Combined_episodenumber>9</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>9</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Ricarda Schlosshan|</Director>
+    <EpisodeName>Rosa Luxemburg und die Freiheit</EpisodeName>
+    <EpisodeNumber>9</EpisodeNumber>
+    <FirstAired>2010-12-12T00:00:00</FirstAired>
+    <GuestStars>|Tereza Brodská|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>10</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>19</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920921.jpg</filename>
+    <lastupdated>1293543013</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+  <Episode>
+    <id>2920931</id>
+    <Combined_episodenumber>10</Combined_episodenumber>
+    <Combined_season>2</Combined_season>
+    <DVD_chapter></DVD_chapter>
+    <DVD_discid></DVD_discid>
+    <DVD_episodenumber>10</DVD_episodenumber>
+    <DVD_season>2</DVD_season>
+    <Director>|Stefan Brauburger, Friedrich Scherer|</Director>
+    <EpisodeName>Gustav Stresemann und die Republik</EpisodeName>
+    <EpisodeNumber>10</EpisodeNumber>
+    <FirstAired>2010-12-14T00:00:00</FirstAired>
+    <GuestStars>|Gustav Stresemann|</GuestStars>
+    <IMDB_ID></IMDB_ID>
+    <Language>en</Language>
+    <Overview></Overview>
+    <ProductionCode></ProductionCode>
+    <Rating>-99</Rating>
+    <SeasonNumber>2</SeasonNumber>
+    <Writer></Writer>
+    <absolute_number>20</absolute_number>
+    <airsafter_season></airsafter_season>
+    <airsbefore_episode></airsbefore_episode>
+    <airsbefore_season></airsbefore_season>
+    <filename>episodes/83876/2920931.jpg</filename>
+    <lastupdated>1293543038</lastupdated>
+    <seasonid>328791</seasonid>
+    <seriesid>83876</seriesid>
+  </Episode>
+</Data>

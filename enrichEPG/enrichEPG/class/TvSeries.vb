@@ -30,6 +30,7 @@ Imports MediaPortal.Database
 Imports SQLite.NET
 Imports TvDatabase
 
+
 Public Class TVSeriesDB
 
     Implements IDisposable
@@ -69,9 +70,9 @@ Public Class TVSeriesDB
 
 
             ' Open database
-            If File.Exists(EnrichEPG.MpDatabasePath & "\TVSeriesDatabase4.db3") = True Then
+            If File.Exists(MySettings.MpDatabasePath & "\TVSeriesDatabase4.db3") = True Then
 
-                m_db = New SQLiteClient(EnrichEPG.MpDatabasePath & "\TVSeriesDatabase4.db3")
+                m_db = New SQLiteClient(MySettings.MpDatabasePath & "\TVSeriesDatabase4.db3")
                 ' Retry 10 times on busy (DB in use or system resources exhausted)
                 m_db.BusyRetries = 20
                 ' Wait 100 ms between each try (default 10)
@@ -79,7 +80,7 @@ Public Class TVSeriesDB
 
                 DatabaseUtility.SetPragmas(m_db)
             Else
-                MyLog.[Error]("enrichEPG: [OpenTvSeriesDB]: TvSeries Database not found: {0}", EnrichEPG.MpDatabasePath)
+                MyLog.[Error]("enrichEPG: [OpenTvSeriesDB]: TvSeries Database not found: {0}", MySettings.MpDatabasePath)
             End If
 
         Catch ex As Exception

@@ -27,7 +27,10 @@ Imports System.Text.RegularExpressions
 ''' <summary>
 ''' An implementation of a log mechanism for the GUI library.
 ''' </summary>
+
 Public Class MyLog
+#Region "Members"
+
     Private Enum LogType
         ''' <summary>
         ''' Debug logging
@@ -48,6 +51,7 @@ Public Class MyLog
 
     End Enum
 
+
     ''' <summary>
     ''' Configure after how many days the log file shall be rotated when a new line is added
     ''' </summary>
@@ -67,6 +71,8 @@ Public Class MyLog
     ''' The last log n lines to compare for repeated entries.
     ''' </summary>
     Private Shared ReadOnly _lastLogLines As New List(Of String)(_maxRepetitions)
+#End Region
+
 
 #Region "Constructors"
 
@@ -173,7 +179,21 @@ Public Class MyLog
     '''</summary>
     '''<returns>Application data path of TvServer</returns>
     Public Shared Function GetPathName() As String
-        Return EnrichEPG.MyLogFilePath
+        Dim _LogPathClient As String = [String].Format("{0}\Team MediaPortal\MediaPortal", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+        Dim _LogPathServer As String = [String].Format("{0}\Team MediaPortal\MediaPortal TV Server", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
+        Select Case MySettings.LogFilePath
+            Case Is = MySettings.LogPath.Client
+                Return _LogPathClient
+            Case Is = MySettings.LogPath.Server
+                Return _LogPathServer
+            Case Else
+                If MySettings.ServerInstalled = True Then
+                    Return _LogPathServer
+                Else
+                    Return _LogPathClient
+                End If
+        End Select
     End Function
 
 #End Region
@@ -184,13 +204,13 @@ Public Class MyLog
         Dim Path As String = GetPathName()
         Select Case logType__1
             Case LogType.Debug, LogType.Info
-                Return [String].Format("{0}\log\{1}", Path, EnrichEPG.MyLogFileName)
+                Return [String].Format("{0}\log\{1}", Path, MySettings.LogFileName)
 
             Case LogType.[Error]
-                Return [String].Format("{0}\log\{1}", Path, EnrichEPG.MyLogFileName)
+                Return [String].Format("{0}\log\{1}", Path, MySettings.LogFileName)
 
             Case Else
-                Return [String].Format("{0}\log\{1}", Path, EnrichEPG.MyLogFileName)
+                Return [String].Format("{0}\log\{1}", Path, MySettings.LogFileName)
         End Select
     End Function
 

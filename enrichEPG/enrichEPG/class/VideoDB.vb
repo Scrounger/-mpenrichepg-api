@@ -29,6 +29,8 @@ Imports MediaPortal.Database
 Imports SQLite.NET
 Imports TvDatabase
 
+
+
 Public Class VideoDB
     Implements IDisposable
 
@@ -60,9 +62,9 @@ Public Class VideoDB
 
 
             ' Open database
-            If File.Exists(EnrichEPG.MpDatabasePath & "\VideoDatabaseV5.db3") = True Then
+            If File.Exists(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3") = True Then
 
-                m_db = New SQLiteClient(EnrichEPG.MpDatabasePath & "\VideoDatabaseV5.db3")
+                m_db = New SQLiteClient(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
                 ' Retry 10 times on busy (DB in use or system resources exhausted)
                 m_db.BusyRetries = 20
                 ' Wait 100 ms between each try (default 10)
@@ -71,7 +73,7 @@ Public Class VideoDB
                 DatabaseUtility.SetPragmas(m_db)
             Else
                 Dim layer As New TvBusinessLayer
-                MyLog.[Error]("TVMovie: [OpenVideoDB]: VideoDatabase not found: {0}", EnrichEPG.MpDatabasePath & "\VideoDatabaseV5.db3")
+                MyLog.[Error]("TVMovie: [OpenVideoDB]: VideoDatabase not found: {0}", MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
             End If
 
 

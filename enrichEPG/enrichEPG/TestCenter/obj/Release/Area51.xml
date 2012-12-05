@@ -1,0 +1,53 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Area51
+</name>
+</assembly>
+<members>
+<member name="P:Area51.My.Resources.Resources.ResourceManager">
+	<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member><member name="P:Area51.My.Resources.Resources.Culture">
+	<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member><member name="T:Area51.My.Resources.Resources">
+	<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
+</member><member name="P:Area51.TvEngine.NewTvServerPluginSetup.Name">
+	<summary>
+ returns the name of the plugin
+ </summary>
+</member><member name="P:Area51.TvEngine.NewTvServerPluginSetup.Version">
+	<summary>
+ returns the version of the plugin
+ </summary>
+</member><member name="P:Area51.TvEngine.NewTvServerPluginSetup.Author">
+	<summary>
+ returns the author of the plugin
+ </summary>
+</member><member name="P:Area51.TvEngine.NewTvServerPluginSetup.MasterOnly">
+	<summary>
+ returns if the plugin should only run on the master server
+ or also on slave servers
+ </summary>
+</member><member name="M:Area51.TvEngine.NewTvServerPluginSetup.Start(TvControl.IController)">
+	<summary>
+ Starts the plugin
+ </summary>
+</member><member name="M:Area51.TvEngine.NewTvServerPluginSetup.Stop">
+	<summary>
+ Stops the plugin
+ </summary>
+</member><member name="P:Area51.TvEngine.NewTvServerPluginSetup.Setup">
+	<summary>
+ returns the setup sections for display in SetupTv
+ </summary>
+</member>
+</members>
+</doc>

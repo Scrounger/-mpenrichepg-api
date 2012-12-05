@@ -63,7 +63,6 @@ D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvLibrary.Utils.d
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\Interop.SHDocVw.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\DirectShowLib.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\log4net.dll
-D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\TvdbLib.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\MySql.Data.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Debug\enrichEPG.xml

@@ -138,6 +138,7 @@
     <Compile Include="class\MovingPicturesDB.vb" />
     <Compile Include="class\MyLog.vb" />
     <Compile Include="class\myTvSeries.vb" />
+    <Compile Include="class\MySettings.vb" />
     <Compile Include="class\TVMovieEpisodeMapping.vb" />
     <Compile Include="class\TVMovieProgram.vb" />
     <Compile Include="class\TvMovieSeriesMapping.vb" />

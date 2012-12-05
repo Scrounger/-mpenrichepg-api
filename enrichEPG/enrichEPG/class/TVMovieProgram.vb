@@ -26,6 +26,7 @@ Imports TvDatabase
 Imports System.Reflection
 Imports System.Threading
 
+
 Namespace TvDatabase
     ''' <summary>
     ''' Instances of this class represent the properties and methods of a row in the table <b>TVMovieProgram</b>.

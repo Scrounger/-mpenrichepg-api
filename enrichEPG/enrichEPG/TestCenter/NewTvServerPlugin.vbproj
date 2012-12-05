@@ -91,6 +91,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Team MediaPortal\MediaPortal TV Server\TVDatabase.dll</HintPath>
     </Reference>
+    <Reference Include="TvdbLib, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="TVLibrary, Version=1.2.2.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Team MediaPortal\MediaPortal TV Server\TVLibrary.dll</HintPath>

@@ -6,55 +6,55 @@ enrichEPG
 </name>
 </assembly>
 <members>
-<member name="P:enrichEPG.MyTvSeries.EpisodesList">
+<member name="P:enrichEPG.Database.MyTvSeries.EpisodesList">
 	<summary>
  Alle Episoden der Serie (ggf. aus TvSeriesDB laden)
  </summary>
-</member><member name="P:enrichEPG.MyTvSeries.Episode(System.Int32,System.Int32)">
+</member><member name="P:enrichEPG.Database.MyTvSeries.Episode(System.Int32,System.Int32)">
 	<summary>
  Episode der Serie (über SeriesNum und EpisodeNum)
  </summary>
-</member><member name="P:enrichEPG.MyTvSeries.Episode(System.String)">
+</member><member name="P:enrichEPG.Database.MyTvSeries.Episode(System.String)">
 	<summary>
  Episode der Serie suchen (über EpisodenName)
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.GetFanArt">
+</member><member name="M:enrichEPG.Database.MyTvSeries.LoadAllEpisodes">
 	<summary>
  FanArt Pfad aus TvSeriesDB laden, nicht vorhanden = string.empty
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.ListAll">
+</member><member name="M:enrichEPG.Database.MyTvSeries.ListAll">
 	<summary>
  Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.Retrieve(System.Int32)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.Retrieve(System.Int32)">
 	<summary>
  einzelne Serie über idSeries aus TvSeriesDB laden
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.Search(System.String)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.Search(System.String)">
 	<summary>
  einzelne Serie suchen (levenshtein)
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.ListAll(System.Int32)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.MyEpisode.ListAll(System.Int32)">
 	<summary>
  Alle Episoden einer Serie laden (über idSeries)
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Retrieve(System.Int32,System.Int32,System.Int32)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.MyEpisode.Retrieve(System.Int32,System.Int32,System.Int32)">
 	<summary>
  Episode einer Serie laden (über idSeries, SeriesNum und EpisodeNum
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Retrieve(System.String)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.MyEpisode.Retrieve(System.String)">
 	<summary>
  Episode einer Serie laden (über idEpisode (CompositeID)) 
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.MyEpisode.Search(System.Int32,System.String)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.MyEpisode.Search(System.Int32,System.String)">
 	<summary>
  Episode einer Serie suchen (über idSeries, EpisodeName (levenshtein))
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.Helper.GetSeries(System.String)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.Helper.GetSeries(System.String)">
 	<summary>
  Daten aus table online_series laden
  </summary>
-</member><member name="M:enrichEPG.MyTvSeries.Helper.GetEpisodes(System.String)">
+</member><member name="M:enrichEPG.Database.MyTvSeries.Helper.GetEpisodes(System.String)">
 	<summary>
  Daten aus table online_episodes laden
  </summary>

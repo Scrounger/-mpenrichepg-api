@@ -29,7 +29,7 @@ Public Class clsTheTVdb
         End Set
     End Property
 
-    Private mCachePath As String = EnrichEPG.TheTvDbCacheFolder
+    Private mCachePath As String = MySettings.TheTvDbCacheFolder
     Public Property CachePath() As String
         Get
             Return mCachePath
@@ -82,5 +82,3 @@ Public Class clsTheTVdb
 
 
 End Class
-
-

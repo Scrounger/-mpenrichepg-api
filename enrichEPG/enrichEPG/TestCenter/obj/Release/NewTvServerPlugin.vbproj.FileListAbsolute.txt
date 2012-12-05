@@ -23,3 +23,34 @@ Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Release\NewTvServerPlugin.vbproj.
 Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Release\ClickfinderEPGImporter.dll
 Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Release\ClickfinderEPGImporter.xml
 Z:\Projekte\MediaPortal\NewTvServer Plugin\obj\Release\ClickfinderEPGImporter.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Area51.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Area51.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Area51.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Common.Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Databases.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Gentle.Common.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Gentle.Framework.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\PluginBase.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\SetupControls.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TvBusinessLayer.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TvControl.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TVDatabase.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TVLibrary.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TvLibrary.Interfaces.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\TvLibrary.Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\log4net.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\DirectShowLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Interop.SHDocVw.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\Core.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\MySql.Data.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\enrichEPG.pdb
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\bin\Release\enrichEPG.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\ResolveAssemblyReference.cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\Area51.SetupTv.Sections.NewTvServerPluginConfig.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\Area51.Resources.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\NewTvServerPlugin.vbproj.GenerateResource.Cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\Area51.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\Area51.xml
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\obj\Release\Area51.pdb

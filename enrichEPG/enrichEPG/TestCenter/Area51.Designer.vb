@@ -29,10 +29,11 @@ Namespace SetupTv.Sections
             Me.components = New System.ComponentModel.Container
             Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
             Me.TabSettings = New System.Windows.Forms.TabPage
+            Me.Button2 = New System.Windows.Forms.Button
             Me.Button1 = New System.Windows.Forms.Button
             Me.TabMapping = New System.Windows.Forms.TabPage
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
-            Me.Button2 = New System.Windows.Forms.Button
+            Me.Button3 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
             Me.SuspendLayout()
@@ -49,6 +50,7 @@ Namespace SetupTv.Sections
             '
             'TabSettings
             '
+            Me.TabSettings.Controls.Add(Me.Button3)
             Me.TabSettings.Controls.Add(Me.Button2)
             Me.TabSettings.Controls.Add(Me.Button1)
             Me.TabSettings.Location = New System.Drawing.Point(4, 22)
@@ -58,6 +60,15 @@ Namespace SetupTv.Sections
             Me.TabSettings.TabIndex = 0
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
+            '
+            'Button2
+            '
+            Me.Button2.Location = New System.Drawing.Point(193, 33)
+            Me.Button2.Name = "Button2"
+            Me.Button2.Size = New System.Drawing.Size(99, 52)
+            Me.Button2.TabIndex = 1
+            Me.Button2.Text = "Button2"
+            Me.Button2.UseVisualStyleBackColor = True
             '
             'Button1
             '
@@ -84,14 +95,14 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
             '
-            'Button2
+            'Button3
             '
-            Me.Button2.Location = New System.Drawing.Point(193, 33)
-            Me.Button2.Name = "Button2"
-            Me.Button2.Size = New System.Drawing.Size(99, 52)
-            Me.Button2.TabIndex = 1
-            Me.Button2.Text = "Button2"
-            Me.Button2.UseVisualStyleBackColor = True
+            Me.Button3.Location = New System.Drawing.Point(241, 254)
+            Me.Button3.Name = "Button3"
+            Me.Button3.Size = New System.Drawing.Size(138, 73)
+            Me.Button3.TabIndex = 2
+            Me.Button3.Text = "Button3"
+            Me.Button3.UseVisualStyleBackColor = True
             '
             'NewTvServerPluginConfig
             '
@@ -111,5 +122,6 @@ Namespace SetupTv.Sections
         Friend WithEvents TvLogosList As System.Windows.Forms.ImageList
         Friend WithEvents Button1 As System.Windows.Forms.Button
         Friend WithEvents Button2 As System.Windows.Forms.Button
+        Friend WithEvents Button3 As System.Windows.Forms.Button
     End Class
 End Namespace
