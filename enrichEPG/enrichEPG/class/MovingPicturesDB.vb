@@ -87,7 +87,6 @@ Public Class MovingPicturesDB
 
         Try
             _MovingPicturesInfos = m_db.Execute("SELECT * FROM movie_info ORDER BY title ASC")
-            MyLog.Info("enrichEPG: [LoadAllMovingPicturesFilms]: success")
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [LoadAllMovingPicturesFilms]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
             OpenMovingPicturesDB()
@@ -223,6 +222,16 @@ Public Class MovingPicturesDB
                 End If
             End Get
         End Property
+
+
+        Public ReadOnly Property Year() As Date
+            Get
+                If _MovingPicturesInfos IsNot Nothing AndAlso _MovingPicturesInfos.Rows.Count > 0 Then
+                    Return CDate(DatabaseUtility.[Get](_MovingPicturesInfos, _Index, "year"))
+                End If
+            End Get
+        End Property
+
     End Class
 
 #End Region

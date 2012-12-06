@@ -93,20 +93,23 @@ Namespace SetupTv.Sections
         End Sub
 
         Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+            'Try
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MyLog.BackupLogFiles()
+            MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
+            '----------------
 
-            enrichEPG.MyLog.BackupLogFiles()
 
-            Dim _tvbLayer As New TvBusinessLayer
-            Dim _enrichEPG As New enrichEPG.EnrichEPG(_tvbLayer.GetSetting("TvMovieMPDatabase", "C:\ProgramData\Team MediaPortal\MediaPortal\database").Value, _
-                    CBool(_tvbLayer.GetSetting("TvMovieImportTvSeriesInfos").Value), _
-                    False, _
-                    False, _
-                    Date.Now, _
-                    MySettings.LogPath.Server, _
-                    "", , , _
-                    "enrichTesting.log", True)
-            _enrichEPG.start()
+            Dim _MovPicList As IList(Of MyMovingPictures) = MyMovingPictures.ListAll
 
+            DataGridView1.AutoGenerateColumns = True
+            DataGridView1.DataSource = _MovPicList
+
+            'Catch ex As Exception
+            '    MsgBox(ex.Message)
+            'End Try
         End Sub
 
         Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
@@ -460,6 +463,94 @@ Namespace SetupTv.Sections
 
         End Function
 
+        Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MyLog.BackupLogFiles()
+            MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
+            '----------------
+            Try
+                Dim _MovieCounter As Integer = 0
+                Dim _EPGcounter As Integer = 0
+                MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: start import")
+
+                Dim _MovieList As IList(Of MyMovingPictures) = MyMovingPictures.ListAll
+
+                MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: {0} movies loaded from Moving Pictures database", _MovieList.Count)
+
+                For Each _movie In _MovieList
+
+                    Dim _Sqlstring As String = String.Empty
+
+                    'nach Mov.Pic Titel im EPG suchen
+                    _Sqlstring = String.Format("Select * from program WHERE OriginalAirDate = {0} AND (title LIKE '{1}'", _
+                                                Helper.MySqlDate(CDate(_movie.year)), MyMovingPictures.Helper.allowedSigns(_movie.Title))
+
+                    'nach Alternate Mov.Pic Title im EPG suchen
+                    If Not String.IsNullOrEmpty(_movie.AlternateTitles) Then
+                        _Sqlstring = _Sqlstring & " " & _
+                                    String.Format("OR title LIKE '{0}'", _
+                                    MyMovingPictures.Helper.allowedSigns(_movie.AlternateTitles))
+                    End If
+
+                    'nach TitleByFilename Mov.Pic Title im EPG suchen
+                    If Not String.IsNullOrEmpty(_movie.AlternateTitles) Then
+                        _Sqlstring = _Sqlstring & " " & _
+                                    String.Format("OR title LIKE '{0}'", _
+                                    MyMovingPictures.Helper.allowedSigns(_movie.TitleByFileName))
+                    End If
+
+                    'Abschließend noch Klammer wegen OR
+                    _Sqlstring = _Sqlstring & ") ORDER BY startTime"
+
+                    'List: programs des Movies laden
+                    Dim _SQLstate As SqlStatement = Broker.GetStatement(_Sqlstring)
+                    Dim _Result As IList(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate.Execute())
+
+                    'Movie im EPG gefunden
+                    If _Result.Count > 0 Then
+                        _MovieCounter = _MovieCounter + 1
+                        _EPGcounter = _EPGcounter + _Result.Count
+                        MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: {0} ({1}) found in {2} epg entries", _movie.Title, _movie.year.Year, _Result.Count)
+
+                        For Each _program In _Result
+                            'Daten im EPG (program) updaten
+                            _program.StarRating = _movie.Rating
+                            _program.ParentalRating = _movie.Certification
+                            If InStr(_program.Description, "existiert lokal" & vbNewLine) = 0 And String.IsNullOrEmpty(_program.SeriesNum) Then
+                                _program.Description = "existiert lokal" & vbNewLine & _program.Description
+                            End If
+
+                            _program.Persist()
+
+                            'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                            If MySettings.ClickfinderProgramGuideImportEnable = True Then
+                                Try
+                                    Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+                                    _TvMovieProgram.idMovingPictures = _movie.ID
+                                    _TvMovieProgram.local = True
+
+                                    _TvMovieProgram.Cover = _movie.Cover
+                                    _TvMovieProgram.FanArt = _movie.FanArt
+                                    _TvMovieProgram.FileName = _movie.FileName
+
+                                    _TvMovieProgram.Persist()
+                                Catch ex As Exception
+                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: TvMovieProgram not found ! (idProgram: {0}, start: {1})", _program.IdProgram, _program.StartTime)
+                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                                End Try
+                            End If
+                        Next
+                    End If
+                Next
+                MyLog.Info("")
+                MyLog.[Info]("enrichEPG: [GetMovingPicturesInfos]: Summary: {0} MovingPictures Films found in {1} EPG entries", _MovieCounter, _EPGcounter)
+
+            Catch ex As Exception
+                MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+            End Try
+        End Sub
     End Class
 End Namespace
 

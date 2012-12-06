@@ -70,7 +70,7 @@ Public Class Helper
             Return oAssembly.Version.ToString()
         End Get
     End Property
-    Friend Shared Function MySqlDate(ByVal Datum As Date) As String
+    Public Shared Function MySqlDate(ByVal Datum As Date) As String
         Try
             If Gentle.Framework.Broker.ProviderName = "MySQL" Then
                 Return "'" & Datum.Year & "-" & Format(Datum.Month, "00") & "-" & Format(Datum.Day, "00") & " " & Format(Datum.Hour, "00") & ":" & Format(Datum.Minute, "00") & ":00'"
