@@ -6,15 +6,7 @@ enrichEPG
 </name>
 </assembly>
 <members>
-<member name="M:enrichEPG.Database.MyMovingPictures.ListAll">
-	<summary>
- Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
- </summary>
-</member><member name="M:enrichEPG.Database.MyMovingPictures.Helper.GetMovies(System.String)">
-	<summary>
- Daten aus table movie_Info laden
- </summary>
-</member><member name="P:enrichEPG.Database.MyTvSeries.EpisodesList">
+<member name="P:enrichEPG.Database.MyTvSeries.EpisodesList">
 	<summary>
  Alle Episoden der Serie (ggf. aus TvSeriesDB laden)
  </summary>
@@ -66,7 +58,15 @@ enrichEPG
 	<summary>
  Daten aus table online_episodes laden
  </summary>
-</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32)">
+</member><member name="M:enrichEPG.Database.MyMovingPictures.ListAll">
+	<summary>
+ Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
+ </summary>
+</member><member name="M:enrichEPG.Database.MyMovingPictures.Helper.GetMovies(System.String)">
+	<summary>
+ Daten aus table movie_Info laden
+ </summary>
+</member><member name="M:enrichEPG.TvDatabase.TVMovieEpisodeMapping.#ctor(System.String,System.Int32)">
 	<summary> 
  Create an object from an existing row of data. This will be used by Gentle to 
  construct objects from retrieved rows. 

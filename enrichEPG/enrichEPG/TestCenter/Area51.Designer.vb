@@ -29,18 +29,19 @@ Namespace SetupTv.Sections
             Me.components = New System.ComponentModel.Container
             Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
             Me.TabSettings = New System.Windows.Forms.TabPage
+            Me.DataGridView1 = New System.Windows.Forms.DataGridView
+            Me.GroupBox1 = New System.Windows.Forms.GroupBox
+            Me.Button4 = New System.Windows.Forms.Button
             Me.Button3 = New System.Windows.Forms.Button
             Me.Button2 = New System.Windows.Forms.Button
             Me.Button1 = New System.Windows.Forms.Button
             Me.TabMapping = New System.Windows.Forms.TabPage
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
-            Me.GroupBox1 = New System.Windows.Forms.GroupBox
-            Me.Button4 = New System.Windows.Forms.Button
-            Me.DataGridView1 = New System.Windows.Forms.DataGridView
+            Me.Button5 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
-            Me.GroupBox1.SuspendLayout()
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.GroupBox1.SuspendLayout()
             Me.SuspendLayout()
             '
             'TabClickfinderEPGImporter
@@ -55,6 +56,7 @@ Namespace SetupTv.Sections
             '
             'TabSettings
             '
+            Me.TabSettings.Controls.Add(Me.Button5)
             Me.TabSettings.Controls.Add(Me.DataGridView1)
             Me.TabSettings.Controls.Add(Me.GroupBox1)
             Me.TabSettings.Controls.Add(Me.Button2)
@@ -66,6 +68,34 @@ Namespace SetupTv.Sections
             Me.TabSettings.TabIndex = 0
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
+            '
+            'DataGridView1
+            '
+            Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridView1.Location = New System.Drawing.Point(21, 271)
+            Me.DataGridView1.Name = "DataGridView1"
+            Me.DataGridView1.Size = New System.Drawing.Size(1157, 240)
+            Me.DataGridView1.TabIndex = 4
+            '
+            'GroupBox1
+            '
+            Me.GroupBox1.Controls.Add(Me.Button4)
+            Me.GroupBox1.Controls.Add(Me.Button3)
+            Me.GroupBox1.Location = New System.Drawing.Point(6, 20)
+            Me.GroupBox1.Name = "GroupBox1"
+            Me.GroupBox1.Size = New System.Drawing.Size(252, 139)
+            Me.GroupBox1.TabIndex = 3
+            Me.GroupBox1.TabStop = False
+            Me.GroupBox1.Text = "enrichEPG API"
+            '
+            'Button4
+            '
+            Me.Button4.Location = New System.Drawing.Point(15, 55)
+            Me.Button4.Name = "Button4"
+            Me.Button4.Size = New System.Drawing.Size(147, 28)
+            Me.Button4.TabIndex = 3
+            Me.Button4.Text = "[GetMovingPicturesInfos]"
+            Me.Button4.UseVisualStyleBackColor = True
             '
             'Button3
             '
@@ -99,7 +129,7 @@ Namespace SetupTv.Sections
             Me.TabMapping.Location = New System.Drawing.Point(4, 22)
             Me.TabMapping.Name = "TabMapping"
             Me.TabMapping.Padding = New System.Windows.Forms.Padding(3)
-            Me.TabMapping.Size = New System.Drawing.Size(465, 388)
+            Me.TabMapping.Size = New System.Drawing.Size(1234, 517)
             Me.TabMapping.TabIndex = 1
             Me.TabMapping.Text = "Map Channels"
             Me.TabMapping.UseVisualStyleBackColor = True
@@ -110,33 +140,14 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
             '
-            'GroupBox1
+            'Button5
             '
-            Me.GroupBox1.Controls.Add(Me.Button4)
-            Me.GroupBox1.Controls.Add(Me.Button3)
-            Me.GroupBox1.Location = New System.Drawing.Point(6, 20)
-            Me.GroupBox1.Name = "GroupBox1"
-            Me.GroupBox1.Size = New System.Drawing.Size(252, 139)
-            Me.GroupBox1.TabIndex = 3
-            Me.GroupBox1.TabStop = False
-            Me.GroupBox1.Text = "enrichEPG API"
-            '
-            'Button4
-            '
-            Me.Button4.Location = New System.Drawing.Point(15, 55)
-            Me.Button4.Name = "Button4"
-            Me.Button4.Size = New System.Drawing.Size(147, 28)
-            Me.Button4.TabIndex = 3
-            Me.Button4.Text = "[GetMovingPicturesInfos]"
-            Me.Button4.UseVisualStyleBackColor = True
-            '
-            'DataGridView1
-            '
-            Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridView1.Location = New System.Drawing.Point(21, 271)
-            Me.DataGridView1.Name = "DataGridView1"
-            Me.DataGridView1.Size = New System.Drawing.Size(1157, 240)
-            Me.DataGridView1.TabIndex = 4
+            Me.Button5.Location = New System.Drawing.Point(835, 74)
+            Me.Button5.Name = "Button5"
+            Me.Button5.Size = New System.Drawing.Size(298, 112)
+            Me.Button5.TabIndex = 5
+            Me.Button5.Text = "Button5"
+            Me.Button5.UseVisualStyleBackColor = True
             '
             'NewTvServerPluginConfig
             '
@@ -147,8 +158,8 @@ Namespace SetupTv.Sections
             Me.Size = New System.Drawing.Size(1260, 558)
             Me.TabClickfinderEPGImporter.ResumeLayout(False)
             Me.TabSettings.ResumeLayout(False)
-            Me.GroupBox1.ResumeLayout(False)
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.GroupBox1.ResumeLayout(False)
             Me.ResumeLayout(False)
 
         End Sub
@@ -162,5 +173,6 @@ Namespace SetupTv.Sections
         Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
         Friend WithEvents Button4 As System.Windows.Forms.Button
         Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+        Friend WithEvents Button5 As System.Windows.Forms.Button
     End Class
 End Namespace

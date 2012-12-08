@@ -12,6 +12,8 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports System.Xml
 
+Imports Gentle.Framework
+
 Imports TvControl
 Imports MediaPortal.UserInterface.Controls
 Imports MediaPortal.Configuration
@@ -24,7 +26,6 @@ Imports enrichEPG.Database
 Imports Databases
 Imports enrichEPG
 Imports enrichEPG.IdentifySeries
-Imports Gentle.Framework
 Imports enrichEPG.TvDatabase
 
 Namespace SetupTv.Sections
@@ -93,23 +94,13 @@ Namespace SetupTv.Sections
         End Sub
 
         Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-            'Try
-            'Muss wieder raus
-            MySettings.LogFileName = "Area51.log"
-            MySettings.LogFilePath = MySettings.LogPath.Server
-            MyLog.BackupLogFiles()
-            MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
-            '----------------
+            Try
 
+                Dim bla As MyTvSeries = Nothing
 
-            Dim _MovPicList As IList(Of MyMovingPictures) = MyMovingPictures.ListAll
-
-            DataGridView1.AutoGenerateColumns = True
-            DataGridView1.DataSource = _MovPicList
-
-            'Catch ex As Exception
-            '    MsgBox(ex.Message)
-            'End Try
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
         End Sub
 
         Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
@@ -162,7 +153,6 @@ Namespace SetupTv.Sections
 
         End Function
 
-
         Private Shared _ImportStartTime As Date
         Private Shared _IdentifiedPrograms As New ArrayList
         Private Shared _ScheduledDummyRecordingList As New ArrayList
@@ -175,8 +165,8 @@ Namespace SetupTv.Sections
             MySettings.LogFilePath = MySettings.LogPath.Server
             MyLog.BackupLogFiles()
             MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
-            '----------------
 
+            '----------------
             Try
                 MyLog.Info("enrichEPG: [GetSeriesInfos]: start import")
 
@@ -454,6 +444,10 @@ Namespace SetupTv.Sections
                 If _TvMovieSeriesMapping.disabled = True Then
                     MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0} is disabled (local = true) !", _TvMovieSeriesMapping.TvSeriesTitle)
                 End If
+
+                If _TvMovieSeriesMapping.minSeasonNum > 0 Then
+                    MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0}: minSeasonNumber >= {1} (local = true) !", _TvMovieSeriesMapping.TvSeriesTitle, _TvMovieSeriesMapping.minSeasonNum)
+                End If
             Catch SeriesMappingEx As Exception
                 'Exception wenn keine mappings gefunden
                 'MyLog.[Info]("enrichEPG: [GetSeriesInfos]: SeriesMapping Error: {0}, stack: {1}", SeriesMappingEx.Message, SeriesMappingEx.StackTrace)
@@ -471,6 +465,7 @@ Namespace SetupTv.Sections
             MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
             '----------------
             Try
+                Dim _MovPicTimer As Date = Date.Now
                 Dim _MovieCounter As Integer = 0
                 Dim _EPGcounter As Integer = 0
                 MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: start import")
@@ -537,19 +532,114 @@ Namespace SetupTv.Sections
 
                                     _TvMovieProgram.Persist()
                                 Catch ex As Exception
-                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: TvMovieProgram not found ! (idProgram: {0}, start: {1})", _program.IdProgram, _program.StartTime)
-                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+
+
+                                    'SQLstring: Alle Movies (2 > TvMovieBewertung < 6), inkl. TagesTipps des Tages laden
+                                    _Sqlstring = _
+                                        "Select * from program INNER JOIN TvMovieProgram ON program.idprogram = TvMovieProgram.idProgram " & _
+                                        "WHERE title LIKE '" & Helper.allowedSigns(_program.Title) & "' " & _
+                                        "AND episodeName LIKE '" & Helper.allowedSigns(_program.EpisodeName) & "'"
+
+                                    Try
+                                        'List: Daten laden
+                                        _Sqlstring = Replace(_Sqlstring, " * ", " TVMovieProgram.idProgram, TVMovieProgram.Action, TVMovieProgram.Actors, TVMovieProgram.BildDateiname, TVMovieProgram.Country, TVMovieProgram.Cover, TVMovieProgram.Describtion, TVMovieProgram.Dolby, TVMovieProgram.EpisodeImage, TVMovieProgram.Erotic, TVMovieProgram.FanArt, TVMovieProgram.Feelings, TVMovieProgram.FileName, TVMovieProgram.Fun, TVMovieProgram.HDTV, TVMovieProgram.idEpisode, TVMovieProgram.idMovingPictures, TVMovieProgram.idSeries, TVMovieProgram.idVideo, TVMovieProgram.KurzKritik, TVMovieProgram.local, TVMovieProgram.Regie, TVMovieProgram.Requirement, TVMovieProgram.SeriesPosterImage, TVMovieProgram.ShortDescribtion, TVMovieProgram.Tension, TVMovieProgram.TVMovieBewertung ")
+                                        Dim _SQLstate1 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                                        Dim _RepeatList As List(Of TVMovieProgram) = ObjectFactory.GetCollection(GetType(TVMovieProgram), _SQLstate1.Execute())
+
+                                        If _RepeatList.Count > 0 Then
+                                            Dim _TvMovieProgram As New TVMovieProgram(_program.IdProgram)
+
+                                            _TvMovieProgram.TVMovieBewertung = _RepeatList(0).TVMovieBewertung
+                                            _TvMovieProgram.BildDateiname = _RepeatList(0).BildDateiname
+                                            _TvMovieProgram.KurzKritik = _RepeatList(0).KurzKritik
+                                            _TvMovieProgram.Fun = _RepeatList(0).Fun
+                                            _TvMovieProgram.Action = _RepeatList(0).Action
+                                            _TvMovieProgram.Feelings = _RepeatList(0).Feelings
+                                            _TvMovieProgram.Erotic = _RepeatList(0).Erotic
+                                            _TvMovieProgram.Tension = _RepeatList(0).Tension
+                                            _TvMovieProgram.Requirement = _RepeatList(0).Requirement
+                                            _TvMovieProgram.Actors = _RepeatList(0).Actors
+                                            _TvMovieProgram.Dolby = _RepeatList(0).Dolby
+                                            _TvMovieProgram.HDTV = _RepeatList(0).HDTV
+                                            _TvMovieProgram.Country = _RepeatList(0).Country
+                                            _TvMovieProgram.Regie = _RepeatList(0).Regie
+                                            _TvMovieProgram.Describtion = _RepeatList(0).Describtion
+                                            _TvMovieProgram.ShortDescribtion = _RepeatList(0).ShortDescribtion
+
+                                            _TvMovieProgram.idMovingPictures = _movie.ID
+                                            _TvMovieProgram.local = True
+
+                                            _TvMovieProgram.Cover = _movie.Cover
+                                            _TvMovieProgram.FanArt = _movie.FanArt
+                                            _TvMovieProgram.FileName = _movie.FileName
+
+                                            _TvMovieProgram.Persist()
+
+                                            MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: repeat found -> create TvMovieProgram")
+                                        Else
+                                            MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: TvMovieProgram not found ! (idProgram: {0}, start: {1})", _program.IdProgram, _program.StartTime)
+                                        End If
+                                    Catch ex3 As Exception
+                                        MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err: {0}, stack: {1}", ex3.Message, ex3.StackTrace)
+                                    End Try
                                 End Try
                             End If
                         Next
                     End If
                 Next
                 MyLog.Info("")
-                MyLog.[Info]("enrichEPG: [GetMovingPicturesInfos]: Summary: {0} MovingPictures Films found in {1} EPG entries", _MovieCounter, _EPGcounter)
+                MyLog.[Info]("enrichEPG: [GetMovingPicturesInfos]: Summary: {0} MovingPictures Films found in {1} EPG entries ({2}s)", _MovieCounter, _EPGcounter, (DateTime.Now - _MovPicTimer).TotalSeconds)
 
             Catch ex As Exception
                 MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
             End Try
+        End Sub
+
+        Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MyLog.BackupLogFiles()
+            MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
+            '----------------
+
+            Dim _List As List(Of MyTvSeries) = MyTvSeries.ListAll
+
+            MsgBox(_List.Count)
+
+            DataGridView1.AutoGenerateColumns = True
+            DataGridView1.DataSource = _List
+
+
+            'Dim layer As New TvBusinessLayer()
+
+            'Dim _plugin As String = "1.2.3.4 beta"
+
+
+            'Try
+            '    'Table TVMovieEpisodeMapping anlegen
+            '    Broker.Execute("CREATE  TABLE mptvdb.TVMovieEpisodeMapping ( idEpisode varchar(15) NOT NULL, idSeries int(11) NOT NULL, EPGEpisodeName text, seriesNum int(11) NOT NULL, episodeNum int(11) NOT NULL, PRIMARY KEY (idEpisode) )")
+            '    MyLog.[Debug]("TVMovie: [TvMovie++ Settings]: TVMovieEpisodeMapping table created")
+            'Catch ex As Exception
+            '    'existiert bereits
+            '    MyLog.[Debug]("TVMovie: [TvMovie++ Settings]: TVMovieEpisodeMapping table exist")
+            'End Try
+
+            'Neue Verrsion: benötigte Einstellungen hier
+            'If Not layer.GetSetting("TvMovieVersion", String.Empty).Value = _plugin Then
+
+            '    MsgBox("New TvMovie++ Version detected!" & vbNewLine & vbNewLine & "All database tables must be reset for this new Version. That means you will lost your Series Mapping configuration and have to reconfigure the mappings !" & vbNewLine & vbNewLine & "You have to start a manual import to save the changes !!!", MsgBoxStyle.Information, "New Version")
+
+            '    Broker.Execute("DROP TABLE mptvdb.TvMovieSeriesMapping")
+
+
+            '    'VersionsNr. speichern.
+            '    'Dim Setting As Setting = layer.GetSetting("TvMovieVersion", String.Empty)
+            '    'Setting.Value = _plugin.Version
+            '    'Setting.Persist()
+            'End If
+
+
         End Sub
     End Class
 End Namespace

@@ -294,16 +294,34 @@ Public Class IdentifySeries
             'True: local = 1
             Dim _Local As Boolean = False
 
-            'TvMovieSeriesMapping: disabled = existiert
-            Try
-                If TvMovieSeriesMapping.Retrieve(TvSeries.idSeries).disabled = True Then
-                    _Local = True
-                Else
+            'minSeasonNum / disabled
+            If episodeIdentfiy = True Then
+                Try
+                    Dim _Mapping As TvMovieSeriesMapping = TvMovieSeriesMapping.Retrieve(TvSeries.idSeries)
+                    'TvMovieSeriesMapping: minSeasonNum
+                    If Episode.SeriesNum < _Mapping.minSeasonNum And _Mapping.disabled = False Then
+                        _Local = True
+                        'TvMovieSeriesMapping: disabled = existiert
+                    ElseIf _Mapping.disabled = True Then
+                        _Local = True
+                    Else
+                        _Local = EpisodeExistLocal
+                    End If
+                Catch ex As Exception
                     _Local = EpisodeExistLocal
-                End If
-            Catch ex As Exception
-                _Local = EpisodeExistLocal
-            End Try
+                End Try
+            End If
+
+            ''TvMovieSeriesMapping: disabled = existiert
+            'Try
+            '    If TvMovieSeriesMapping.Retrieve(TvSeries.idSeries).disabled = True Then
+            '        _Local = True
+            '    Else
+            '        _Local = EpisodeExistLocal
+            '    End If
+            'Catch ex As Exception
+            '    _Local = EpisodeExistLocal
+            'End Try
 
             'Daten im EPG (program) updaten
             IdentifySeries.UpdateEpgEpisode(program, TvSeries, Episode, episodeIdentfiy)

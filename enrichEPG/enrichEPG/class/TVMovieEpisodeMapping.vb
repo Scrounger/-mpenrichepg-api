@@ -57,12 +57,9 @@ Namespace TvDatabase
         ''' Create an object from an existing row of data. This will be used by Gentle to 
         ''' construct objects from retrieved rows. 
         ''' </summary> 
-        Public Sub New(ByVal idEpisode As String, ByVal idSeries As Integer, ByVal EPGEpisodeName As String, ByVal seriesNum As Integer, ByVal episodeNum As Integer)
+        Public Sub New(ByVal idEpisode As String, ByVal idSeries As Integer)
             Me.m_idEpisode = idEpisode
             Me.idSeries = idSeries
-            Me.EPGEpisodeName = EPGEpisodeName
-            Me.seriesNum = seriesNum
-            Me.episodeNum = episodeNum
         End Sub
 #End Region
 #Region "Public Properties"
