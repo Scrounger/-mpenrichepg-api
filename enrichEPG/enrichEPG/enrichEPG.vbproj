@@ -161,6 +161,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="seriesManagement.Designer.vb">
+      <DependentUpon>seriesManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="seriesManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TvSeriesListing.Designer.vb">
+      <DependentUpon>TvSeriesListing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TvSeriesListing.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -168,6 +180,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="seriesManagement.resx">
+      <DependentUpon>seriesManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TvSeriesListing.resx">
+      <DependentUpon>TvSeriesListing.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -641,6 +641,15 @@ Namespace SetupTv.Sections
 
 
         End Sub
+
+        Private Sub BT_MappingManagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BT_MappingManagement.Click
+            Dim _layer As New TvBusinessLayer
+            MySettings.MpDatabasePath = _layer.GetSetting("TvMovieMPDatabase").Value
+
+            Dim test As New enrichEPG.seriesManagement
+            test.ShowDialog()
+
+        End Sub
     End Class
 End Namespace
 

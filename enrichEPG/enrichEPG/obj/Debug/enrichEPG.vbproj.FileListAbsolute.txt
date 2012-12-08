@@ -8,3 +8,5 @@ D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TvdbLib.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.seriesManagement.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.TvSeriesListing.resources
