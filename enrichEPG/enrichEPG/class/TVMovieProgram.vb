@@ -459,6 +459,14 @@ Namespace TvDatabase
         Public Function ReferencedProgram() As Program
             Return Program.Retrieve(idProgram)
         End Function
+        <CLSCompliant(False)> _
+        Public Function ReferencedSeries() As TvMovieSeriesMapping
+            Try
+                Return TvMovieSeriesMapping.Retrieve(idSeries)
+            Catch ex As Exception
+                Throw New Exception(String.Format("enrichEPG: TvMovieProgram.ReferencedSeries: not found !"))
+            End Try
+        End Function
 #End Region
 
         Public Sub Delete()

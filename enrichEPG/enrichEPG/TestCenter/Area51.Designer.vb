@@ -29,6 +29,7 @@ Namespace SetupTv.Sections
             Me.components = New System.ComponentModel.Container
             Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
             Me.TabSettings = New System.Windows.Forms.TabPage
+            Me.BT_MappingManagement = New System.Windows.Forms.Button
             Me.Button5 = New System.Windows.Forms.Button
             Me.DataGridView1 = New System.Windows.Forms.DataGridView
             Me.GroupBox1 = New System.Windows.Forms.GroupBox
@@ -38,7 +39,7 @@ Namespace SetupTv.Sections
             Me.Button1 = New System.Windows.Forms.Button
             Me.TabMapping = New System.Windows.Forms.TabPage
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
-            Me.BT_MappingManagement = New System.Windows.Forms.Button
+            Me.Button6 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,6 +58,7 @@ Namespace SetupTv.Sections
             '
             'TabSettings
             '
+            Me.TabSettings.Controls.Add(Me.Button6)
             Me.TabSettings.Controls.Add(Me.BT_MappingManagement)
             Me.TabSettings.Controls.Add(Me.Button5)
             Me.TabSettings.Controls.Add(Me.DataGridView1)
@@ -70,6 +72,15 @@ Namespace SetupTv.Sections
             Me.TabSettings.TabIndex = 0
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
+            '
+            'BT_MappingManagement
+            '
+            Me.BT_MappingManagement.Location = New System.Drawing.Point(504, 45)
+            Me.BT_MappingManagement.Name = "BT_MappingManagement"
+            Me.BT_MappingManagement.Size = New System.Drawing.Size(169, 45)
+            Me.BT_MappingManagement.TabIndex = 6
+            Me.BT_MappingManagement.Text = "MappingManagement"
+            Me.BT_MappingManagement.UseVisualStyleBackColor = True
             '
             'Button5
             '
@@ -151,14 +162,14 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
             '
-            'BT_MappingManagement
+            'Button6
             '
-            Me.BT_MappingManagement.Location = New System.Drawing.Point(504, 45)
-            Me.BT_MappingManagement.Name = "BT_MappingManagement"
-            Me.BT_MappingManagement.Size = New System.Drawing.Size(169, 45)
-            Me.BT_MappingManagement.TabIndex = 6
-            Me.BT_MappingManagement.Text = "MappingManagement"
-            Me.BT_MappingManagement.UseVisualStyleBackColor = True
+            Me.Button6.Location = New System.Drawing.Point(530, 176)
+            Me.Button6.Name = "Button6"
+            Me.Button6.Size = New System.Drawing.Size(51, 28)
+            Me.Button6.TabIndex = 7
+            Me.Button6.Text = "Button6"
+            Me.Button6.UseVisualStyleBackColor = True
             '
             'NewTvServerPluginConfig
             '
@@ -186,5 +197,6 @@ Namespace SetupTv.Sections
         Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
         Friend WithEvents Button5 As System.Windows.Forms.Button
         Friend WithEvents BT_MappingManagement As System.Windows.Forms.Button
+        Friend WithEvents Button6 As System.Windows.Forms.Button
     End Class
 End Namespace

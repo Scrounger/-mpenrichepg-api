@@ -17,7 +17,6 @@ Public Class seriesManagement
 #Region "Form Events"
 
     Private Sub seriesManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         LoadSeriesMappings(0)
     End Sub
 

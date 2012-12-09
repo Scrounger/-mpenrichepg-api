@@ -11,6 +11,7 @@ Imports System.Windows.Forms
 Imports System.Text.RegularExpressions
 Imports enrichEPG.TvDatabase
 Imports enrichEPG.Database
+Imports Gentle.Framework
 
 
 Public Class IdentifySeries
@@ -18,10 +19,11 @@ Public Class IdentifySeries
 #Region "Members"
     Private Shared _SeriesEN As TvdbLib.Data.TvdbSeries
     Private Shared _SeriesLang As TvdbLib.Data.TvdbSeries
-    Private Shared _IdentifiedEpisode As TvdbLib.Data.TvdbEpisode
+    Private Shared _TheTvDbEpisode As TvdbLib.Data.TvdbEpisode
     Private Shared _UpdateEpgEpisodeSeriesNameCounter As Integer
     Private Shared _idSeries As Integer
     Private Shared _logLevenstein As String
+    Private Shared _TvSeriesEpisode As MyTvSeries.MyEpisode
 #End Region
 
 #Region "Properties"
@@ -41,12 +43,20 @@ Public Class IdentifySeries
             _SeriesLang = value
         End Set
     End Property
-    Public Shared Property IdentifiedEpisode() As TvdbLib.Data.TvdbEpisode
+    Public Shared Property TheTvDbEpisode() As TvdbLib.Data.TvdbEpisode
         Get
-            Return _IdentifiedEpisode
+            Return _TheTvDbEpisode
         End Get
         Set(ByVal value As TvdbLib.Data.TvdbEpisode)
-            _IdentifiedEpisode = value
+            _TheTvDbEpisode = value
+        End Set
+    End Property
+    Public Shared Property TvSeriesEpisode() As MyTvSeries.MyEpisode
+        Get
+            Return _TvSeriesEpisode
+        End Get
+        Set(ByVal value As MyTvSeries.MyEpisode)
+            _TvSeriesEpisode = value
         End Set
     End Property
     Public Shared Property UpdateEpgEpisodeSeriesNameCounter() As Integer
@@ -68,6 +78,7 @@ Public Class IdentifySeries
 #End Region
 
 #Region "Functions"
+    'old wird noch für EScanner verwendet
     Public Shared Sub UpdateEpgEpisode2(ByVal program As Program, ByVal TvSeriesDB As TVSeriesDB, ByVal TvSeriesDBname As String, ByVal episodeIdentified As Boolean)
         Try
             'Daten im EPG (program) updaten
@@ -85,24 +96,10 @@ Public Class IdentifySeries
 
             program.Persist()
 
-            UpdateEpgEpisode2SeriesName(program, TvSeriesDBname)
+            UpdateEpgEpisodeSeriesName(program, TvSeriesDBname)
 
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateEpgEpisode2]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
-        End Try
-    End Sub
-    Private Shared Sub UpdateEpgEpisode2SeriesName(ByVal program As Program, ByVal TvSeriesDBname As String)
-        Try
-            'Daten im EPG (program) updaten
-            If Not TvSeriesDBname = program.Title Then
-                program.Title = TvSeriesDBname
-                program.Persist()
-
-                UpdateEpgEpisodeSeriesNameCounter = UpdateEpgEpisodeSeriesNameCounter + 1
-            End If
-
-        Catch ex As Exception
-            MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateEpgEpisode2SeriesName]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
     Public Shared Sub MarkEpgEpisodeAsNew(ByVal program As Program, ByVal EpisodeExistsLocal As Boolean)
@@ -220,8 +217,8 @@ Public Class IdentifySeries
         End Try
     End Function
 
-
-    Public Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeries As MyTvSeries, ByVal Episode As MyTvSeries.MyEpisode, ByVal episodeIdentified As Boolean)
+    'Neu program (SxEx + description) + TvMoviePorgam updaten
+    Private Shared Sub UpdateEpgEpisode(ByVal program As Program, ByVal TvSeries As MyTvSeries, ByVal Episode As MyTvSeries.MyEpisode, ByVal episodeIdentified As Boolean)
         Try
             'Daten im EPG (program) updaten
 
@@ -235,15 +232,26 @@ Public Class IdentifySeries
                 program.StarRating = TvSeries.Rating
             End If
 
-            program.Persist()
-
-            UpdateEpgEpisode2SeriesName(program, TvSeries.Title)
+            UpdateEpgEpisodeSeriesName(program, TvSeries.Title)
 
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateEpgEpisode]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Sub
-    Public Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeries As MyTvSeries, ByVal Episode As MyTvSeries.MyEpisode, ByVal EpisodeExistsLocal As Boolean, ByVal episodeIdentified As Boolean)
+    Private Shared Sub UpdateEpgEpisodeSeriesName(ByVal program As Program, ByVal TvSeriesDBname As String)
+        Try
+            'Daten im EPG (program) updaten
+            If Not TvSeriesDBname = program.Title Then
+                program.Title = TvSeriesDBname
+
+                UpdateEpgEpisodeSeriesNameCounter = UpdateEpgEpisodeSeriesNameCounter + 1
+            End If
+
+        Catch ex As Exception
+            MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateEpgEpisode2SeriesName]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+        End Try
+    End Sub
+    Private Shared Sub UpdateTvMovieProgram(ByVal program As Program, ByVal TvSeries As MyTvSeries, ByVal Episode As MyTvSeries.MyEpisode, ByVal EpisodeExistsLocal As Boolean, ByVal episodeIdentified As Boolean)
         Try
             If MySettings.ClickfinderProgramGuideImportEnable = True Then
                 'Zunächst nur Serien Infos schreiben (episode in TvSeriesDB nicht gefunden)
@@ -258,11 +266,6 @@ Public Class IdentifySeries
                 _TvMovieProgram.SeriesPosterImage = TvSeries.SeriesPosterImage
                 'FanArt
                 _TvMovieProgram.FanArt = TvSeries.FanArt
-
-                'sonst von TvMovie actors
-                'If Not String.IsNullOrEmpty(TvSeriesDB(indexTvSeriesDB).Actors) = True Then
-                '    _TvMovieProgram.Actors = TvSeriesDB(indexTvSeriesDB).Actors
-                'End If
 
                 'Falls Episode geladen
                 If episodeIdentified = True Then
@@ -287,41 +290,22 @@ Public Class IdentifySeries
         End Try
     End Sub
     Public Shared Function UpdateProgramAndTvMovieProgram(ByVal program As Program, ByVal TvSeries As MyTvSeries, ByVal Episode As MyTvSeries.MyEpisode, ByVal EpisodeExistLocal As Boolean, ByVal episodeIdentfiy As Boolean) As Boolean
-        'Function, wegen evtl. Serie deaktiviert, bzw. nur ab bestimmter staffel als neu kennzeichnen
-
         Try
             'False: lokal = 0 
             'True: local = 1
-            Dim _Local As Boolean = False
+            Dim _Local As Boolean = EpisodeExistLocal
 
             'minSeasonNum / disabled
-            If episodeIdentfiy = True Then
-                Try
-                    Dim _Mapping As TvMovieSeriesMapping = TvMovieSeriesMapping.Retrieve(TvSeries.idSeries)
-                    'TvMovieSeriesMapping: minSeasonNum
-                    If Episode.SeriesNum < _Mapping.minSeasonNum And _Mapping.disabled = False Then
-                        _Local = True
-                        'TvMovieSeriesMapping: disabled = existiert
-                    ElseIf _Mapping.disabled = True Then
-                        _Local = True
-                    Else
-                        _Local = EpisodeExistLocal
-                    End If
-                Catch ex As Exception
-                    _Local = EpisodeExistLocal
-                End Try
-            End If
+            Try
+                Dim _Mapping As TvMovieSeriesMapping = TvMovieSeriesMapping.Retrieve(TvSeries.idSeries)
 
-            ''TvMovieSeriesMapping: disabled = existiert
-            'Try
-            '    If TvMovieSeriesMapping.Retrieve(TvSeries.idSeries).disabled = True Then
-            '        _Local = True
-            '    Else
-            '        _Local = EpisodeExistLocal
-            '    End If
-            'Catch ex As Exception
-            '    _Local = EpisodeExistLocal
-            'End Try
+                'TvMovieSeriesMapping: minSeasonNum
+                If (Episode.SeriesNum < _Mapping.minSeasonNum And episodeIdentfiy = True) Or _Mapping.disabled = True Then
+                    _Local = True
+                End If
+            Catch ex As Exception
+                _Local = EpisodeExistLocal
+            End Try
 
             'Daten im EPG (program) updaten
             IdentifySeries.UpdateEpgEpisode(program, TvSeries, Episode, episodeIdentfiy)
@@ -335,12 +319,108 @@ Public Class IdentifySeries
             Return _Local
 
         Catch ex As Exception
-            MyLog.[Error]("enrichEPG: [UpdateProgramAndTvMovieProgram]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+            MyLog.[Error]("enrichEPG: [IdentifySeries] [UpdateProgramAndTvMovieProgram]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
     End Function
 
+    'Nach Episoden suchen und updaten
+    Public Shared Function EpisodeIdentifed(ByVal program As Program, ByVal TvSeries As MyTvSeries) As Boolean
+        TvSeriesEpisode = Nothing
 
-    Public Shared Function TheTvDbEpisodeIdentify(ByVal program As Program) As Boolean
+        Dim _programIdentified As Boolean = False
+
+        '---------------- TvSeries DB --------------------------------
+        Try
+            Dim _Episode As MyTvSeries.MyEpisode = TvSeries.Episode(program.EpisodeName)
+            _programIdentified = True
+            TvSeriesEpisode = _Episode
+
+            TvSeriesEpisode.ExistLocal = IdentifySeries.UpdateProgramAndTvMovieProgram(program, TvSeries, _Episode, _Episode.ExistLocal, True)
+
+            MyLog.Info("enrichEPG: [IdentifySeries] [EpisodeIdentifed]: TvSeriesDB: S{0}E{1} - {2} (newEpisode: {3}{4})", _
+            _Episode.SeriesNum, _Episode.EpisodeNum, program.EpisodeName, Not TvSeriesEpisode.ExistLocal, MyTvSeries.Helper.logLevenstein)
+
+            Return True
+        Catch ex As Exception
+            _programIdentified = False
+            'Falls Episode nicht gefunden wird, Exception abfangen
+        End Try
+
+
+        '---------------- TheTvDB --------------------------------
+        'auf TheTvDb.com nach episode suchen (language: lang)
+        If _programIdentified = False And MySettings.useTheTvDb = True Then
+            If IdentifySeries.TheTvDbEpisodeIdentifed(program) = True Then
+                'Episode auf TheTvDb gefunden
+                Dim _Episode As MyTvSeries.MyEpisode = TvSeries.Episode(IdentifySeries.TheTvDbEpisode.SeasonNumber, IdentifySeries.TheTvDbEpisode.EpisodeNumber)
+                _programIdentified = True
+                TvSeriesEpisode = _Episode
+
+                TvSeriesEpisode.ExistLocal = IdentifySeries.UpdateProgramAndTvMovieProgram(program, TvSeries, _Episode, _Episode.ExistLocal, True)
+
+                MyLog.Info("enrichEPG: [IdentifySeries] [EpisodeIdentifed]: TheTvDb.com ({0}): S{1}E{2} - {3} (newEpisode: {4}{5})", IdentifySeries.TheTvDbEpisode.Language.Abbriviation, _
+                                          IdentifySeries.TheTvDbEpisode.SeasonNumber, IdentifySeries.TheTvDbEpisode.EpisodeNumber, program.EpisodeName, Not TvSeriesEpisode.ExistLocal, IdentifySeries.logLevenstein)
+                Return True
+            End If
+        End If
+
+        '---------------- TvMovieEpisodeMapping --------------------------------
+        'Verlinkung in TvMovieEpisodeMapping suchen
+        If _programIdentified = False Then
+
+            'Nach Verlinkung suchen
+            'Zunächst nach alle Serien mit SerienName aus TvSeries DB suchen
+            Dim _SQLString As String = "Select * from TvMovieEpisodeMapping " & _
+            "WHERE idSeries = " & TvSeries.idSeries & " " & _
+            "AND EPGEpisodeName LIKE '%" & MyTvSeries.Helper.allowedSigns(program.EpisodeName) & "%'"
+
+            '_SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+            Dim _SQLstate2 As SqlStatement = Broker.GetStatement(_SQLString)
+            Dim _EpisodeMappingList As List(Of TVMovieEpisodeMapping) = ObjectFactory.GetCollection(GetType(TVMovieEpisodeMapping), _SQLstate2.Execute())
+            'Mapping EpisodeName gefunden
+            If _EpisodeMappingList.Count > 0 Then
+
+                Dim _Episode As MyTvSeries.MyEpisode = TvSeries.Episode(_EpisodeMappingList(0).seriesNum, _EpisodeMappingList(0).episodeNum)
+                _programIdentified = True
+                TvSeriesEpisode = _Episode
+
+                TvSeriesEpisode.ExistLocal = IdentifySeries.UpdateProgramAndTvMovieProgram(program, TvSeries, _Episode, _Episode.ExistLocal, True)
+
+                MyLog.Info("enrichEPG: [IdentifySeries] [EpisodeIdentifed]: TvMovieEpisodeMapping: S{0}E{1} - {2} (newEpisode: {3})", _
+                                      _Episode.SeriesNum, _Episode.EpisodeNum, program.EpisodeName, Not TvSeriesEpisode.ExistLocal)
+
+                Return True
+            End If
+        End If
+
+        '---------------- Nicht gefunden --------------------------------
+        If _programIdentified = False Then
+            'Nicht gefunden -> local = flase
+            'Dim tmp As Boolean = IdentifySeries.UpdateProgramAndTvMovieProgram(program, TvSeries, Nothing, False, False)
+            Dim _NotEpisode As MyTvSeries.MyEpisode = New MyTvSeries.MyEpisode
+            _NotEpisode.ExistLocal = False
+            TvSeriesEpisode = _NotEpisode
+
+            TvSeriesEpisode.ExistLocal = IdentifySeries.UpdateProgramAndTvMovieProgram(program, TvSeries, _NotEpisode, False, False)
+
+            'log ausgabe, falls disabled
+            Dim _disabled As String = String.Empty
+            Try
+                Dim _SeriesMapping As TvMovieSeriesMapping = TvMovieSeriesMapping.Retrieve(TvSeries.idSeries)
+                If _SeriesMapping.disabled = True Then
+                    _disabled = ", Series is disabled -> "
+                End If
+            Catch ex As Exception
+            End Try
+
+            MyLog.Warn("enrichEPG: [IdentifySeries] [EpisodeIdentifed]: Not identified: {0} ({1}, {2}newEpisode: {3})", _
+                               program.EpisodeName, program.ReferencedChannel.DisplayName, _disabled, Not TvSeriesEpisode.ExistLocal)
+            Return False
+        End If
+
+    End Function
+
+    Public Shared Function TheTvDbEpisodeIdentifed(ByVal program As Program) As Boolean
         Try
 
             Dim EpgEpisodeName As String = ReplaceSearchingString(program.EpisodeName)
@@ -350,7 +430,7 @@ Public Class IdentifySeries
                         String.Compare(ReplaceSearchingString(x.EpisodeName), EpgEpisodeName, True) = 0)
 
                 If _episodeList.Count > 0 Then
-                    IdentifiedEpisode = _episodeList.Item(0)
+                    TheTvDbEpisode = _episodeList.Item(0)
                     logLevenstein = String.Empty
                     Return True
                 Else
@@ -358,8 +438,8 @@ Public Class IdentifySeries
                         levenshtein(ReplaceSearchingString(x.EpisodeName), EpgEpisodeName) <= 2)
 
                     If _episodeList.Count > 0 Then
-                        IdentifiedEpisode = _episodeList.Item(0)
-                        logLevenstein = String.Format(", levenshtein: {0}", IdentifiedEpisode.EpisodeName)
+                        TheTvDbEpisode = _episodeList.Item(0)
+                        logLevenstein = String.Format(", levenshtein: {0}", TheTvDbEpisode.EpisodeName)
                         Return True
                     Else
                         logLevenstein = String.Empty
@@ -373,7 +453,7 @@ Public Class IdentifySeries
                         String.Compare(ReplaceSearchingString(x.EpisodeName), EpgEpisodeName, True) = 0)
 
                 If _episodeList.Count > 0 Then
-                    IdentifiedEpisode = _episodeList.Item(0)
+                    TheTvDbEpisode = _episodeList.Item(0)
                     logLevenstein = String.Empty
                     Return True
                 Else
@@ -381,8 +461,8 @@ Public Class IdentifySeries
                         levenshtein(ReplaceSearchingString(x.EpisodeName), EpgEpisodeName) <= 2)
 
                     If _episodeList.Count > 0 Then
-                        IdentifiedEpisode = _episodeList.Item(0)
-                        logLevenstein = String.Format(", levenshtein: {0}", IdentifiedEpisode.EpisodeName)
+                        TheTvDbEpisode = _episodeList.Item(0)
+                        logLevenstein = String.Format(", levenshtein: {0}", TheTvDbEpisode.EpisodeName)
                         Return True
                     Else
                         logLevenstein = String.Empty
@@ -390,13 +470,14 @@ Public Class IdentifySeries
                 End If
             End If
 
-                Return False
+            Return False
 
         Catch ex As Exception
             MyLog.[Error]("enrichEPG: [IdentifySeries] [TheTvDbEpisodeIdentify]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         End Try
 
     End Function
+
     Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
         Return System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()_]", "")
     End Function
@@ -529,7 +610,6 @@ Public Class IdentifySeries
 #End Region
 
         Public Shared Sub SearchSeries(ByVal SeriesName As String)
-
             Try
                 'SerienId auf TheTvDB (_lang) suchen mit SerienName
                 Dim _SearchSeriesResult As New List(Of TvdbLib.Data.TvdbSearchResult)
@@ -684,8 +764,8 @@ Public Class IdentifySeries
                             'Episode über SeasonNum & EpisodeNum identifizieren
                             If SeasonNum = IdentifySeries.SeriesEN.Episodes(z).SeasonNumber And EpisodeNum = IdentifySeries.SeriesEN.Episodes(z).EpisodeNumber Then
                                 _EpisodeFound = True
-                                IdentifiedEpisode = IdentifySeries.SeriesEN.Episodes(z)
-                                _idEpisode = _idSeries & "_" & IdentifiedEpisode.SeasonNumber & "x" & IdentifiedEpisode.EpisodeNumber
+                                TheTvDbEpisode = IdentifySeries.SeriesEN.Episodes(z)
+                                _idEpisode = _idSeries & "_" & TheTvDbEpisode.SeasonNumber & "x" & TheTvDbEpisode.EpisodeNumber
 
                                 Exit For
                             Else
@@ -720,14 +800,14 @@ Public Class IdentifySeries
                         'EpisodeImage laden
 
                         'EpisodenImage laden
-                        _EpisodeImagePath = "Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_" & IdentifiedEpisode.SeasonNumber & "x" & IdentifiedEpisode.EpisodeNumber & ".jpg"
+                        _EpisodeImagePath = "Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_" & TheTvDbEpisode.SeasonNumber & "x" & TheTvDbEpisode.EpisodeNumber & ".jpg"
 
                         If Not File.Exists(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _EpisodeImagePath) Then
-                            IdentifiedEpisode.Banner.LoadThumb()
+                            TheTvDbEpisode.Banner.LoadThumb()
                             IO.Directory.CreateDirectory(MySettings.MpThumbPath & "\MPTVSeriesBanners\Clickfinder ProgramGuide\" & _idSeries)
-                            IdentifiedEpisode.Banner.ThumbImage.Save(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _EpisodeImagePath)
+                            TheTvDbEpisode.Banner.ThumbImage.Save(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _EpisodeImagePath)
                             _EpisodeImageStatus = "downloaded"
-                            IdentifiedEpisode.Banner.UnloadThumb()
+                            TheTvDbEpisode.Banner.UnloadThumb()
                         Else
                             _EpisodeImageStatus = "exists"
                         End If
