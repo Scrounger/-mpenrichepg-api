@@ -143,7 +143,6 @@
     <Compile Include="class\TVMovieEpisodeMapping.vb" />
     <Compile Include="class\TVMovieProgram.vb" />
     <Compile Include="class\TvMovieSeriesMapping.vb" />
-    <Compile Include="class\TvSeries.vb" />
     <Compile Include="class\VideoDB.vb" />
     <Compile Include="enrichEPG.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

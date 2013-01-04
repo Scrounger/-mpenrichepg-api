@@ -168,7 +168,7 @@ Public Class seriesManagement
 
         Dim _EpisodeList As List(Of MyTvSeries.MyEpisode) = MyTvSeries.MyEpisode.ListAll(_idSeries)
 
-        _EpisodeList = _EpisodeList.Where(Function(x) x.SeriesNum > 0).ToList
+        '_EpisodeList = _EpisodeList.Where(Function(x) x.SeriesNum > 0).ToList
         _EpisodeList = _EpisodeList.OrderBy(Function(x) x.SeriesNum).ThenBy(Function(x) x.EpisodeNum).ToList()
 
         _EpisodeList = _EpisodeList.FindAll(Function(x) FindidEpisodeInDataGridView(x) = False)

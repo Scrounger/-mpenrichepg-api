@@ -29,7 +29,7 @@ Namespace Database
     Public Class MyTvSeries
 
 #Region "Member"
-        Private Shared _onLineSeriesCoulumns As String = "ID, Pretty_Name, origName, PosterBannerFileName, Summary, Rating, Network, Status, (Select LocalPath FROM Fanart WHERE seriesID = online_series.ID AND LocalPath LIKE '_%') as FanArt"
+        Private Shared _onLineSeriesCoulumns As String = "ID, Pretty_Name, origName, PosterBannerFileName, Summary, Rating, Network, Status, (Select LocalPath FROM Fanart WHERE seriesID = online_series.ID AND LocalPath LIKE '_%') as FanArt, (SELECT SeasonIndex FROM season Where SeriesID = online_series.ID order by SeasonIndex DESC Limit 1) as SeasonCount, EpisodeCount"
         Private Shared _SqlSeriesConstructor As String = String.Format("Select {0} FROM online_series", _onLineSeriesCoulumns)
 #End Region
 
@@ -46,6 +46,8 @@ Namespace Database
         Private m_EpisodesList As New List(Of MyTvSeries.MyEpisode)
         Private m_Episode As MyTvSeries.MyEpisode
         Private m_FanArt As String
+        Private m_EpisodeCount As Integer
+        Private m_SeasonCount As Integer
 #End Region
         Public Property idSeries() As Integer
             Get
@@ -196,7 +198,23 @@ Namespace Database
                 m_Episode = value
             End Set
         End Property
-        
+
+        Public Property SeasonCount() As Integer
+            Get
+                Return m_SeasonCount
+            End Get
+            Set(ByVal value As Integer)
+                m_SeasonCount = value
+            End Set
+        End Property
+        Public Property EpisodeCount() As Integer
+            Get
+                Return m_EpisodeCount
+            End Get
+            Set(ByVal value As Integer)
+                m_EpisodeCount = value
+            End Set
+        End Property
 #End Region
 
 #Region "Functions"
@@ -485,7 +503,7 @@ Namespace Database
                         m_db.BusyRetryDelay = 1000
 
                         DatabaseUtility.SetPragmas(m_db)
-                        MyLog.Debug("enrichEPG: [MyTvSeries]: [OpenTvSeriesDB]: Data readed from TvSeries database")
+                        'MyLog.Debug("enrichEPG: [MyTvSeries]: [OpenTvSeriesDB]: Data readed from TvSeries database")
                     Else
                         MyLog.Error("enrichEPG: [MyTvSeries]: [OpenTvSeriesDB]: TvSeries Database not found: {0}", MySettings.MpDatabasePath & "\TVSeriesDatabase4.db3")
                     End If
@@ -533,7 +551,7 @@ Namespace Database
 #Region "Class Helper"
         Public Class Helper
             Public Shared Function allowedSigns(ByVal expression As String) As String
-                Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\?]", "_"), "'", "''")
+                Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!-*]", "_"), "'", "''")
             End Function
             ''' <summary>
             ''' Daten aus table online_series laden
@@ -559,7 +577,7 @@ Namespace Database
             End Function
 
             Public Shared Function ReplaceSearchingString(ByVal expression As String) As String
-                Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!'-*()_]", ""), "'", "''")
+                Return Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\:?,.!-*_]", ""), "'", "''")
             End Function
             Public Shared Function levenshtein(ByVal a As [String], ByVal b As [String]) As Int32
                 a = UCase(ReplaceSearchingString(a))
@@ -614,12 +632,14 @@ Namespace Database
                             .idSeries = c.fields(0), _
                             .Title = c.fields(1), _
                             .SeriesorigName = c.fields(2), _
-                            .SeriesPosterImage = c.fields(3), _
+                            .SeriesPosterImage = If(String.IsNullOrEmpty(c.fields(8)), String.Empty, c.fields(3)), _
                             .Summary = c.fields(4), _
                             .Rating = CInt(Replace(c.fields(5), ".", ",")), _
                             .Network = c.fields(6), _
                             .Status = c.fields(7), _
-                            .FanArt = c.fields(8)}))
+                            .FanArt = If(String.IsNullOrEmpty(c.fields(8)), String.Empty, "Fan Art\" & c.fields(8)), _
+                            .SeasonCount = CInt(c.fields(9)), _
+                            .EpisodeCount = CInt(c.fields(10))}))
             End Function
             'Convert SQLiteResultSet -> IList(Of MyTvSeries.Episode)
             Private Shared Function ConvertToEpisodeList(ByVal Result As SQLiteResultSet) As IList(Of MyTvSeries.MyEpisode)

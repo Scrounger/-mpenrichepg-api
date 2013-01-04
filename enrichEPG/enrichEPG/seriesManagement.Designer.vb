@@ -49,6 +49,7 @@ Partial Class seriesManagement
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer
         Me.GroupBox6 = New System.Windows.Forms.GroupBox
         Me.Panel9 = New System.Windows.Forms.Panel
+        Me.Button3 = New System.Windows.Forms.Button
         Me.BT_NewEpisode = New System.Windows.Forms.Button
         Me.BT_SaveEpisode = New System.Windows.Forms.Button
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel
@@ -427,6 +428,7 @@ Partial Class seriesManagement
         '
         'Panel9
         '
+        Me.Panel9.Controls.Add(Me.Button3)
         Me.Panel9.Controls.Add(Me.BT_NewEpisode)
         Me.Panel9.Controls.Add(Me.BT_SaveEpisode)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -435,6 +437,15 @@ Partial Class seriesManagement
         Me.Panel9.Padding = New System.Windows.Forms.Padding(0, 6, 0, 0)
         Me.Panel9.Size = New System.Drawing.Size(449, 36)
         Me.Panel9.TabIndex = 9
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(175, 6)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(82, 29)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'BT_NewEpisode
         '
@@ -829,4 +840,5 @@ Partial Class seriesManagement
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class

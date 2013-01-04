@@ -20,6 +20,7 @@ Imports TvLibrary.Interfaces
 Imports TvEngine.PowerScheduler.Interfaces
 
 Imports enrichEPG.TvDatabase
+Imports enrichEPG.Database
 
 Public Class Helper
     Public Shared Function allowedSigns(ByVal expression As String) As String
@@ -30,26 +31,24 @@ Public Class Helper
         Try
             Dim Counter As Integer = 0
             Dim di As New DirectoryInfo(path)
-            Dim _Series As New TVSeriesDB
+
+            'Dim _Series As New TVSeriesDB
 
             For Each subdi As DirectoryInfo In di.GetDirectories
-                Dim _idSeries As Integer = CInt(subdi.Name)
-
-                'wenn in TvSeries DB, dann löschen
-                If _Series.SeriesFoundbySeriesId(_idSeries) = True Then
+                Try
+                    Dim _Series As MyTvSeries = MyTvSeries.Retrieve(CInt(subdi.Name))
                     Directory.Delete(subdi.FullName, True)
                     Counter = Counter + 1
-                End If
+                Catch ex As Exception
+
+                End Try
 
                 'wenn nicht im Cache (EpisodenScanner), dann löschen
-                If Not CachedSeries.Contains(_idSeries) Then
+                If Not CachedSeries.Contains(CInt(subdi.Name)) Then
                     Directory.Delete(subdi.FullName, True)
                     Counter = Counter + 1
                 End If
-
             Next
-
-            _Series.Dispose()
 
             If Counter > 0 Then
                 MyLog.Info("")

@@ -29,17 +29,18 @@ Namespace SetupTv.Sections
             Me.components = New System.ComponentModel.Container
             Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
             Me.TabSettings = New System.Windows.Forms.TabPage
+            Me.Button6 = New System.Windows.Forms.Button
             Me.BT_MappingManagement = New System.Windows.Forms.Button
             Me.Button5 = New System.Windows.Forms.Button
             Me.DataGridView1 = New System.Windows.Forms.DataGridView
             Me.GroupBox1 = New System.Windows.Forms.GroupBox
+            Me.Button7 = New System.Windows.Forms.Button
             Me.Button4 = New System.Windows.Forms.Button
             Me.Button3 = New System.Windows.Forms.Button
             Me.Button2 = New System.Windows.Forms.Button
             Me.Button1 = New System.Windows.Forms.Button
             Me.TabMapping = New System.Windows.Forms.TabPage
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
-            Me.Button6 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,6 +74,15 @@ Namespace SetupTv.Sections
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
             '
+            'Button6
+            '
+            Me.Button6.Location = New System.Drawing.Point(530, 176)
+            Me.Button6.Name = "Button6"
+            Me.Button6.Size = New System.Drawing.Size(51, 28)
+            Me.Button6.TabIndex = 7
+            Me.Button6.Text = "Button6"
+            Me.Button6.UseVisualStyleBackColor = True
+            '
             'BT_MappingManagement
             '
             Me.BT_MappingManagement.Location = New System.Drawing.Point(504, 45)
@@ -101,6 +111,7 @@ Namespace SetupTv.Sections
             '
             'GroupBox1
             '
+            Me.GroupBox1.Controls.Add(Me.Button7)
             Me.GroupBox1.Controls.Add(Me.Button4)
             Me.GroupBox1.Controls.Add(Me.Button3)
             Me.GroupBox1.Location = New System.Drawing.Point(6, 20)
@@ -109,6 +120,15 @@ Namespace SetupTv.Sections
             Me.GroupBox1.TabIndex = 3
             Me.GroupBox1.TabStop = False
             Me.GroupBox1.Text = "enrichEPG API"
+            '
+            'Button7
+            '
+            Me.Button7.Location = New System.Drawing.Point(30, 101)
+            Me.Button7.Name = "Button7"
+            Me.Button7.Size = New System.Drawing.Size(176, 32)
+            Me.Button7.TabIndex = 4
+            Me.Button7.Text = "enrichEPG starten"
+            Me.Button7.UseVisualStyleBackColor = True
             '
             'Button4
             '
@@ -162,15 +182,6 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
             '
-            'Button6
-            '
-            Me.Button6.Location = New System.Drawing.Point(530, 176)
-            Me.Button6.Name = "Button6"
-            Me.Button6.Size = New System.Drawing.Size(51, 28)
-            Me.Button6.TabIndex = 7
-            Me.Button6.Text = "Button6"
-            Me.Button6.UseVisualStyleBackColor = True
-            '
             'NewTvServerPluginConfig
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -198,5 +209,6 @@ Namespace SetupTv.Sections
         Friend WithEvents Button5 As System.Windows.Forms.Button
         Friend WithEvents BT_MappingManagement As System.Windows.Forms.Button
         Friend WithEvents Button6 As System.Windows.Forms.Button
+        Friend WithEvents Button7 As System.Windows.Forms.Button
     End Class
 End Namespace
