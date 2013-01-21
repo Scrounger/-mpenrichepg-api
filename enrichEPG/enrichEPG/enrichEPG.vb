@@ -367,7 +367,8 @@ Public Class EnrichEPG
         Dim _lastEpisodeName As String = String.Empty
 
         Dim _Counter As Integer = 0
-        Dim _SeriesDummyID As Integer = 0
+        Dim _SeriesDummyID As Integer = 1
+        Dim _idSeries As Integer = 0
         Dim _idEpisode As String = String.Empty
 
         Dim _CacheSeries As New ArrayList
@@ -402,7 +403,6 @@ Public Class EnrichEPG
                         Dim _SeriesMappingResult As New List(Of TvMovieSeriesMapping)
                         Dim _logSeriesFound As Boolean = False
                         Dim _logNewEpisode As Boolean = False
-                        Dim _idSeries As Integer = 0
                         Dim _Episode As MyTvSeries.MyEpisode = Nothing
                         Dim _Series As MyTvSeries = Nothing
 
@@ -484,6 +484,8 @@ Public Class EnrichEPG
                                     Else
                                         'Serie nicht gefunden auf TheTvDb
                                         _idSeries = _SeriesDummyID
+                                        _idEpisode = String.Empty
+                                        _SeriesDummyID = _SeriesDummyID + 1
                                         MyLog.Warn("enrichEPG: [EScannerImport]: TheTvDb.com: {0} (DummyID: {1}) - not found -> mark all episodes as new", _Result(i).Title, _idSeries)
                                     End If
                                 End If
@@ -511,49 +513,56 @@ Public Class EnrichEPG
                                         _idEpisode = String.Empty
                                         MyLog.Warn("enrichEPG: [EScannerImport]: TheTvDb.com: episode: {0} - not found -> mark all episodes as new", _Result(i).Title, _idSeries)
                                     End If
-
                                 End If
                             Else
-                                _idEpisode = String.Empty
-                                _idSeries = _SeriesDummyID
+                                'Kein TheTvDb.com nutzen
+                                'Information pro Serie nur einmal laden
+                                If Not _lastSeriesName = _Result(i).Title Then
+                                    _idEpisode = String.Empty
+                                    _idSeries = _SeriesDummyID
+                                    _SeriesDummyID = _SeriesDummyID + 1
+                                End If
+
+                                MyLog.Info("enrichEPG: [EScannerImport]: {0}: S{1}E{2} - {3} Series not identified (newEpisode: {4})", _
+                                            _Result(i).Title, _Result(i).SeriesNum, _Result(i).EpisodeNum, _Result(i).EpisodeName, True)
                             End If
 
-                            'Daten im EPG (program) updaten
-                            _Result(i).StarRating = _rating
-                            _Result(i).Persist()
+                                'Daten im EPG (program) updaten
+                                _Result(i).StarRating = _rating
+                                _Result(i).Persist()
 
-                            'Neue Episode -> im EPG Describtion kennzeichnen
-                            IdentifySeries.MarkEpgEpisodeAsNew(_Result(i), False)
+                                'Neue Episode -> im EPG Describtion kennzeichnen
+                                IdentifySeries.MarkEpgEpisodeAsNew(_Result(i), False)
 
-                            'Sofern Clickfinder Plugin aktiviert -> daten in TvMovieProgam schreiben mit Dummy idSeries
-                            If MySettings.ClickfinderProgramGuideImportEnable = True Then
-                                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_Result(i).IdProgram)
-                                _TvMovieProgram.idSeries = _idSeries
-                                _TvMovieProgram.idEpisode = _idEpisode
-                                _TvMovieProgram.local = False
-                                _TvMovieProgram.TVMovieBewertung = 6
+                                'Sofern Clickfinder Plugin aktiviert -> daten in TvMovieProgam schreiben mit Dummy idSeries
+                                If MySettings.ClickfinderProgramGuideImportEnable = True Then
+                                    Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_Result(i).IdProgram)
+                                    _TvMovieProgram.idSeries = _idSeries
+                                    _TvMovieProgram.idEpisode = _idEpisode
+                                    _TvMovieProgram.local = False
+                                    _TvMovieProgram.TVMovieBewertung = 6
 
-                                'MyLog.Info("{0}, {1},idseries: {2},idepisode: {3}, local: {4}", _Result(i).Title, _Result(i).EpisodeName, _TvMovieProgram.idSeries, _TvMovieProgram.idEpisode, _TvMovieProgram.local)
+                                    'MyLog.Info("{0}, {1},idseries: {2},idepisode: {3}, local: {4}", _Result(i).Title, _Result(i).EpisodeName, _TvMovieProgram.idSeries, _TvMovieProgram.idEpisode, _TvMovieProgram.local)
 
-                                'Serien Poster Image
-                                If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.SeriesPosterPath) = True Then
-                                    _TvMovieProgram.SeriesPosterImage = IdentifySeries.TheTvDb.SeriesPosterPath
+                                    'Serien Poster Image
+                                    If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.SeriesPosterPath) = True Then
+                                        _TvMovieProgram.SeriesPosterImage = IdentifySeries.TheTvDb.SeriesPosterPath
+                                    End If
+
+                                    'FanArt Image
+                                    If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.FanArtPath) = True Then
+                                        _TvMovieProgram.FanArt = IdentifySeries.TheTvDb.FanArtPath
+                                    End If
+
+                                    'Episoden Image
+                                    If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.EpisodeImagePath) = True Then
+                                        _TvMovieProgram.EpisodeImage = IdentifySeries.TheTvDb.EpisodeImagePath
+                                    End If
+
+                                    _TvMovieProgram.Persist()
                                 End If
 
-                                'FanArt Image
-                                If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.FanArtPath) = True Then
-                                    _TvMovieProgram.FanArt = IdentifySeries.TheTvDb.FanArtPath
-                                End If
-
-                                'Episoden Image
-                                If Not String.IsNullOrEmpty(IdentifySeries.TheTvDb.EpisodeImagePath) = True Then
-                                    _TvMovieProgram.EpisodeImage = IdentifySeries.TheTvDb.EpisodeImagePath
-                                End If
-
-                                _TvMovieProgram.Persist()
-                            End If
-
-                            _Counter = _Counter + 1
+                                _Counter = _Counter + 1
                         End If
 
                         _lastSeriesName = _Result(i).Title

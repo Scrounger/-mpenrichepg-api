@@ -294,7 +294,7 @@ Namespace Database
 
 #Region "Members"
             Private Const _onLineEpisodesCoulumns As String = _
-                    "online_episodes.CompositeID, online_episodes.EpisodeName, online_episodes.SeasonIndex, online_episodes.EpisodeIndex, online_episodes.SeriesID, online_episodes.Rating, online_episodes.thumbFilename, local_episodes.IsAvailable, local_episodes.EpisodeFilename"
+                    "online_episodes.CompositeID, online_episodes.EpisodeName, online_episodes.SeasonIndex, online_episodes.EpisodeIndex, online_episodes.SeriesID, online_episodes.Rating, online_episodes.thumbFilename, local_episodes.IsAvailable, local_episodes.EpisodeFilename, online_episodes.Summary"
 
             Private Shared _SqlEpisodeConstructor As String = _
                     String.Format("Select {0} FROM online_episodes LEFT JOIN local_episodes ON online_episodes.CompositeID = local_episodes.CompositeID", _onLineEpisodesCoulumns)
@@ -311,6 +311,7 @@ Namespace Database
             Private m_EpisodeName As String
             Private m_IsAvailable As Boolean
             Private m_EpisodeFilename As String
+            Private m_EpisodeSummary As String
 #End Region
             Public Property idEpisode() As String
                 Get
@@ -382,6 +383,14 @@ Namespace Database
                 End Get
                 Set(ByVal value As String)
                     m_EpisodeFilename = value
+                End Set
+            End Property
+            Public Property EpisodeSummary() As String
+                Get
+                    Return m_EpisodeSummary
+                End Get
+                Set(ByVal value As String)
+                    m_EpisodeSummary = value
                 End Set
             End Property
 
@@ -652,7 +661,8 @@ Namespace Database
                         .Rating = CInt(Replace(c.fields(5), ".", ",")), _
                         .ThumbFilename = c.fields(6), _
                         .ExistLocal = CBool(If(String.IsNullOrEmpty(c.fields(7)), False, CBool(c.fields(7)))), _
-                        .EpisodeFilename = c.fields(8)}))
+                        .EpisodeFilename = c.fields(8), _
+                        .EpisodeSummary = c.fields(9)}))
                 'Exception wenn ExistLocal Null, deshalb if abfangen
             End Function
 

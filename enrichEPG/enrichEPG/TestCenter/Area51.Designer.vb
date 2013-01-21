@@ -29,6 +29,7 @@ Namespace SetupTv.Sections
             Me.components = New System.ComponentModel.Container
             Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
             Me.TabSettings = New System.Windows.Forms.TabPage
+            Me.Button8 = New System.Windows.Forms.Button
             Me.Button6 = New System.Windows.Forms.Button
             Me.BT_MappingManagement = New System.Windows.Forms.Button
             Me.Button5 = New System.Windows.Forms.Button
@@ -41,6 +42,7 @@ Namespace SetupTv.Sections
             Me.Button1 = New System.Windows.Forms.Button
             Me.TabMapping = New System.Windows.Forms.TabPage
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
+            Me.Button9 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -59,6 +61,8 @@ Namespace SetupTv.Sections
             '
             'TabSettings
             '
+            Me.TabSettings.Controls.Add(Me.Button9)
+            Me.TabSettings.Controls.Add(Me.Button8)
             Me.TabSettings.Controls.Add(Me.Button6)
             Me.TabSettings.Controls.Add(Me.BT_MappingManagement)
             Me.TabSettings.Controls.Add(Me.Button5)
@@ -73,6 +77,15 @@ Namespace SetupTv.Sections
             Me.TabSettings.TabIndex = 0
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
+            '
+            'Button8
+            '
+            Me.Button8.Location = New System.Drawing.Point(223, 195)
+            Me.Button8.Name = "Button8"
+            Me.Button8.Size = New System.Drawing.Size(107, 50)
+            Me.Button8.TabIndex = 8
+            Me.Button8.Text = "Button8"
+            Me.Button8.UseVisualStyleBackColor = True
             '
             'Button6
             '
@@ -182,6 +195,15 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
             '
+            'Button9
+            '
+            Me.Button9.Location = New System.Drawing.Point(644, 197)
+            Me.Button9.Name = "Button9"
+            Me.Button9.Size = New System.Drawing.Size(111, 61)
+            Me.Button9.TabIndex = 9
+            Me.Button9.Text = "Button9"
+            Me.Button9.UseVisualStyleBackColor = True
+            '
             'NewTvServerPluginConfig
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -210,5 +232,7 @@ Namespace SetupTv.Sections
         Friend WithEvents BT_MappingManagement As System.Windows.Forms.Button
         Friend WithEvents Button6 As System.Windows.Forms.Button
         Friend WithEvents Button7 As System.Windows.Forms.Button
+        Friend WithEvents Button8 As System.Windows.Forms.Button
+        Friend WithEvents Button9 As System.Windows.Forms.Button
     End Class
 End Namespace

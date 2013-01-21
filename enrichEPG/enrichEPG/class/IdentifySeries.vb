@@ -163,18 +163,18 @@ Public Class IdentifySeries
                 _TvMovieProgram.TVMovieBewertung = 6
 
                 'Serien Poster Image
-                _TvMovieProgram.SeriesPosterImage = TvSeries.SeriesPosterImage
+                If Not String.IsNullOrEmpty(TvSeries.SeriesPosterImage) Then _TvMovieProgram.SeriesPosterImage = TvSeries.SeriesPosterImage
                 'FanArt
-                _TvMovieProgram.FanArt = TvSeries.FanArt
+                If Not String.IsNullOrEmpty(TvSeries.FanArt) Then _TvMovieProgram.FanArt = TvSeries.FanArt
 
                 'Falls Episode geladen
                 If episodeIdentified = True Then
                     'idEpisode
-                    _TvMovieProgram.idEpisode = Episode.idEpisode
+                    If Not String.IsNullOrEmpty(Episode.idEpisode) Then _TvMovieProgram.idEpisode = Episode.idEpisode
                     'FileName
-                    _TvMovieProgram.FileName = Episode.EpisodeFilename
+                    If Not String.IsNullOrEmpty(Episode.EpisodeFilename) Then _TvMovieProgram.FileName = Episode.EpisodeFilename
                     'Episoden Image
-                    _TvMovieProgram.EpisodeImage = Episode.ThumbFilename
+                    If Not String.IsNullOrEmpty(Episode.ThumbFilename) Then _TvMovieProgram.EpisodeImage = Episode.ThumbFilename
                 Else
                     _TvMovieProgram.idEpisode = String.Empty
                 End If
@@ -613,41 +613,51 @@ Public Class IdentifySeries
                 If String.IsNullOrEmpty(MySettings.MpThumbPath) = False Then
 
                     If _SeriesFound = True Then
+                        Try
 
-                        'SeriesPoster laden 
-                        If IdentifySeries.SeriesEN.PosterBanners.Count > 0 Then
-                            _SeriesPosterPath = "Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_poster.jpg"
 
-                            If File.Exists(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _SeriesPosterPath) = False Then
-                                IdentifySeries.SeriesEN.PosterBanners(0).LoadThumb()
-                                IO.Directory.CreateDirectory(MySettings.MpThumbPath & "\MPTVSeriesBanners\Clickfinder ProgramGuide\" & _idSeries)
-                                IdentifySeries.SeriesEN.PosterBanners(0).ThumbImage.Save(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _SeriesPosterPath)
-                                _PosterImageStatus = "downloaded"
-                                IdentifySeries.SeriesEN.PosterBanners(0).UnloadThumb()
+                            'SeriesPoster laden 
+                            If IdentifySeries.SeriesEN.PosterBanners.Count > 0 Then
+                                _SeriesPosterPath = "Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_poster.jpg"
+
+                                If File.Exists(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _SeriesPosterPath) = False Then
+                                    IdentifySeries.SeriesEN.PosterBanners(0).LoadThumb()
+                                    IO.Directory.CreateDirectory(MySettings.MpThumbPath & "\MPTVSeriesBanners\Clickfinder ProgramGuide\" & _idSeries)
+                                    IdentifySeries.SeriesEN.PosterBanners(0).ThumbImage.Save(MySettings.MpThumbPath & "\MPTVSeriesBanners\" & _SeriesPosterPath)
+                                    _PosterImageStatus = "downloaded"
+                                    IdentifySeries.SeriesEN.PosterBanners(0).UnloadThumb()
+                                Else
+                                    _PosterImageStatus = "exists"
+                                End If
                             Else
-                                _PosterImageStatus = "exists"
+                                _PosterImageStatus = "nothing found"
                             End If
-                        Else
-                            _PosterImageStatus = "nothing found"
-                        End If
+                        Catch ex As Exception
+                            _PosterImageStatus = "error"
+                            MyLog.[Error]("enrichEPG: [IdentifySeries] [LoadCoverAndFanart]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                        End Try
 
-                        'FanArt laden
-                        If IdentifySeries.SeriesEN.FanartBanners.Count > 0 Then
-                            _FanArtPath = "Fan Art\Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_fanArt.jpg"
+                        Try
+                            'FanArt laden
+                            If IdentifySeries.SeriesEN.FanartBanners.Count > 0 Then
+                                _FanArtPath = "Fan Art\Clickfinder ProgramGuide\" & _idSeries & "\" & _idSeries & "_fanArt.jpg"
 
-                            If File.Exists(MySettings.MpThumbPath & "\" & _FanArtPath) = False Then
-                                IdentifySeries.SeriesEN.FanartBanners(0).LoadBanner()
-                                IO.Directory.CreateDirectory(MySettings.MpThumbPath & "\Fan Art\Clickfinder ProgramGuide\" & _idSeries)
-                                IdentifySeries.SeriesEN.FanartBanners(0).BannerImage.Save(MySettings.MpThumbPath & "\" & _FanArtPath)
-                                _FanArtImageStatus = "downloaded"
-                                IdentifySeries.SeriesEN.FanartBanners(0).UnloadBanner()
+                                If File.Exists(MySettings.MpThumbPath & "\" & _FanArtPath) = False Then
+                                    IdentifySeries.SeriesEN.FanartBanners(0).LoadBanner()
+                                    IO.Directory.CreateDirectory(MySettings.MpThumbPath & "\Fan Art\Clickfinder ProgramGuide\" & _idSeries)
+                                    IdentifySeries.SeriesEN.FanartBanners(0).BannerImage.Save(MySettings.MpThumbPath & "\" & _FanArtPath)
+                                    _FanArtImageStatus = "downloaded"
+                                    IdentifySeries.SeriesEN.FanartBanners(0).UnloadBanner()
+                                Else
+                                    _FanArtImageStatus = "exists"
+                                End If
                             Else
-                                _FanArtImageStatus = "exists"
+                                _FanArtImageStatus = "nothing found"
                             End If
-                        Else
-                            _FanArtImageStatus = "nothing found"
-                        End If
-
+                        Catch ex As Exception
+                            _FanArtImageStatus = "error"
+                            MyLog.[Error]("enrichEPG: [IdentifySeries] [LoadCoverAndFanart]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                        End Try
                     End If
                 End If
             Catch ex As Exception

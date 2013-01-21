@@ -138,6 +138,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="TvMprogram.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Area51.resx">

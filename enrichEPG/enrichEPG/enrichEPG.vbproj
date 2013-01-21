@@ -135,7 +135,6 @@
     <Compile Include="class\clsTheTVdb.vb" />
     <Compile Include="class\Helper.vb" />
     <Compile Include="class\IdentifySeries.vb" />
-    <Compile Include="class\MovingPicturesDB.vb" />
     <Compile Include="class\MyLog.vb" />
     <Compile Include="class\MyMovingPictures.vb" />
     <Compile Include="class\myTvSeries.vb" />

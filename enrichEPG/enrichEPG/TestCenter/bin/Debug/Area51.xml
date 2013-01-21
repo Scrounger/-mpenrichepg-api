@@ -48,6 +48,12 @@ Area51
 	<summary>
  returns the setup sections for display in SetupTv
  </summary>
+</member><member name="M:Area51.TvEngine.TvMprogram.RetrieveList(System.String,System.String)">
+	<summary>
+ Retrieve List(of TvMprogram), SqlString vorbereitet (FROM Sendungen INNER JOIN SendungenDetails)
+ SQLStringAppendix = WHERE, ORDER BY, etc.
+ DatabasePath = Pfad zur Datenbank (absolut)
+ </summary>
 </member>
 </members>
 </doc>

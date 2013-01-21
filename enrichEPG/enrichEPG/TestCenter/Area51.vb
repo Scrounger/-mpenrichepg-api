@@ -27,6 +27,7 @@ Imports Databases
 Imports enrichEPG
 Imports enrichEPG.IdentifySeries
 Imports enrichEPG.TvDatabase
+Imports Area51.TvEngine
 
 Namespace SetupTv.Sections
 
@@ -71,7 +72,8 @@ Namespace SetupTv.Sections
             MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
 
             '----------------
-            GetSeriesInfos()
+            Dim _tmp As MyTvSeries.MyEpisode = MyTvSeries.Retrieve(84947).Episode(1, 3)
+            MsgBox(_tmp.EpisodeSummary)
         End Sub
 
         Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
@@ -387,7 +389,7 @@ Namespace SetupTv.Sections
         '        MyLog.[Error]("enrichEPG: [GetSeriesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
         '    End Try
         'End Sub
-      
+
 
         Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
             'Muss wieder raus
@@ -792,12 +794,15 @@ Namespace SetupTv.Sections
 
         Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
 
+
+
+
             Dim _tvblayer As New TvBusinessLayer
             'enrichEPG Api aufrufen
             Try
                 Dim _EpisodenScannerPath As String = String.Empty
 
-                If Not String.IsNullOrEmpty(_tvbLayer.GetSetting("TvMovieRunAppAfter", String.Empty).Value) Then
+                If Not String.IsNullOrEmpty(_tvblayer.GetSetting("TvMovieRunAppAfter", String.Empty).Value) Then
                     _EpisodenScannerPath = _tvblayer.GetSetting("TvMovieRunAppAfter", String.Empty).Value
                 End If
 
@@ -817,6 +822,285 @@ Namespace SetupTv.Sections
                 MyLog.Error("TVMovie: [StartTVMoviePlus]: error: {0} stack: {1}", exEnrich.Message, exEnrich.StackTrace)
             End Try
         End Sub
+
+        Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+            Dim _layer As New TvBusinessLayer
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MyLog.BackupLogFiles()
+            MySettings.MpDatabasePath = _layer.GetSetting("TvMovieMPDatabase").Value
+            '-------------------------------------
+            Try
+
+
+                Dim _Sqlstring As String = _
+                                "Select * from Schedule " & _
+                                "Group By ProgramName ORDER BY startTime"
+
+                'List: Daten laden
+                Dim _SQLstate1 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                Dim _ScheduleList As List(Of Schedule) = ObjectFactory.GetCollection(GetType(Schedule), _SQLstate1.Execute())
+
+                Dim _MappedSeriesList As List(Of TvMovieSeriesMapping) = TvMovieSeriesMapping.ListAll
+
+                For Each _schedule In _ScheduleList
+
+
+                    'Verlinkt?
+                    If _MappedSeriesList.FindAll(Function(x) x.EpgTitle = _schedule.ProgramName).Count > 0 Then
+                        MyLog.Info("enrichEPG: [ScheduleIdentifier]: {0} is mapped with series -> continue...", _schedule.ProgramName)
+                        Continue For
+                    End If
+
+                    Try
+                        'TvSeries db?
+                        Dim _Series As MyTvSeries = MyTvSeries.Search(_schedule.ProgramName)
+                        MyLog.Info("enrichEPG: [ScheduleIdentifier]: {0} found in TvSeries database -> continue...", _schedule.ProgramName)
+                        Continue For
+                    Catch ex As Exception
+                        'Serie auf thetvdb.com suchen
+
+                        IdentifySeries.TheTvDb.SearchSeries(_schedule.ProgramName)
+                        If IdentifySeries.TheTvDb.SeriesFound = True Then
+                            MyLog.Info("")
+                            MyLog.Info("enrichEPG: [ScheduleIdentifier]: {0} found on TheTvDb.com (idSeries: {1})", _schedule.ProgramName, IdentifySeries.SeriesEN.Id)
+
+                            'Alle Episoden im EPG suchen
+                            _Sqlstring = "Select * from program " & _
+                                         "WHERE title LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "' " & _
+                                         "AND (NOT episodeName LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "' " & _
+                                         "OR NOT episodeName LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "') " & _
+                                         "ORDER BY episodeName"
+
+                            'List: Daten laden
+                            Dim _SQLstate2 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                            Dim _ProgramList As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate2.Execute())
+
+                            For Each _program In _ProgramList
+                                If IdentifySeries.TheTvDbEpisodeIdentifed(_program) = True Then
+                                    'Episode gefunden
+                                    MyLog.Info("enrichEPG: [EScannerImport]: {0}: S{1}E{2} - {3} found on TheTvDb.com", _
+                                                                             _program.Title, IdentifySeries.TheTvDbEpisode.SeasonNumber, IdentifySeries.TheTvDbEpisode.EpisodeNumber, _program.EpisodeName)
+
+
+                                Else
+                                    'Episode nicht gefunden -> als neu kennzeichnen
+                                    MyLog.Warn("enrichEPG: [ScheduleIdentifier]: Not identified: {0} ({1}, newEpisode: {2})", _
+                                    _program.EpisodeName, _program.ReferencedChannel.DisplayName, Not False)
+                                End If
+                            Next
+                            MyLog.Info("")
+                        Else
+                            MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} not found on TheTvDb.com !!!", _schedule.ProgramName)
+                        End If
+
+                        ''auf thetvdb.com en suchen
+                        'Select Case _ResultEN.Count
+                        '    Case Is = 1
+                        '        _idSeries = _ResultEN(0).Id
+                        '        MyLog.Info("enrichEPG: [ScheduleIdentifier]: {0} found on TheTvDb.com (en)", _schedule.ProgramName)
+                        '    Case Is > 1
+                        '        MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} found mulltiple entries on TheTvDb.com (en) !!!", _schedule.ProgramName)
+                        '        For Each _Match In _ResultEN
+                        '            MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} ", _Match.SeriesName)
+                        '        Next
+                        '    Case Else
+                        '        MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} not found on TheTvDb.com (en) !!!", _schedule.ProgramName)
+
+                        'End Select
+
+                        ''auf thetvdb.com lang suchen
+                        'If _idSeries = 0 Then
+                        '    Select Case _ResultLang.Count
+                        '        Case Is = 1
+                        '            _idSeries = _ResultLang(0).Id
+                        '            MyLog.Info("enrichEPG: [ScheduleIdentifier]: {0} found on TheTvDb.com ({1})", _schedule.ProgramName, MyTVDBlang.tvLanguage)
+                        '        Case Is > 1
+                        '            MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} found mulltiple entries on TheTvDb.com ({1}) !!!", _schedule.ProgramName, MyTVDBlang.tvLanguage)
+                        '            For Each _Match In _ResultLang
+                        '                MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} ", _Match.SeriesName)
+                        '            Next
+                        '        Case Else
+                        '            MyLog.Warn("enrichEPG: [ScheduleIdentifier]: {0} not found on TheTvDb.com ({1}) !!!", _schedule.ProgramName, MyTVDBlang.tvLanguage)
+                        '    End Select
+                        'End If
+
+
+
+                        'MsgBox(_schedule.ProgramName & vbNewLine & vbNewLine & "en: " & _ResultEN.Count & vbNewLine & "lang: " & _ResultLang.Count)
+                    End Try
+
+
+
+
+
+                    '_Sqlstring = "Select * from program " & _
+                    '             "WHERE title LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "' " & _
+                    '             "AND (NOT episodeName LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "' " & _
+                    '             "OR NOT episodeName LIKE '" & MyTvSeries.Helper.allowedSigns(_schedule.ProgramName) & "')"
+
+                    ''List: Daten laden
+                    'Dim _SQLstate2 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                    'Dim _ProgramList As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), _SQLstate2.Execute())
+
+
+                    'For Each _program In _ProgramList
+                    '    Try
+                    '        If IdentifySeries.TheTvDbEpisodeIdentifed(_program) = True Then
+                    '            MsgBox(IdentifySeries.TheTvDbEpisode.EpisodeName)
+                    '        End If
+                    '    Catch ex As Exception
+                    '        MsgBox(ex.Message)
+                    '    End Try
+                    'Next
+
+
+
+                    'Exit For
+
+                Next
+            Catch exEnrich As Exception
+                MyLog.Error("TVMovie: [ScheduleIdentifier]: error: {0} stack: {1}", exEnrich.Message, exEnrich.StackTrace)
+            End Try
+
+
+        End Sub
+
+        Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MySettings.ClickfinderProgramGuideImportEnable = True
+            MyLog.BackupLogFiles()
+            MySettings.SetSettings("C:\ProgramData\Team MediaPortal\MediaPortal\database", True, False, False, MySettings.LogPath.Server, "Area51.log")
+
+            '----------------
+
+
+            Try
+
+
+                Dim _Sqlstring As String = "Select * from program left JOIN tvmovieprogram ON program.idprogram = tvmovieprogram.idprogram " & _
+                                                "where tvmovieprogram.idprogram Is null Order by idchannel"
+
+                _Sqlstring = Replace(_Sqlstring, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
+                Dim stmt3 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                Dim _NotIdentifiedList As List(Of Program) = ObjectFactory.GetCollection(GetType(Program), stmt3.Execute())
+
+                Dim _ResultList As New List(Of TvMprogram)
+
+                For Each _program As Program In _NotIdentifiedList
+
+                    _Sqlstring = "Select * from program Inner JOIN tvmovieprogram ON program.idprogram = tvmovieprogram.idprogram " & _
+                                           "where title LIKE '" & allowedSigns(_program.Title) & "' " & _
+                                           "AND episodeName LIKE '" & allowedSigns(_program.EpisodeName) & "' " & _
+                                           "AND idChannel = " & _program.IdChannel
+
+                    _Sqlstring = Replace(_Sqlstring, " * ", " TVMovieProgram.idProgram, TVMovieProgram.Action, TVMovieProgram.Actors, TVMovieProgram.BildDateiname, TVMovieProgram.Country, TVMovieProgram.Cover, TVMovieProgram.Describtion, TVMovieProgram.Dolby, TVMovieProgram.EpisodeImage, TVMovieProgram.Erotic, TVMovieProgram.FanArt, TVMovieProgram.Feelings, TVMovieProgram.FileName, TVMovieProgram.Fun, TVMovieProgram.HDTV, TVMovieProgram.idEpisode, TVMovieProgram.idMovingPictures, TVMovieProgram.idSeries, TVMovieProgram.idVideo, TVMovieProgram.KurzKritik, TVMovieProgram.local, TVMovieProgram.Regie, TVMovieProgram.Requirement, TVMovieProgram.SeriesPosterImage, TVMovieProgram.ShortDescribtion, TVMovieProgram.Tension, TVMovieProgram.TVMovieBewertung ")
+                    Dim stmt4 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                    Dim _RepeatList As List(Of TVMovieProgram) = ObjectFactory.GetCollection(GetType(TVMovieProgram), stmt4.Execute())
+
+                    If _RepeatList.Count > 0 Then
+                        InsertTvMovieProgram(_program.IdProgram, _RepeatList(0))
+
+                    Else
+                        'Alle TvMprogramme des jeweiligen channels laden
+                        Dim _SQLstringClickfinderDB As String = String.Empty
+                        Dim sqlb As New StringBuilder()
+
+                        'SqlString: Bewertung > 0 laden
+                        sqlb.Append("WHERE Sendungen.SenderKennung LIKE ""{0}%"" AND Sendungen.Titel = ""{1}"" AND Sendungen.Beginn >= #{2}# AND Sendungen.Ende <= #{3}#")
+
+
+                        Dim key As New Key(GetType(TvMovieMapping), True, "idChannel", _program.IdChannel)
+                        '                            Dim _lastDummyScheduledRecordings As Setting = Setting.Retrieve(key)
+
+                        Try
+
+                            _SQLstringClickfinderDB = String.Format(sqlb.ToString(), Replace(TvMovieMapping.Retrieve(key).StationName, " HD", ""), _
+                                                                    Replace(Replace(_program.Title, " (LIVE)", ""), " (Wdh.)", ""), _
+                                                                    _program.StartTime.AddMinutes(-30).ToString("yyyy-MM-dd HH:mm:ss"), _
+                                                                    _program.EndTime.AddMinutes(30).ToString("yyyy-MM-dd HH:mm:ss"))
+
+                            Dim _TvMprogramList As List(Of TvMprogram) = TvMprogram.RetrieveList(_SQLstringClickfinderDB, _program.ReferencedChannel.DisplayName)
+
+                            If _TvMprogramList.Count > 0 Then
+
+                                _TvMprogramList(0).idProgram = _program.IdProgram
+                                _ResultList.Add(_TvMprogramList(0))
+
+                            Else
+                                MyLog.Error("TVMovie: TvMProgram not found (idProgram: {4}, Channel: {5} , Title: {0}, startTime: {1}, endTime: {2}, episodeName: {3}", _program.Title, _program.StartTime, _program.EndTime, _program.EpisodeName, _program.IdProgram, _program.ReferencedChannel.DisplayName)
+                            End If
+                        Catch ex As Exception
+
+                        End Try
+                    End If
+                Next
+
+                If _ResultList.Count > 0 Then
+
+                End If
+
+                MsgBox("notidentifie.count: " & _NotIdentifiedList.Count & vbNewLine & "result: " & _ResultList.Count)
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End Sub
+
+        Private Function allowedSigns(ByVal expression As String) As String
+            Return Replace(Replace(expression, "'", "''"), ":", "%")
+        End Function
+
+        Private Sub InsertTvMovieProgram(ByVal idProgram As Integer, ByVal programContext As TVMovieProgram)
+            Dim _NewTvMovieProgram As New TVMovieProgram(IdProgram)
+
+            _NewTvMovieProgram.Action = programContext.Action
+
+            _NewTvMovieProgram.Actors = programContext.Actors
+
+            If Not String.IsNullOrEmpty(programContext.BildDateiname) Then _NewTvMovieProgram.BildDateiname = programContext.BildDateiname
+
+            If Not String.IsNullOrEmpty(programContext.Country) Then _NewTvMovieProgram.Country = programContext.Country
+            If Not String.IsNullOrEmpty(programContext.Cover) Then _NewTvMovieProgram.Cover = programContext.Cover
+            If Not String.IsNullOrEmpty(programContext.Describtion) Then _NewTvMovieProgram.Describtion = programContext.Describtion
+
+
+            _NewTvMovieProgram.Dolby = programContext.Dolby
+            If Not String.IsNullOrEmpty(programContext.EpisodeImage) Then _NewTvMovieProgram.EpisodeImage = programContext.EpisodeImage
+            _NewTvMovieProgram.Erotic = programContext.Erotic
+
+            If Not String.IsNullOrEmpty(programContext.FanArt) Then _NewTvMovieProgram.FanArt = programContext.FanArt
+            _NewTvMovieProgram.Feelings = programContext.Feelings
+            If Not String.IsNullOrEmpty(programContext.FileName) Then _NewTvMovieProgram.FileName = programContext.FileName
+
+
+            _NewTvMovieProgram.Fun = programContext.Fun
+            _NewTvMovieProgram.HDTV = programContext.HDTV
+
+            If Not String.IsNullOrEmpty(programContext.idEpisode) Then _NewTvMovieProgram.idEpisode = programContext.idEpisode
+
+            _NewTvMovieProgram.idMovingPictures = programContext.idMovingPictures
+            _NewTvMovieProgram.idSeries = programContext.idSeries
+            _NewTvMovieProgram.idVideo = programContext.idVideo
+
+            If Not String.IsNullOrEmpty(programContext.KurzKritik) Then _NewTvMovieProgram.KurzKritik = programContext.KurzKritik
+            _NewTvMovieProgram.local = programContext.local
+            If Not String.IsNullOrEmpty(programContext.Regie) Then _NewTvMovieProgram.Regie = programContext.Regie
+
+
+            _NewTvMovieProgram.Requirement = programContext.Requirement
+            If Not String.IsNullOrEmpty(programContext.SeriesPosterImage) Then _NewTvMovieProgram.SeriesPosterImage = programContext.SeriesPosterImage
+            If Not String.IsNullOrEmpty(programContext.ShortDescribtion) Then _NewTvMovieProgram.ShortDescribtion = programContext.ShortDescribtion
+
+            _NewTvMovieProgram.Tension = programContext.Tension
+            _NewTvMovieProgram.TVMovieBewertung = programContext.TVMovieBewertung
+
+            _NewTvMovieProgram.Persist()
+        End Sub
+
     End Class
 End Namespace
 
