@@ -26,23 +26,23 @@ Namespace SetupTv.Sections
         'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
-            Me.components = New System.ComponentModel.Container
-            Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl
-            Me.TabSettings = New System.Windows.Forms.TabPage
-            Me.Button8 = New System.Windows.Forms.Button
-            Me.Button6 = New System.Windows.Forms.Button
-            Me.BT_MappingManagement = New System.Windows.Forms.Button
-            Me.Button5 = New System.Windows.Forms.Button
-            Me.DataGridView1 = New System.Windows.Forms.DataGridView
-            Me.GroupBox1 = New System.Windows.Forms.GroupBox
-            Me.Button7 = New System.Windows.Forms.Button
-            Me.Button4 = New System.Windows.Forms.Button
-            Me.Button3 = New System.Windows.Forms.Button
-            Me.Button2 = New System.Windows.Forms.Button
-            Me.Button1 = New System.Windows.Forms.Button
-            Me.TabMapping = New System.Windows.Forms.TabPage
+            Me.components = New System.ComponentModel.Container()
+            Me.TabClickfinderEPGImporter = New System.Windows.Forms.TabControl()
+            Me.TabSettings = New System.Windows.Forms.TabPage()
+            Me.Button9 = New System.Windows.Forms.Button()
+            Me.Button8 = New System.Windows.Forms.Button()
+            Me.Button6 = New System.Windows.Forms.Button()
+            Me.BT_MappingManagement = New System.Windows.Forms.Button()
+            Me.Button5 = New System.Windows.Forms.Button()
+            Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+            Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+            Me.Button7 = New System.Windows.Forms.Button()
+            Me.Button4 = New System.Windows.Forms.Button()
+            Me.Button3 = New System.Windows.Forms.Button()
+            Me.Button2 = New System.Windows.Forms.Button()
+            Me.Button1 = New System.Windows.Forms.Button()
+            Me.TabMapping = New System.Windows.Forms.TabPage()
             Me.TvLogosList = New System.Windows.Forms.ImageList(Me.components)
-            Me.Button9 = New System.Windows.Forms.Button
             Me.TabClickfinderEPGImporter.SuspendLayout()
             Me.TabSettings.SuspendLayout()
             CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,6 +77,15 @@ Namespace SetupTv.Sections
             Me.TabSettings.TabIndex = 0
             Me.TabSettings.Text = "Settings"
             Me.TabSettings.UseVisualStyleBackColor = True
+            '
+            'Button9
+            '
+            Me.Button9.Location = New System.Drawing.Point(644, 197)
+            Me.Button9.Name = "Button9"
+            Me.Button9.Size = New System.Drawing.Size(111, 61)
+            Me.Button9.TabIndex = 9
+            Me.Button9.Text = "Button9"
+            Me.Button9.UseVisualStyleBackColor = True
             '
             'Button8
             '
@@ -194,15 +203,6 @@ Namespace SetupTv.Sections
             Me.TvLogosList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
             Me.TvLogosList.ImageSize = New System.Drawing.Size(60, 40)
             Me.TvLogosList.TransparentColor = System.Drawing.Color.Transparent
-            '
-            'Button9
-            '
-            Me.Button9.Location = New System.Drawing.Point(644, 197)
-            Me.Button9.Name = "Button9"
-            Me.Button9.Size = New System.Drawing.Size(111, 61)
-            Me.Button9.TabIndex = 9
-            Me.Button9.Text = "Button9"
-            Me.Button9.UseVisualStyleBackColor = True
             '
             'NewTvServerPluginConfig
             '

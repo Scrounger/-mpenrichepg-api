@@ -194,7 +194,7 @@ Public Class MySettings
         MyLog.Info("log path: {0}", MySettings.LogFilePath)
         MyLog.Info("log file: {0}", MySettings.LogFileName)
         MyLog.Info("TheTvDb.com language: {0}", MySettings.TheTvDbLanguage)
-        MyLog.Info("Clickfinder PG Import enabled: {0}", MySettings.ClickfinderProgramGuideImportEnable)
+        MyLog.Info("Import Clickfinder ProgramGuide Infos: {0}", MySettings.ClickfinderProgramGuideImportEnable)
         MyLog.Info("")
 
     End Sub

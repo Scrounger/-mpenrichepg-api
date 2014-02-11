@@ -156,6 +156,22 @@ Public Class IdentifySeries
             If MySettings.ClickfinderProgramGuideImportEnable = True Then
                 'Zunächst nur Serien Infos schreiben (episode in TvSeriesDB nicht gefunden)
 
+
+                ''Prüfen ob channel gemappt ist
+                'Dim _SQLstring As String = "Select * from tvmoviemapping where idChannel = " & program.IdChannel
+                'Dim _SQLstate2 As SqlStatement = Broker.GetStatement(_SQLstring)
+                'Dim _Mapped As List(Of TvMovieMapping) = ObjectFactory.GetCollection(GetType(TvMovieMapping), _SQLstate2.Execute())
+
+
+                'ggf. einen TvMovieProgram Eintrag erstellen, wenn Source z.B. Epg grab
+                Try
+                    Dim _TvMovieProgramTest As TVMovieProgram = TVMovieProgram.Retrieve(program.IdProgram)
+                Catch ex As Exception
+                    Dim _newTvMovieProgram As New TVMovieProgram(program.IdProgram)
+                    _newTvMovieProgram.Persist()
+                End Try
+
+
                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
                 Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(program.IdProgram)
                 _TvMovieProgram.idSeries = TvSeries.idSeries
@@ -163,7 +179,7 @@ Public Class IdentifySeries
                 _TvMovieProgram.TVMovieBewertung = 6
 
                 'Serien Poster Image
-                If Not String.IsNullOrEmpty(TvSeries.SeriesPosterImage) Then _TvMovieProgram.SeriesPosterImage = TvSeries.SeriesPosterImage
+                If Not String.IsNullOrEmpty(TvSeries.PosterImage) Then _TvMovieProgram.SeriesPosterImage = TvSeries.PosterImage
                 'FanArt
                 If Not String.IsNullOrEmpty(TvSeries.FanArt) Then _TvMovieProgram.FanArt = TvSeries.FanArt
 
@@ -179,7 +195,7 @@ Public Class IdentifySeries
                     _TvMovieProgram.idEpisode = String.Empty
                 End If
 
-                'MyLog.debug("{0}, {1},idseries: {2},idepisode: {3}, local: {4}", program.Title, program.EpisodeName, _TvMovieProgram.idSeries, _TvMovieProgram.idEpisode, _TvMovieProgram.local)
+                'MyLog.Info("{0}, {1},idseries: {2},idepisode: {3}, local: {4}", program.Title, program.EpisodeName, _TvMovieProgram.idSeries, _TvMovieProgram.idEpisode, _TvMovieProgram.local)
 
                 _TvMovieProgram.Persist()
 

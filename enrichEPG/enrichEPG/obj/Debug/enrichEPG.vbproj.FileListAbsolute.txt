@@ -1,8 +1,6 @@
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.xml
-D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\ResolveAssemblyReference.cache
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.Resources.resources
-D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.vbproj.GenerateResource.Cache
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.xml
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.pdb
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TvdbLib.dll
@@ -10,3 +8,17 @@ D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\enrichEPG.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.seriesManagement.resources
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.TvSeriesListing.resources
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.vbproj.GenerateResource.Cache
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Databases.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Gentle.Common.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Gentle.Framework.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TvBusinessLayer.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TVDatabase.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Core.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\log4net.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\TvLibrary.Interfaces.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\MySql.Data.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\DirectShowLib.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Common.Utils.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\PowerScheduler.Interfaces.dll

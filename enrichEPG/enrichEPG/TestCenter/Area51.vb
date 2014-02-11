@@ -794,9 +794,6 @@ Namespace SetupTv.Sections
 
         Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
 
-
-
-
             Dim _tvblayer As New TvBusinessLayer
             'enrichEPG Api aufrufen
             Try
@@ -806,13 +803,13 @@ Namespace SetupTv.Sections
                     _EpisodenScannerPath = _tvblayer.GetSetting("TvMovieRunAppAfter", String.Empty).Value
                 End If
 
-                Dim _enrichEPG As New enrichEPG.EnrichEPG(_tvblayer.GetSetting("TvMovieMPDatabase", "C:\ProgramData\Team MediaPortal\MediaPortal\database").Value, _
+                Dim _enrichEPG As New enrichEPG.EnrichEPG(_tvblayer.GetSetting("TvMovieMPDatabase", "\\10.0.1.2\MediaPortal Transfer\Database").Value, _
                 True, _
                 False, _
                 False, _
                 _ImportStartTime, _
                 enrichEPG.MySettings.LogPath.Server, _
-                "C:\EpisodenScanner\bin", , , _
+                , , , _
                 "testarea.log", CBool(_tvblayer.GetSetting("TvMovieUseTheTvDb", "false").Value), , _tvblayer.GetSetting("TvMovieMPThumbsPath", "").Value)
 
                 _enrichEPG.start()
@@ -1101,6 +1098,160 @@ Namespace SetupTv.Sections
             _NewTvMovieProgram.Persist()
         End Sub
 
+        Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MySettings.ClickfinderProgramGuideImportEnable = True
+            MyLog.BackupLogFiles()
+            MySettings.SetSettings("\\10.0.1.2\MediaPortal Transfer\Database", True, False, False, MySettings.LogPath.Server, "Area51.log")
+
+            Try
+                MyLog.Info("enrichEPG: [GetSeriesInfos]: start import")
+
+                Dim _Counter As Integer = 0
+                Dim _CounterFound As Integer = 0
+                Dim _CounterNewEpisode As Integer = 0
+                Dim _SQLString As String = String.Empty
+                Dim _SeriesImportStartTime As Date = Date.Now
+                Dim _NextSeries As Boolean = True
+                Dim _lastEpisodeName As String = String.Empty
+
+                IdentifySeries.UpdateEpgEpisodeSeriesNameCounter = 0
+
+                'Alle Serien aus DB laden
+                Dim _TvSeriesList As IList(Of MyTvSeries) = MyTvSeries.ListAll
+
+                MyLog.Info("enrichEPG: [GetSeriesInfos]: {0} series loaded from database", _TvSeriesList.Count)
+                MyLog.Info("")
+                IdentifySeries.SeriesEN = MyTVDBen.TheTVdbHandler.GetSeries(_TvSeriesList(0).idSeries, MyTVDBen.DBLanguage, True, False, False)
+                IdentifySeries.SeriesLang = MyTVDBlang.TheTVdbHandler.GetSeries(_TvSeriesList(0).idSeries, MyTVDBlang.DBLanguage, True, False, False)
+
+                'Alle Serien durchgehen
+                For Each _TvSeries In _TvSeriesList
+                    Try
+                        'Alle Episoden der Serie in Speicher laden
+                        _TvSeries.LoadAllEpisodes()
+                        MyLog.Info("enrichEPG: [GetSeriesInfos]: {0}: {1} episodes loaded from database", _TvSeries.Title, _TvSeries.EpisodesList.Count)
+
+                        Dim _logScheduldedRecording As String = String.Empty
+                        Dim _ScheduldedDummyRecording As Program = Nothing
+                        Dim _EpisodeIdentified As Boolean = True
+
+                        Dim _EpisodeFoundCounter As Integer = 0
+
+                        'EPG nach Serien Name (+ mapped Serien Namen) durchsuchen = Episoden
+                        Dim _programList As List(Of Program) = GetSeriesFromEPG(_TvSeries)
+
+                        'Entfernen: kein EpisodenName
+                        _programList = _programList.FindAll(Function(x) x.EpisodeName.Length > 0)
+
+
+                        'Daten von TheTvDb für Serie downloaden / cache
+                        If _NextSeries = True And MySettings.useTheTvDb = True Then
+                            'MyLog.Info("enrichEPG: [GetSeriesInfos]: Daten von TheTvDb.com holen: {0} (idSeries: {1})", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID)
+                            _NextSeries = False
+                            IdentifySeries.SeriesEN = MyTVDBen.TheTVdbHandler.GetSeries(_TvSeries.idSeries, MyTVDBen.DBLanguage, True, False, False)
+                            IdentifySeries.SeriesLang = MyTVDBlang.TheTVdbHandler.GetSeries(_TvSeries.idSeries, MyTVDBlang.DBLanguage, True, False, False)
+                        End If
+
+                        'Alle gefundenen Episoden der Serie durchlaufen
+                        For Each _program As Program In _programList
+                            Try
+                                Dim _episodeFound As Boolean = False
+                                Dim _logNewEpisode As Boolean = False
+
+                                'Episode identifziert (inkl. Daten update program + TvMovieProgram & log Ausgabe)
+                                If IdentifySeries.EpisodeIdentifed(_program, _TvSeries) = True Then
+                                    _episodeFound = True
+                                    _EpisodeFoundCounter = _EpisodeFoundCounter + 1
+
+                                    'log + counter
+                                    If IdentifySeries.TvSeriesEpisode.ExistLocal = False Then
+                                        _logNewEpisode = True
+                                        _CounterNewEpisode = _CounterNewEpisode + 1
+                                    End If
+                                Else
+                                    _EpisodeIdentified = False
+
+                                    _ScheduldedDummyRecording = _program
+                                    _lastEpisodeName = _program.EpisodeName
+                                End If
+
+                                'Gefunden zur List, damit EPscanner nicht prüfen
+                                If _episodeFound = True Then
+                                    _IdentifiedPrograms.Add(_program.IdProgram)
+                                End If
+
+                            Catch ex As Exception
+                                MyLog.[Error]("enrichEPG: [GetSeriesInfos]: title:{0} idchannel:{1} startTime: {2} episodeName: {3}", _program.Title, _program.ReferencedChannel.DisplayName, _program.StartTime, _program.EpisodeName)
+                                MyLog.[Error]("enrichEPG: [GetSeriesInfos]: Loop :Result exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                            End Try
+                        Next
+
+                        'nicht identifiziert -> Dummy schedule anlegen für EpisodenScanner
+                        If _EpisodeIdentified = False And String.IsNullOrEmpty(MySettings.EpisodenScannerPath) = False Then
+
+                            Dim sb As New SqlBuilder(Gentle.Framework.StatementType.Select, GetType(Schedule))
+                            sb.AddConstraint([Operator].Equals, "programName", _ScheduldedDummyRecording.Title)
+                            sb.SetRowLimit(1)
+                            Dim stmt As SqlStatement = sb.GetStatement(True)
+                            Dim _Schedule As IList(Of Schedule) = ObjectFactory.GetCollection(GetType(Schedule), stmt.Execute())
+
+                            If _Schedule.Count > 0 Then
+                                _logScheduldedRecording = ", scheduled recording exist"
+                            Else
+                                'Episode am Ende des EPG Zeitraums als Dummy Recording verwenden, damit EpisodenScanner danach sucht
+                                Dim sb2 As New SqlBuilder(Gentle.Framework.StatementType.Select, GetType(Program))
+                                sb2.AddConstraint([Operator].Equals, "title", _ScheduldedDummyRecording.Title)
+                                sb2.AddOrderByField(False, "startTime")
+                                sb2.SetRowLimit(1)
+                                Dim stmt2 As SqlStatement = sb2.GetStatement(True)
+                                Dim _DummyProgram As IList(Of Program) = ObjectFactory.GetCollection(GetType(Program), stmt2.Execute())
+
+                                If _DummyProgram.Count > 0 Then
+
+                                    Dim _dummy As Schedule = New Schedule(_DummyProgram(0).IdChannel, _DummyProgram(0).Title, _DummyProgram(0).StartTime, _DummyProgram(0).EndTime)
+                                    _dummy.Persist()
+                                    _ScheduledDummyRecordingList.Add(_dummy.IdSchedule)
+
+                                    Dim key As New Key(GetType(Setting), True, "tag", "enrichEPGlastScheduleRecordings")
+                                    Dim _lastDummyScheduledRecordings As Setting = Setting.Retrieve(key)
+
+                                    If String.IsNullOrEmpty(_lastDummyScheduledRecordings.Value) Then
+                                        _lastDummyScheduledRecordings.Value = _dummy.IdSchedule
+                                        _lastDummyScheduledRecordings.Persist()
+                                    Else
+                                        _lastDummyScheduledRecordings.Value = _lastDummyScheduledRecordings.Value & "|" & _dummy.IdSchedule
+                                        _lastDummyScheduledRecordings.Persist()
+                                    End If
+
+                                    _logScheduldedRecording = String.Format(", scheduled recording dummy created: {0} ({1}), {2}", _DummyProgram(0).Title, _dummy.IdSchedule, _DummyProgram(0).StartTime)
+                                End If
+                            End If
+                        End If
+
+                        MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0}: {1}/{2} episodes identified (programs renamed {3}{4})", _TvSeries.Title, _EpisodeFoundCounter, _programList.Count, IdentifySeries.UpdateEpgEpisodeSeriesNameCounter, _logScheduldedRecording)
+                        _CounterFound = _CounterFound + _EpisodeFoundCounter
+                        _Counter = _Counter + _programList.Count
+                        _NextSeries = True
+                        IdentifySeries.UpdateEpgEpisodeSeriesNameCounter = 0
+                        MyLog.[Info]("")
+                    Catch ex As Exception
+                        MyLog.[Error]("enrichEPG: [GetSeriesInfos]: Loop exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                    End Try
+                Next
+
+                MyLog.[Info]("enrichEPG: [GetSeriesInfos]: Summary: {0}/{1} episodes identified ({2}%), {3} new episodes identified", _CounterFound, _Counter, Format(_CounterFound / _Counter * 100, "00"), _CounterNewEpisode)
+                MyLog.Info("enrichEPG: [GetSeriesInfos]: Import duration: {0}", (Date.Now - _SeriesImportStartTime).Minutes & "min " & (Date.Now - _SeriesImportStartTime).Seconds & "s")
+                MyLog.Info("")
+                MyLog.Info("")
+            Catch ex As Exception
+                MyLog.[Error]("enrichEPG: [GetSeriesInfos]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+            End Try
+
+
+
+        End Sub
     End Class
 End Namespace
 

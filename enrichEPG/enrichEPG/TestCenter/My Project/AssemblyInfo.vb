@@ -61,6 +61,8 @@ Imports MediaPortal.Common.Utils
 'new
 '[assembly: CompatibleVersion("Own")]
 <Assembly: UsesSubsystem("TVE")> 
-<Assembly: CompatibleVersion("1.1.6.27652")> 
+
+'MP 1.4
+<Assembly: CompatibleVersion("1.4.0.0", "1.1.6.27644")> 
 
 <Assembly: CLSCompliant(True)> 

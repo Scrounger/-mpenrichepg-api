@@ -179,7 +179,6 @@ Public Class EnrichEPG
                     'Entfernen: kein EpisodenName
                     _programList = _programList.FindAll(Function(x) x.EpisodeName.Length > 0)
 
-
                     'Daten von TheTvDb für Serie downloaden / cache
                     If _NextSeries = True And MySettings.useTheTvDb = True Then
                         'MyLog.Info("enrichEPG: [GetSeriesInfos]: Daten von TheTvDb.com holen: {0} (idSeries: {1})", _TvSeriesDB(i).SeriesName, _TvSeriesDB(i).SeriesID)
@@ -315,7 +314,7 @@ Public Class EnrichEPG
 
                     If _MappedSeries.Count > 0 Then
                         _ProgramList.AddRange(_MappedSeries)
-                        MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0}: {1} episodes found in EPG", _MappedSeriesNames.Item(z), _MappedSeries.Count)
+                        MyLog.[Info]("enrichEPG: [GetSeriesInfos]: {0}: {1} episodes found in EPG (series is mapped)", _MappedSeriesNames.Item(z), _MappedSeries.Count)
                     End If
                 Next
             End If
@@ -329,7 +328,7 @@ Public Class EnrichEPG
             End If
         Catch SeriesMappingEx As Exception
             'Exception wenn keine mappings gefunden
-            'MyLog.[Info]("enrichEPG: [GetSeriesInfos]: SeriesMapping Error: {0}, stack: {1}", SeriesMappingEx.Message, SeriesMappingEx.StackTrace)
+            'MyLog.Warn("enrichEPG: [GetSeriesInfos]: SeriesMapping Error: {0}, stack: {1}", SeriesMappingEx.Message, SeriesMappingEx.StackTrace)
         End Try
 
         Return _ProgramList

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="NewTvServerPlugin">
+</Property><Property Name="Projektmappendatei" Value="D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\NewTvServerPlugin.sln">
+</Property><Property Name="Benutzeroptionendatei" Value="D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\NewTvServerPlugin.suo">
+</Property><Property Name="Date" Value="Dienstag, 11. Februar 2014">
+</Property><Property Name="Time" Value="19:03">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="NewTvServerPlugin.sln" Description="Datei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\NewTvServerPlugin.sln&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="" Source="NewTvServerPlugin.suo" Description="Datei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\NewTvServerPlugin.suo&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vbproj" Description="Projektdatei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\NewTvServerPlugin.vbproj">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vbproj.user" Description="Die Projektbenutzerdatei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\NewTvServerPlugin.vbproj.user&quot; gesichert.">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Area51.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Area51.Designer.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Area51.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Area51.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\NewTvServerPlugin.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\AssemblyInfo.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\AssemblyInfo.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Application.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Application.Designer.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Resources.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Resources.Designer.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Settings.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Settings.Designer.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Settings.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Settings.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="TvMprogram.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\TvMprogram.vb">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Application.myapp" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Application.myapp">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Settings.settings" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Settings.settings">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Resources\Nopic.jpg" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Resources\Nopic.jpg">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Resources\Nopic1.jpg" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Resources\Nopic1.jpg">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="Area51.resx" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\Area51.resx">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="My Project\Resources.resx" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\enrichEPG\TestCenter\Backup\My Project\Resources.resx">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vbproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="NewTvServerPlugin.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="NewTvServerPlugin.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="NewTvServerPlugin" Source="NewTvServerPlugin.vbproj" Description="Überprüfung abgeschlossen: Upgrade der Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>

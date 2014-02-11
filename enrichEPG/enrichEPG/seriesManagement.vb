@@ -81,7 +81,11 @@ Public Class seriesManagement
 
             _SeriesMapping.Persist()
 
-            LoadSeriesMappings(DGVseries.CurrentCell.RowIndex)
+            Try
+                LoadSeriesMappings(DGVseries.CurrentCell.RowIndex)
+            Catch ex As Exception
+                LoadSeriesMappings(0)
+            End Try
 
         Catch ex As Exception
             MsgBox("Error: " & ex.Message & vbNewLine & vbNewLine & "stack: " & ex.StackTrace, MsgBoxStyle.Critical, "Error")
@@ -205,59 +209,61 @@ Public Class seriesManagement
 
 #Region "Functions"
     Private Sub LoadSeriesMappings(ByVal lastFoucsed As Integer)
-
         DGVseries.DataSource = Nothing
         DGVseries.Columns.Clear()
 
         'Alle Serien + idSeries in CB schreiben
         Dim _SeriesMappingList As IList(Of TvMovieSeriesMapping) = TvMovieSeriesMapping.ListAll
-        _SeriesMappingList = _SeriesMappingList.OrderBy(Function(x As TvMovieSeriesMapping) x.TvSeriesTitle).ToList
 
-        DGVseries.AutoGenerateColumns = True
-        DGVseries.DataSource = _SeriesMappingList
-        DGVseries.Columns("IsChanged").Visible = False
-        DGVseries.Columns("CacheKey").Visible = False
-        DGVseries.Columns("IsPersisted").Visible = False
-        DGVseries.Columns("SessionBroker").Visible = False
-        DGVseries.Columns("idSeries").Visible = False
-        DGVseries.ReadOnly = True
+        If _SeriesMappingList.Count > 0 Then
 
-        Dim _DeleteButton As New DataGridViewButtonColumn
-        With _DeleteButton
-            .DefaultCellStyle.Padding = New Padding(1, 1, 1, 1)
-            .HeaderText = "Delete"
-            .Text = "Delete"
-            .Name = "Delete"
-            '.FlatStyle = FlatStyle.Flat
-            .UseColumnTextForButtonValue = True
-            '_editbutton.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
-            .Width = 60
-        End With
-        Me.DGVseries.Columns.Add(_DeleteButton)
+            _SeriesMappingList = _SeriesMappingList.OrderBy(Function(x As TvMovieSeriesMapping) x.TvSeriesTitle).ToList
 
-        DGVseries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        DGVseries.Columns(2).Width = 30
-        DGVseries.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells)
-        DGVseries.Columns(5).Width = 30
-        DGVseries.AutoResizeColumn(9, DataGridViewAutoSizeColumnMode.DisplayedCells)
-        DGVseries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+            DGVseries.AutoGenerateColumns = True
+            DGVseries.DataSource = _SeriesMappingList
+            DGVseries.Columns("IsChanged").Visible = False
+            DGVseries.Columns("CacheKey").Visible = False
+            DGVseries.Columns("IsPersisted").Visible = False
+            DGVseries.Columns("SessionBroker").Visible = False
+            DGVseries.Columns("idSeries").Visible = False
+            DGVseries.ReadOnly = True
 
-        L_idSeries.Text = DGVseries.Item(1, 0).Value.ToString
-        CheckDisable.Checked = CBool(DGVseries.Item(2, 0).Value)
-        TBSeriesName.Text = DGVseries.Item(3, 0).Value.ToString
-        tb_EPGTitle.Text = DGVseries.Item(4, 0).Value.ToString
-        NumericminSeriesNum.Value = CInt(DGVseries.Item(5, 0).Value)
+            Dim _DeleteButton As New DataGridViewButtonColumn
+            With _DeleteButton
+                .DefaultCellStyle.Padding = New Padding(1, 1, 1, 1)
+                .HeaderText = "Delete"
+                .Text = "Delete"
+                .Name = "Delete"
+                '.FlatStyle = FlatStyle.Flat
+                .UseColumnTextForButtonValue = True
+                '_editbutton.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+                .Width = 60
+            End With
+            Me.DGVseries.Columns.Add(_DeleteButton)
 
-        DGVseries.Rows(lastFoucsed).Cells(2).Selected = True
+            DGVseries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DGVseries.Columns(2).Width = 30
+            DGVseries.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells)
+            DGVseries.Columns(5).Width = 30
+            DGVseries.AutoResizeColumn(9, DataGridViewAutoSizeColumnMode.DisplayedCells)
+            DGVseries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
 
-        L_idSeries.Text = DGVseries.Item(1, lastFoucsed).Value.ToString
-        CheckDisable.Checked = CBool(DGVseries.Item(2, lastFoucsed).Value)
-        TBSeriesName.Text = DGVseries.Item(3, lastFoucsed).Value.ToString
-        tb_EPGTitle.Text = DGVseries.Item(4, lastFoucsed).Value.ToString
-        NumericminSeriesNum.Value = CInt(DGVseries.Item(5, lastFoucsed).Value)
+            L_idSeries.Text = DGVseries.Item(1, 0).Value.ToString
+            CheckDisable.Checked = CBool(DGVseries.Item(2, 0).Value)
+            TBSeriesName.Text = DGVseries.Item(3, 0).Value.ToString
+            tb_EPGTitle.Text = DGVseries.Item(4, 0).Value.ToString
+            NumericminSeriesNum.Value = CInt(DGVseries.Item(5, 0).Value)
 
-        LoadEpisodeMappings(_SeriesMappingList(0).idSeries)
+            DGVseries.Rows(lastFoucsed).Cells(2).Selected = True
 
+            L_idSeries.Text = DGVseries.Item(1, lastFoucsed).Value.ToString
+            CheckDisable.Checked = CBool(DGVseries.Item(2, lastFoucsed).Value)
+            TBSeriesName.Text = DGVseries.Item(3, lastFoucsed).Value.ToString
+            tb_EPGTitle.Text = DGVseries.Item(4, lastFoucsed).Value.ToString
+            NumericminSeriesNum.Value = CInt(DGVseries.Item(5, lastFoucsed).Value)
+
+            LoadEpisodeMappings(_SeriesMappingList(0).idSeries)
+        End If
     End Sub
     Private Sub LoadEpisodeMappings(ByVal idSeries As Integer)
 

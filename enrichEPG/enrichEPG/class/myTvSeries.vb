@@ -29,7 +29,7 @@ Namespace Database
     Public Class MyTvSeries
 
 #Region "Member"
-        Private Shared _onLineSeriesCoulumns As String = "ID, Pretty_Name, origName, PosterBannerFileName, Summary, Rating, Network, Status, (Select LocalPath FROM Fanart WHERE seriesID = online_series.ID AND LocalPath LIKE '_%') as FanArt, (SELECT SeasonIndex FROM season Where SeriesID = online_series.ID order by SeasonIndex DESC Limit 1) as SeasonCount, EpisodeCount"
+        Private Shared _onLineSeriesCoulumns As String = "ID, Pretty_Name, origName, PosterBannerFileName, Summary, Rating, Network, Status, (Select LocalPath FROM Fanart WHERE seriesID = online_series.ID AND LocalPath LIKE '_%') as FanArt, (SELECT SeasonIndex FROM season Where SeriesID = online_series.ID order by SeasonIndex DESC Limit 1) as SeasonCount, EpisodeCount, BannerFileNames"
         Private Shared _SqlSeriesConstructor As String = String.Format("Select {0} FROM online_series", _onLineSeriesCoulumns)
 #End Region
 
@@ -38,9 +38,10 @@ Namespace Database
         Private m_idSeries As Integer
         Private m_title As String
         Private m_SeriesorigName As String
-        Private m_SeriesPosterImage As String
+        Private m_PosterImage As String
+        Private m_SeriesBanner As String
         Private m_Summary As String
-        Private m_Rating As Integer
+        Private m_Rating As Single
         Private m_Network As String
         Private m_Status As String
         Private m_EpisodesList As New List(Of MyTvSeries.MyEpisode)
@@ -48,6 +49,7 @@ Namespace Database
         Private m_FanArt As String
         Private m_EpisodeCount As Integer
         Private m_SeasonCount As Integer
+        Private m_watched As Boolean
 #End Region
         Public Property idSeries() As Integer
             Get
@@ -73,12 +75,27 @@ Namespace Database
                 m_SeriesorigName = value
             End Set
         End Property
-        Public Property SeriesPosterImage() As String
+        Public Property PosterImage() As String
             Get
-                Return m_SeriesPosterImage
+                Return m_PosterImage
             End Get
             Set(ByVal value As String)
-                m_SeriesPosterImage = value
+                m_PosterImage = value
+            End Set
+        End Property
+        Public Property SeriesBanner() As String
+            Get
+
+                Dim x As Array = m_SeriesBanner.Split("|"c)
+
+                For Each _string In x
+                    Return "MPTVSeriesBanners" & _string
+                Next
+
+                Return String.Empty
+            End Get
+            Set(ByVal value As String)
+                m_SeriesBanner = value
             End Set
         End Property
         Public Property Summary() As String
@@ -89,11 +106,11 @@ Namespace Database
                 m_Summary = value
             End Set
         End Property
-        Public Property Rating() As Integer
+        Public Property Rating() As Single
             Get
                 Return m_Rating
             End Get
-            Set(ByVal value As Integer)
+            Set(ByVal value As Single)
                 m_Rating = value
             End Set
         End Property
@@ -198,7 +215,6 @@ Namespace Database
                 m_Episode = value
             End Set
         End Property
-
         Public Property SeasonCount() As Integer
             Get
                 Return m_SeasonCount
@@ -259,7 +275,7 @@ Namespace Database
                 Return Helper.GetSeries(_SqlString).Item(0)
             Catch ex As Exception
                 'Nicht gefunden, levenshtein Vergleich
-                Dim _SeriesList As List(Of MyTvSeries) = MyTvSeries.ListAll.ToList
+                Dim _SeriesList As List(Of MyTvSeries) = MyTvSeries.ListAll
                 Dim _tmpList As New List(Of MyTvSeries)
 
                 _tmpList = _SeriesList.FindAll(Function(x) Helper.levenshtein(x.Title, SeriesName) <= 2)
@@ -294,7 +310,7 @@ Namespace Database
 
 #Region "Members"
             Private Const _onLineEpisodesCoulumns As String = _
-                    "online_episodes.CompositeID, online_episodes.EpisodeName, online_episodes.SeasonIndex, online_episodes.EpisodeIndex, online_episodes.SeriesID, online_episodes.Rating, online_episodes.thumbFilename, local_episodes.IsAvailable, local_episodes.EpisodeFilename, online_episodes.Summary"
+                    "online_episodes.CompositeID, online_episodes.EpisodeName, online_episodes.SeasonIndex, online_episodes.EpisodeIndex, online_episodes.SeriesID, online_episodes.Rating, online_episodes.thumbFilename, local_episodes.IsAvailable, local_episodes.EpisodeFilename, online_episodes.Summary, online_episodes.Watched"
 
             Private Shared _SqlEpisodeConstructor As String = _
                     String.Format("Select {0} FROM online_episodes LEFT JOIN local_episodes ON online_episodes.CompositeID = local_episodes.CompositeID", _onLineEpisodesCoulumns)
@@ -306,12 +322,13 @@ Namespace Database
             Private m_SeriesID As Integer
             Private m_SeriesNum As Integer
             Private m_EpisodeNum As Integer
-            Private m_Rating As Integer
+            Private m_Rating As Single
             Private m_ThumbFilename As String
             Private m_EpisodeName As String
             Private m_IsAvailable As Boolean
             Private m_EpisodeFilename As String
             Private m_EpisodeSummary As String
+            Private m_watched As Boolean
 #End Region
             Public Property idEpisode() As String
                 Get
@@ -353,11 +370,11 @@ Namespace Database
                     m_SeriesID = value
                 End Set
             End Property
-            Public Property Rating() As Integer
+            Public Property Rating() As Single
                 Get
                     Return m_Rating
                 End Get
-                Set(ByVal value As Integer)
+                Set(ByVal value As Single)
                     m_Rating = value
                 End Set
             End Property
@@ -391,6 +408,14 @@ Namespace Database
                 End Get
                 Set(ByVal value As String)
                     m_EpisodeSummary = value
+                End Set
+            End Property
+            Public Property watched() As Boolean
+                Get
+                    Return m_watched
+                End Get
+                Set(ByVal value As Boolean)
+                    m_watched = value
                 End Set
             End Property
 
@@ -448,7 +473,7 @@ Namespace Database
                     Return Helper.GetEpisodes(_SqlString).Item(0)
                 Catch ex As Exception
                     'Nicht gefunden, levenshtein Vergleich
-                    Dim _EpisodeList As List(Of MyTvSeries.MyEpisode) = MyTvSeries.MyEpisode.ListAll(idSeries).ToList
+                    Dim _EpisodeList As List(Of MyTvSeries.MyEpisode) = MyTvSeries.MyEpisode.ListAll(idSeries)
 
                     _EpisodeList = _EpisodeList.FindAll(Function(x) Helper.levenshtein(x.EpisodeName, EpisodeName) <= 2)
 
@@ -472,6 +497,84 @@ Namespace Database
         End Class
 #End Region
 
+        '----------------------------------------------------------------------------------------------------------------------
+#Region "Class MyActros"
+        Public Class MyActors
+#Region "Members"
+            Private Const _ActorsCoulumns As String = _
+                    "Actors.id, Actors.SeriesId, Actors.Image, Actors.Name, online_series.Pretty_Name"
+
+            Private Shared _SqlActorsConstructor As String = _
+                    String.Format("Select {0} FROM Actors INNER JOIN online_series ON Actors.SeriesId = online_series.ID GROUP BY Actors.Name", _ActorsCoulumns)
+#End Region
+
+#Region "Properties"
+            Private m_id As Integer
+            Public Property id As Integer
+                Get
+                    Return m_id
+                End Get
+                Set(ByVal Value As Integer)
+                    m_id = Value
+                End Set
+            End Property
+
+            Private m_SeriesId As Integer
+            Public Property SeriesId As Integer
+                Get
+                    Return m_SeriesId
+                End Get
+                Set(ByVal Value As Integer)
+                    m_SeriesId = Value
+                End Set
+            End Property
+
+            Private m_Image As String
+            Public Property Image As String
+                Get
+                    Return m_Image
+                End Get
+                Set(ByVal Value As String)
+                    m_Image = Value
+                End Set
+            End Property
+
+            Private m_Name As String
+            Public Property Name As String
+                Get
+                    Return m_Name
+                End Get
+                Set(ByVal Value As String)
+                    m_Name = Value
+                End Set
+            End Property
+
+            Private m_SeriesName As String
+            Public Property SeriesName As String
+                Get
+                    Return m_SeriesName
+                End Get
+                Set(ByVal Value As String)
+                    m_SeriesName = Value
+                End Set
+            End Property
+
+#End Region
+
+#Region "Retrieval"
+            ''' <summary>
+            ''' Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
+            ''' </summary>
+            Public Shared Function ListAll() As IList(Of MyTvSeries.MyActors)
+                Dim _SqlString As String = String.Format("{0} ORDER BY Name", _
+                                                         _SqlActorsConstructor)
+
+                Return Helper.GetActors(_SqlString)
+            End Function
+#End Region
+
+        End Class
+#End Region
         '----------------------------------------------------------------------------------------------------------------------
 #Region "Class ConnectDB"
         Public Class ConnectDB
@@ -635,20 +738,40 @@ Namespace Database
 
             End Function
 
+            Public Shared Function GetActors(ByVal SQLstring As String) As IList(Of MyTvSeries.MyActors)
+                'Daten aus TvSeriesDB laden
+                Dim _con As New ConnectDB(SQLstring)
+                Dim _Result As SQLiteResultSet = _con.Execute
+                _con.Dispose()
+
+                Return ConvertToMyActorsList(_Result)
+            End Function
+
+            'Convert SQLiteResultSet -> IList(Of MyActors)
+            Private Shared Function ConvertToMyActorsList(ByVal Result As SQLiteResultSet) As IList(Of MyTvSeries.MyActors)
+                Return Result.Rows.ConvertAll(Of MyTvSeries.MyActors)(New Converter(Of SQLiteResultSet.Row, MyTvSeries.MyActors)(Function(c As SQLiteResultSet.Row) New MyTvSeries.MyActors() With { _
+                            .id = c.fields(0), _
+                            .SeriesId = c.fields(1), _
+                            .Image = c.fields(2), _
+                            .Name = c.fields(3), _
+                            .SeriesName = c.fields(4)}))
+            End Function
+
             'Convert SQLiteResultSet -> IList(Of MyTvSeries)
             Private Shared Function ConvertToMyTvSeriesList(ByVal Result As SQLiteResultSet) As IList(Of MyTvSeries)
                 Return Result.Rows.ConvertAll(Of MyTvSeries)(New Converter(Of SQLiteResultSet.Row, MyTvSeries)(Function(c As SQLiteResultSet.Row) New MyTvSeries() With { _
                             .idSeries = c.fields(0), _
                             .Title = c.fields(1), _
                             .SeriesorigName = c.fields(2), _
-                            .SeriesPosterImage = If(String.IsNullOrEmpty(c.fields(8)), String.Empty, c.fields(3)), _
+                            .PosterImage = If(String.IsNullOrEmpty(c.fields(8)), String.Empty, Replace("MPTVSeriesBanners\" & c.fields(3), "\\", "\")), _
                             .Summary = c.fields(4), _
-                            .Rating = CInt(Replace(c.fields(5), ".", ",")), _
+                            .Rating = CSng(Replace(c.fields(5), ".", ",")), _
                             .Network = c.fields(6), _
                             .Status = c.fields(7), _
                             .FanArt = If(String.IsNullOrEmpty(c.fields(8)), String.Empty, "Fan Art\" & c.fields(8)), _
                             .SeasonCount = CInt(c.fields(9)), _
-                            .EpisodeCount = CInt(c.fields(10))}))
+                            .EpisodeCount = CInt(c.fields(10)),
+                            .SeriesBanner = c.fields(11)}))
             End Function
             'Convert SQLiteResultSet -> IList(Of MyTvSeries.Episode)
             Private Shared Function ConvertToEpisodeList(ByVal Result As SQLiteResultSet) As IList(Of MyTvSeries.MyEpisode)
@@ -658,11 +781,12 @@ Namespace Database
                         .SeriesNum = CInt(c.fields(2)), _
                         .EpisodeNum = CInt(c.fields(3)), _
                         .SeriesID = CInt(c.fields(4)), _
-                        .Rating = CInt(Replace(c.fields(5), ".", ",")), _
-                        .ThumbFilename = c.fields(6), _
+                        .Rating = CSng(Replace(c.fields(5), ".", ",")), _
+                        .ThumbFilename = "MPTVSeriesBanners\" & c.fields(6), _
                         .ExistLocal = CBool(If(String.IsNullOrEmpty(c.fields(7)), False, CBool(c.fields(7)))), _
                         .EpisodeFilename = c.fields(8), _
-                        .EpisodeSummary = c.fields(9)}))
+                        .EpisodeSummary = c.fields(9),
+                        .watched = c.fields(10)}))
                 'Exception wenn ExistLocal Null, deshalb if abfangen
             End Function
 

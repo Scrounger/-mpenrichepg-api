@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="enrichEPG">
+</Property><Property Name="Projektmappendatei" Value="D:\Projekte\enrichEPG\enrichEPG\enrichEPG.sln">
+</Property><Property Name="Benutzeroptionendatei" Value="D:\Projekte\enrichEPG\enrichEPG\enrichEPG.suo">
+</Property><Property Name="Date" Value="Dienstag, 31. Dezember 2013">
+</Property><Property Name="Time" Value="11:32">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="enrichEPG.sln" Description="Datei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG.sln&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="" Source="enrichEPG.suo" Description="Datei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG.suo&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\enrichEPG.vbproj" Description="Projektdatei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\enrichEPG.vbproj">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\enrichEPG.vbproj.user" Description="Die Projektbenutzerdatei wurde erfolgreich als &quot;D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\enrichEPG.vbproj.user&quot; gesichert.">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\clsTheTVdb.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\clsTheTVdb.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\Helper.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\Helper.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\IdentifySeries.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\IdentifySeries.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\MyLog.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\MyLog.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\MyMovingPictures.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\MyMovingPictures.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\myTvSeries.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\myTvSeries.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\MySettings.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\MySettings.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\TVMovieEpisodeMapping.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\TVMovieEpisodeMapping.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\TVMovieProgram.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\TVMovieProgram.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\TvMovieSeriesMapping.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\TvMovieSeriesMapping.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\class\VideoDB.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\class\VideoDB.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\enrichEPG.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\enrichEPG.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\AssemblyInfo.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\AssemblyInfo.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Application.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Application.Designer.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Resources.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Resources.Designer.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Settings.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Settings.Designer.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\seriesManagement.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\seriesManagement.Designer.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\seriesManagement.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\seriesManagement.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\TvSeriesListing.Designer.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\TvSeriesListing.Designer.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\TvSeriesListing.vb" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\TvSeriesListing.vb">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Application.myapp" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Application.myapp">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Settings.settings" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Settings.settings">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\My Project\Resources.resx" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\My Project\Resources.resx">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\seriesManagement.resx" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\seriesManagement.resx">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\TvSeriesListing.resx" Description="Datei erfolgreich gesichert als D:\Projekte\enrichEPG\enrichEPG\Backup\enrichEPG\TvSeriesListing.resx">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\enrichEPG.vbproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="enrichEPG" Source="enrichEPG\enrichEPG.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="enrichEPG.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="enrichEPG.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="enrichEPG" Source="enrichEPG\enrichEPG.vbproj" Description="Überprüfung abgeschlossen: Upgrade der Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>

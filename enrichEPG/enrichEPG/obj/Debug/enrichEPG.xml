@@ -50,6 +50,10 @@ enrichEPG
 	<summary>
  Episode einer Serie suchen (über idSeries, EpisodeName (levenshtein))
  </summary>
+</member><member name="M:enrichEPG.Database.MyTvSeries.MyActors.ListAll">
+	<summary>
+ Alle Serien aus TvSeriesDB laden, ORDER BY Title ASC
+ </summary>
 </member><member name="M:enrichEPG.Database.MyTvSeries.Helper.GetSeries(System.String)">
 	<summary>
  Daten aus table online_series laden
