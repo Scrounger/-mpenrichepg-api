@@ -22,3 +22,4 @@ D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\MySql.Data.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\DirectShowLib.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\Common.Utils.dll
 D:\Projekte\enrichEPG\enrichEPG\enrichEPG\bin\Debug\PowerScheduler.Interfaces.dll
+D:\Projekte\enrichEPG\enrichEPG\enrichEPG\obj\Debug\enrichEPG.vbprojResolveAssemblyReference.cache

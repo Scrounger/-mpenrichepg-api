@@ -633,19 +633,29 @@ Public Class EnrichEPG
                     MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: {0} ({1}) found in {2} epg entries", _movie.Title, _movie.year.Year, _Result.Count)
 
                     For Each _program In _Result
-                        'Daten im EPG (program) updaten
-                        _program.StarRating = _movie.Rating
-                        _program.ParentalRating = _movie.Certification
-                        If InStr(_program.Description, "existiert lokal" & vbNewLine) = 0 And String.IsNullOrEmpty(_program.SeriesNum) Then
-                            _program.Description = "existiert lokal" & vbNewLine & _program.Description
-                        End If
+                        Try
+                            'Daten im EPG (program) updaten
+                            _program.StarRating = _movie.Rating
+                            _program.ParentalRating = _movie.Certification
+                            If InStr(_program.Description, "existiert lokal" & vbNewLine) = 0 And String.IsNullOrEmpty(_program.SeriesNum) Then
+                                _program.Description = "existiert lokal" & vbNewLine & _program.Description
+                            End If
 
-                        _program.Persist()
+                            _program.Persist()
 
-                        'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                        If MySettings.ClickfinderProgramGuideImportEnable = True Then
-                            Try
+                            'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                            If MySettings.ClickfinderProgramGuideImportEnable = True Then
+
+                                'ggf. einen TvMovieProgram Eintrag erstellen, wenn Source z.B. Epg grab
+                                Try
+                                    Dim _TvMovieProgramTest As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+                                Catch ex As Exception
+                                    Dim _newTvMovieProgram As New TVMovieProgram(_program.IdProgram)
+                                    _newTvMovieProgram.Persist()
+                                End Try
+
                                 Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+
                                 _TvMovieProgram.idMovingPictures = _movie.ID
                                 _TvMovieProgram.local = True
 
@@ -654,7 +664,7 @@ Public Class EnrichEPG
                                 _TvMovieProgram.FileName = _movie.FileName
 
                                 _TvMovieProgram.Persist()
-                            Catch ex As Exception
+
                                 'Nach Wiederholung suchen & TvMovieProgram anlegen
 
                                 'SQLstring: Alle Movies (2 > TvMovieBewertung < 6), inkl. TagesTipps des Tages laden
@@ -663,50 +673,48 @@ Public Class EnrichEPG
                                     "WHERE title LIKE '" & Helper.allowedSigns(_program.Title) & "' " & _
                                     "AND episodeName LIKE '" & Helper.allowedSigns(_program.EpisodeName) & "'"
 
-                                Try
-                                    'List: Daten laden
-                                    _Sqlstring = Replace(_Sqlstring, " * ", " TVMovieProgram.idProgram, TVMovieProgram.Action, TVMovieProgram.Actors, TVMovieProgram.BildDateiname, TVMovieProgram.Country, TVMovieProgram.Cover, TVMovieProgram.Describtion, TVMovieProgram.Dolby, TVMovieProgram.EpisodeImage, TVMovieProgram.Erotic, TVMovieProgram.FanArt, TVMovieProgram.Feelings, TVMovieProgram.FileName, TVMovieProgram.Fun, TVMovieProgram.HDTV, TVMovieProgram.idEpisode, TVMovieProgram.idMovingPictures, TVMovieProgram.idSeries, TVMovieProgram.idVideo, TVMovieProgram.KurzKritik, TVMovieProgram.local, TVMovieProgram.Regie, TVMovieProgram.Requirement, TVMovieProgram.SeriesPosterImage, TVMovieProgram.ShortDescribtion, TVMovieProgram.Tension, TVMovieProgram.TVMovieBewertung ")
-                                    Dim _SQLstate1 As SqlStatement = Broker.GetStatement(_Sqlstring)
-                                    Dim _RepeatList As List(Of TVMovieProgram) = ObjectFactory.GetCollection(GetType(TVMovieProgram), _SQLstate1.Execute())
 
-                                    If _RepeatList.Count > 0 Then
-                                        Dim _TvMovieProgram As New TVMovieProgram(_program.IdProgram)
+                                'List: Daten laden
+                                _Sqlstring = Replace(_Sqlstring, " * ", " TVMovieProgram.idProgram, TVMovieProgram.Action, TVMovieProgram.Actors, TVMovieProgram.BildDateiname, TVMovieProgram.Country, TVMovieProgram.Cover, TVMovieProgram.Describtion, TVMovieProgram.Dolby, TVMovieProgram.EpisodeImage, TVMovieProgram.Erotic, TVMovieProgram.FanArt, TVMovieProgram.Feelings, TVMovieProgram.FileName, TVMovieProgram.Fun, TVMovieProgram.HDTV, TVMovieProgram.idEpisode, TVMovieProgram.idMovingPictures, TVMovieProgram.idSeries, TVMovieProgram.idVideo, TVMovieProgram.KurzKritik, TVMovieProgram.local, TVMovieProgram.Regie, TVMovieProgram.Requirement, TVMovieProgram.SeriesPosterImage, TVMovieProgram.ShortDescribtion, TVMovieProgram.Tension, TVMovieProgram.TVMovieBewertung ")
+                                Dim _SQLstate1 As SqlStatement = Broker.GetStatement(_Sqlstring)
+                                Dim _RepeatList As List(Of TVMovieProgram) = ObjectFactory.GetCollection(GetType(TVMovieProgram), _SQLstate1.Execute())
 
-                                        _TvMovieProgram.TVMovieBewertung = _RepeatList(0).TVMovieBewertung
-                                        _TvMovieProgram.BildDateiname = _RepeatList(0).BildDateiname
-                                        _TvMovieProgram.KurzKritik = _RepeatList(0).KurzKritik
-                                        _TvMovieProgram.Fun = _RepeatList(0).Fun
-                                        _TvMovieProgram.Action = _RepeatList(0).Action
-                                        _TvMovieProgram.Feelings = _RepeatList(0).Feelings
-                                        _TvMovieProgram.Erotic = _RepeatList(0).Erotic
-                                        _TvMovieProgram.Tension = _RepeatList(0).Tension
-                                        _TvMovieProgram.Requirement = _RepeatList(0).Requirement
-                                        _TvMovieProgram.Actors = _RepeatList(0).Actors
-                                        _TvMovieProgram.Dolby = _RepeatList(0).Dolby
-                                        _TvMovieProgram.HDTV = _RepeatList(0).HDTV
-                                        _TvMovieProgram.Country = _RepeatList(0).Country
-                                        _TvMovieProgram.Regie = _RepeatList(0).Regie
-                                        _TvMovieProgram.Describtion = _RepeatList(0).Describtion
-                                        _TvMovieProgram.ShortDescribtion = _RepeatList(0).ShortDescribtion
+                                If _RepeatList.Count > 0 Then
 
-                                        _TvMovieProgram.idMovingPictures = _movie.ID
-                                        _TvMovieProgram.local = True
+                                    _TvMovieProgram.TVMovieBewertung = _RepeatList(0).TVMovieBewertung
+                                    _TvMovieProgram.BildDateiname = _RepeatList(0).BildDateiname
+                                    _TvMovieProgram.KurzKritik = _RepeatList(0).KurzKritik
+                                    _TvMovieProgram.Fun = _RepeatList(0).Fun
+                                    _TvMovieProgram.Action = _RepeatList(0).Action
+                                    _TvMovieProgram.Feelings = _RepeatList(0).Feelings
+                                    _TvMovieProgram.Erotic = _RepeatList(0).Erotic
+                                    _TvMovieProgram.Tension = _RepeatList(0).Tension
+                                    _TvMovieProgram.Requirement = _RepeatList(0).Requirement
+                                    _TvMovieProgram.Actors = _RepeatList(0).Actors
+                                    _TvMovieProgram.Dolby = _RepeatList(0).Dolby
+                                    _TvMovieProgram.HDTV = _RepeatList(0).HDTV
+                                    _TvMovieProgram.Country = _RepeatList(0).Country
+                                    _TvMovieProgram.Regie = _RepeatList(0).Regie
+                                    _TvMovieProgram.Describtion = _RepeatList(0).Describtion
+                                    _TvMovieProgram.ShortDescribtion = _RepeatList(0).ShortDescribtion
 
-                                        _TvMovieProgram.Cover = _movie.Cover
-                                        _TvMovieProgram.FanArt = _movie.FanArt
-                                        _TvMovieProgram.FileName = _movie.FileName
+                                    _TvMovieProgram.idMovingPictures = _movie.ID
+                                    _TvMovieProgram.local = True
 
-                                        _TvMovieProgram.Persist()
+                                    _TvMovieProgram.Cover = _movie.Cover
+                                    _TvMovieProgram.FanArt = _movie.FanArt
+                                    _TvMovieProgram.FileName = _movie.FileName
 
-                                        MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: repeat found -> create TvMovieProgram")
-                                    Else
-                                        MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: TvMovieProgram not found ! (idProgram: {0}, start: {1})", _program.IdProgram, _program.StartTime)
-                                    End If
-                                Catch ex3 As Exception
-                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err: {0}, stack: {1}", ex3.Message, ex3.StackTrace)
-                                End Try
-                            End Try
-                        End If
+                                    _TvMovieProgram.Persist()
+
+                                    'MyLog.Info("enrichEPG: [GetMovingPicturesInfos]: repeat found -> create TvMovieProgram")
+                                Else
+                                    MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: TvMovieProgram not found ! (idProgram: {0}, start: {1})", _program.IdProgram, _program.StartTime)
+                                End If
+                            End If
+                            Catch ex3 As Exception
+                            MyLog.Error("enrichEPG: [GetMovingPicturesInfos]: exception err: {0}, stack: {1}", ex3.Message, ex3.StackTrace)
+                        End Try
                     Next
                 End If
             Next
@@ -771,6 +779,14 @@ Public Class EnrichEPG
 
                             'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
                             If MySettings.ClickfinderProgramGuideImportEnable = True Then
+
+                                'ggf. einen TvMovieProgram Eintrag erstellen, wenn Source z.B. Epg grab
+                                Try
+                                    Dim _TvMovieProgramTest As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+                                Catch ex As Exception
+                                    Dim _newTvMovieProgram As New TVMovieProgram(_program.IdProgram)
+                                    _newTvMovieProgram.Persist()
+                                End Try
 
                                 'idProgram in TvMovieProgram suchen & Daten aktualisieren
                                 Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)

@@ -804,9 +804,9 @@ Namespace SetupTv.Sections
                 End If
 
                 Dim _enrichEPG As New enrichEPG.EnrichEPG(_tvblayer.GetSetting("TvMovieMPDatabase", "\\10.0.1.2\MediaPortal Transfer\Database").Value, _
+                False, _
+                False, _
                 True, _
-                False, _
-                False, _
                 _ImportStartTime, _
                 enrichEPG.MySettings.LogPath.Server, _
                 , , , _

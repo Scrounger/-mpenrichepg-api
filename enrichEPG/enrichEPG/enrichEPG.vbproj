@@ -197,6 +197,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start xcopy.exe "$(TargetDir)enrichEPG.dll" "C:\Program Files\Team MediaPortal\MediaPortal TV Server" /Y
+start xcopy.exe "$(TargetDir)enrichEPG.dll" "C:\Program Files\Team MediaPortal\MediaPortal" /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
