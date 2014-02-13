@@ -586,11 +586,20 @@ Namespace SetupTv.Sections
         End Sub
 
         Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-            Dim test As MyTvSeries.MyEpisode = New MyTvSeries.MyEpisode
+            Dim _layer As New TvBusinessLayer
+            'Muss wieder raus
+            MySettings.LogFileName = "Area51.log"
+            MySettings.LogFilePath = MySettings.LogPath.Server
+            MyLog.BackupLogFiles()
+            MySettings.MpDatabasePath = "\\10.0.1.2\MediaPortal Transfer\Database"
+            '-------------------------------------
 
-            test.ExistLocal = True
+            Try
+                Dim _MyVidList As List(Of myVideos) = myVideos.ListAll
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-            MsgBox(test.ExistLocal)
         End Sub
 
 #Region "EinrichEPG functions"
@@ -805,8 +814,8 @@ Namespace SetupTv.Sections
 
                 Dim _enrichEPG As New enrichEPG.EnrichEPG(_tvblayer.GetSetting("TvMovieMPDatabase", "\\10.0.1.2\MediaPortal Transfer\Database").Value, _
                 False, _
-                False, _
                 True, _
+                False, _
                 _ImportStartTime, _
                 enrichEPG.MySettings.LogPath.Server, _
                 , , , _
@@ -1252,6 +1261,8 @@ Namespace SetupTv.Sections
 
 
         End Sub
+
+
     End Class
 End Namespace
 

@@ -68,7 +68,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Team MediaPortal\MediaPortal TV Server\Databases.dll</HintPath>
     </Reference>
-    <Reference Include="enrichEPG, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="enrichEPG, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Team MediaPortal\MediaPortal TV Server\enrichEPG.dll</HintPath>
     </Reference>

@@ -729,28 +729,27 @@ Public Class EnrichEPG
     Private Sub GetVideoDatabaseInfos()
 
         Try
-            MyLog.[Debug]("TVMovie: [GetVideoDatabaseInfos]: start import")
+            MyLog.Info("TVMovie: [GetVideoDatabaseInfos]: start import")
 
-            Dim _VideoDB As New VideoDB
-            _VideoDB.LoadAllVideoDBFilms()
+            Dim _MyVidList As List(Of myVideos) = myVideos.ListAll
+
 
             Dim EPGCounter As Integer = 0
             Dim MovieCounter As Integer = 0
             Dim _SQLString As String = String.Empty
 
-            For i As Integer = 0 To _VideoDB.Count - 1
-
+            For Each _video In _MyVidList
                 Try
 
-                    'nach Mov.Pic Titel suchen
+                    'nach Video Titel suchen
                     _SQLString = _
-                        "Select * from program WHERE title LIKE '" & allowedSigns(_VideoDB(i).Title) & "' "
+                        "Select * from program WHERE title LIKE '" & allowedSigns(_video.Title) & "' "
 
                     'nach Mov.Pic Titel über Dateiname suchen
-                    If Not String.IsNullOrEmpty(_VideoDB(i).TitlebyFileName) Then
+                    If Not String.IsNullOrEmpty(_video.FileName) Then
                         _SQLString = _SQLString & _
-                        "OR title LIKE '" & allowedSigns(_VideoDB(i).TitlebyFileName) & "' " & _
-                        "OR episodeName LIKE '" & allowedSigns(_VideoDB(i).TitlebyFileName) & "' "
+                        "OR title LIKE '" & allowedSigns(_video.FileName) & "' " & _
+                        "OR episodeName LIKE '" & allowedSigns(_video.FileName) & "' "
                     End If
 
                     _SQLString = Replace(_SQLString, " * ", " Program.IdProgram, Program.Classification, Program.Description, Program.EndTime, Program.EpisodeName, Program.EpisodeNum, Program.EpisodePart, Program.Genre, Program.IdChannel, Program.OriginalAirDate, Program.ParentalRating, Program.SeriesNum, Program.StarRating, Program.StartTime, Program.state, Program.Title ")
@@ -759,57 +758,58 @@ Public Class EnrichEPG
 
                     If _Result.Count > 0 Then
                         MovieCounter = MovieCounter + 1
-                    End If
-
-                    For Each _program As Program In _Result
-
-                        Try
-                            'Daten im EPG (program) updaten
-
-                            'Wenn TvMovieImportMovingPicturesInfos deaktiviert, dann Rating aus VideoDatabase nehmen
-                            If MySettings.MovPicEnabled = False Then
-                                _program.StarRating = _VideoDB(i).Rating
-                            End If
-
-                            If InStr(_program.Description, "existiert lokal") = 0 And String.IsNullOrEmpty(_program.SeriesNum) Then
-                                _program.Description = "existiert lokal" & vbNewLine & _program.Description
-                            End If
-
-                            _program.Persist()
-
-                            'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
-                            If MySettings.ClickfinderProgramGuideImportEnable = True Then
-
-                                'ggf. einen TvMovieProgram Eintrag erstellen, wenn Source z.B. Epg grab
-                                Try
-                                    Dim _TvMovieProgramTest As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
-                                Catch ex As Exception
-                                    Dim _newTvMovieProgram As New TVMovieProgram(_program.IdProgram)
-                                    _newTvMovieProgram.Persist()
-                                End Try
-
-                                'idProgram in TvMovieProgram suchen & Daten aktualisieren
-                                Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
-                                _TvMovieProgram.idVideo = _VideoDB(i).VideoID
-                                _TvMovieProgram.local = True
+                        MyLog.Info("enrichEPG: [GetVideoDatabaseInfos]: {0} ({1}) found in {2} epg entries", _video.Title, _video.year, _Result.Count)
 
 
-                                If Not String.IsNullOrEmpty(_VideoDB(i).FileName) And String.IsNullOrEmpty(_TvMovieProgram.FileName) Then
-                                    _TvMovieProgram.FileName = _VideoDB(i).FileName
+                        For Each _program As Program In _Result
+
+                            Try
+                                'Daten im EPG (program) updaten
+
+                                'Wenn TvMovieImportMovingPicturesInfos deaktiviert, dann Rating aus VideoDatabase nehmen
+                                If MySettings.MovPicEnabled = False Then
+                                    _program.StarRating = _video.Rating
                                 End If
 
-                                _TvMovieProgram.Persist()
+                                If InStr(_program.Description, "existiert lokal") = 0 And String.IsNullOrEmpty(_program.SeriesNum) Then
+                                    _program.Description = "existiert lokal" & vbNewLine & _program.Description
+                                End If
 
-                            End If
+                                _program.Persist()
 
-                            EPGCounter = EPGCounter + 1
+                                'Clickfinder ProgramGuide Infos in TvMovieProgram schreiben, sofern aktiviert
+                                If MySettings.ClickfinderProgramGuideImportEnable = True Then
 
-                        Catch ex As Exception
-                            MyLog.[Error]("TVMovie: [GetVideoDatabaseInfos]: Loop _Result exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
-                            MyLog.[Error]("TVMovie: [GetVideoDatabaseInfos]: title:{0} idchannel:{1} startTime: {2}", _program.Title, _program.ReferencedChannel.DisplayName, _program.StartTime)
-                        End Try
-                    Next
+                                    'ggf. einen TvMovieProgram Eintrag erstellen, wenn Source z.B. Epg grab
+                                    Try
+                                        Dim _TvMovieProgramTest As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+                                    Catch ex As Exception
+                                        Dim _newTvMovieProgram As New TVMovieProgram(_program.IdProgram)
+                                        _newTvMovieProgram.Persist()
+                                    End Try
 
+                                    'idProgram in TvMovieProgram suchen & Daten aktualisieren
+                                    Dim _TvMovieProgram As TVMovieProgram = TVMovieProgram.Retrieve(_program.IdProgram)
+                                    _TvMovieProgram.idVideo = _video.idMyVid
+                                    _TvMovieProgram.local = True
+
+
+                                    If Not String.IsNullOrEmpty(_video.FileName) And String.IsNullOrEmpty(_TvMovieProgram.FileName) Then
+                                        _TvMovieProgram.FileName = _video.FileName
+                                    End If
+
+                                    _TvMovieProgram.Persist()
+
+                                End If
+
+                                EPGCounter = EPGCounter + 1
+
+                            Catch ex As Exception
+                                MyLog.[Error]("TVMovie: [GetVideoDatabaseInfos]: Loop _Result exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                                MyLog.[Error]("TVMovie: [GetVideoDatabaseInfos]: title:{0} idchannel:{1} startTime: {2}", _program.Title, _program.ReferencedChannel.DisplayName, _program.StartTime)
+                            End Try
+                        Next
+                    End If
                 Catch ex As Exception
                     MyLog.[Error]("TVMovie: [GetVideoDatabaseInfos]: Loop _VideoDB - exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
                 End Try

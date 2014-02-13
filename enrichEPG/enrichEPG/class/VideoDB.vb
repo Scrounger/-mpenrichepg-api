@@ -18,197 +18,354 @@
 
 #End Region
 
-Imports System.Collections.Generic
-Imports System.Globalization
 Imports System.IO
+Imports SQLite.NET
 Imports System.Runtime.CompilerServices
-Imports System.Threading
-Imports TvLibrary.Log
 
 Imports MediaPortal.Database
-Imports SQLite.NET
 Imports TvDatabase
 
 
 
-Public Class VideoDB
-    Implements IDisposable
+Namespace Database
 
-#Region "Members"
-    Private disposed As Boolean = False
-    Private Shared m_db As SQLiteClient = Nothing
-    Private Shared _VideoDBInfos As SQLiteResultSet
-    Private _VideoDBID As Integer
-    Private Shared _Index As Integer
-#End Region
+    Public Class myVideos
 
-#Region "Constructors"
-    Public Sub New()
-        OpenVideoDB()
-    End Sub
-
-    <MethodImpl(MethodImplOptions.Synchronized)> _
-    Private Sub OpenVideoDB()
-        Try
-            ' Maybe called by an exception
-            If m_db IsNot Nothing Then
-                Try
-                    m_db.Close()
-                    m_db.Dispose()
-                    MyLog.Debug("TVMovie: [OpenVideoDB]: Disposing current instance..")
-                Catch generatedExceptionName As Exception
-                End Try
-            End If
-
-
-            ' Open database
-            If File.Exists(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3") = True Then
-
-                m_db = New SQLiteClient(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
-                ' Retry 10 times on busy (DB in use or system resources exhausted)
-                m_db.BusyRetries = 20
-                ' Wait 100 ms between each try (default 10)
-                m_db.BusyRetryDelay = 1000
-
-                DatabaseUtility.SetPragmas(m_db)
-            Else
-                Dim layer As New TvBusinessLayer
-                MyLog.[Error]("TVMovie: [OpenVideoDB]: VideoDatabase not found: {0}", MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
-            End If
-
-
-        Catch ex As Exception
-            MyLog.[Error]("TVMovie: [OpenVideoDB]: VideoDatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
-            OpenVideoDB()
-        End Try
-        'Mylog.Info("picture database opened")
-    End Sub
-
-    Public Sub LoadAllVideoDBFilms()
-
-        Try
-            _VideoDBInfos = m_db.Execute("SELECT idMovie, strTitle, fRating FROM movieinfo ORDER BY strTitle ASC")
-            MyLog.Info("TVMovie: [LoadAllVideoDBFilms]: success")
-
-
-        Catch ex As Exception
-            MyLog.[Error]("TVMovie: [LoadAllVideoDBFilms]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
-            OpenVideoDB()
-        End Try
-
-    End Sub
+#Region "Member"
+        Private Shared _movie_InfoCoulumns As String = "idMovie, strTitle, IMDBID, (SELECT strPath FROM path INNER JOIN files ON path.idPath = files.idPath WHERE files.idMovie = movieinfo.idMovie) as FilePath, (SELECT strFilename FROM files WHERE idMovie = movieinfo.idMovie) as Filename, strPictureURL, strFanartURL, (SELECT watched from movie WHERE idMovie = movieinfo.idMovie) as watched, strPlot, fRating, iYear"
+        Private Shared _SqlMovPicConstructor As String = String.Format("Select {0} FROM movieinfo", _movie_InfoCoulumns)
 #End Region
 
 #Region "Properties"
-    Public ReadOnly Property Count() As Integer
-        Get
-            If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                Return _VideoDBInfos.Rows.Count
-            Else
-                Return 0
-            End If
-        End Get
-    End Property
 
-    'Get DBFields over Index
-    Private _Item As New VideoDBItem
-    Default Public ReadOnly Property VideoDatabase(ByVal Index As Integer) As VideoDBItem
-        Get
-            _Index = Index
-            Return _Item
-        End Get
-    End Property
-    Public Class VideoDBItem
-        Public ReadOnly Property VideoID() As Integer
-            Get
-                If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                    Return CInt(DatabaseUtility.[Get](_VideoDBInfos, _Index, "idMovie"))
-                Else
-                    Return 0
-                End If
-            End Get
-        End Property
-        Public ReadOnly Property Title() As String
-            Get
-                If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                    Return DatabaseUtility.[Get](_VideoDBInfos, _Index, "strTitle")
-                Else
-                    Return ""
-                End If
-            End Get
-        End Property
-
-        Public ReadOnly Property TitlebyFileName() As String
-            Get
-                If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                    Dim idMovie As Integer = CInt(DatabaseUtility.[Get](_VideoDBInfos, _Index, "idMovie"))
-                    Dim _VideoDBFileName As SQLiteResultSet
-
-                    _VideoDBFileName = m_db.Execute("SELECT strFilename FROM files WHERE idMovie = " & idMovie)
-
-                    If _VideoDBFileName IsNot Nothing AndAlso _VideoDBFileName.Rows.Count > 0 Then
-                        Return IO.Path.GetFileNameWithoutExtension(DatabaseUtility.[Get](_VideoDBFileName, 0, "strFilename"))
-                    Else
-                        Return String.Empty
-                    End If
-                Else
-                    Return ""
-                End If
-            End Get
-        End Property
-
-        Public ReadOnly Property FileName() As String
-            Get
-                If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                    Dim idMovie As Integer = CInt(DatabaseUtility.[Get](_VideoDBInfos, _Index, "idMovie"))
-                    Dim _VideoDBFileName As SQLiteResultSet
-
-                    _VideoDBFileName = m_db.Execute("SELECT * FROM path INNER JOIN files ON path.idPath = files.idPath WHERE idMovie = " & idMovie)
-
-                    If _VideoDBFileName IsNot Nothing AndAlso _VideoDBFileName.Rows.Count > 0 Then
-                        Return DatabaseUtility.[Get](_VideoDBFileName, 0, "strPath") & DatabaseUtility.[Get](_VideoDBFileName, 0, "strFilename")
-                    Else
-                        Return String.Empty
-                    End If
-                Else
-                    Return ""
-                End If
-            End Get
-        End Property
-
-        Public ReadOnly Property Rating() As Integer
-            Get
-                If _VideoDBInfos IsNot Nothing AndAlso _VideoDBInfos.Rows.Count > 0 Then
-                    Return CInt(Replace(DatabaseUtility.[Get](_VideoDBInfos, _Index, "fRating"), ".", ","))
-                Else
-                    Return 0
-                End If
-            End Get
-        End Property
-    End Class
+#Region "Values"
+        Private m_idMyVid As Integer
+        Private m_Title As String
+        Private m_imdb_id As String
+        'Private m_AlternateTitles As String
+        'Private m_TitleByFileName As String
+        Private m_Filename As String
+        Private m_year As String
+        Private m_Rating As Integer
+        'Private m_Certification As Integer
+        Private m_FanArt As String
+        Private m_Cover As String
+        Private m_summary As String
+        Private m_watched As Boolean
 
 #End Region
+        Public Property idMyVid() As Integer
+            Get
+                Return m_idMyVid
+            End Get
+            Set(ByVal value As Integer)
+                m_idMyVid = value
+            End Set
+        End Property
+        Public Property Title() As String
+            Get
+                Return m_Title
+            End Get
+            Set(ByVal value As String)
+                m_Title = value
+            End Set
+        End Property
 
-#Region "IDisposable Members"
+        Public Property imdb_id() As String
+            Get
+                Return m_imdb_id
+            End Get
+            Set(ByVal value As String)
+                m_imdb_id = value
+            End Set
+        End Property
 
-    Public Sub Dispose() Implements IDisposable.Dispose
-        If Not disposed Then
-            disposed = True
-            If m_db IsNot Nothing Then
+        'Public Property AlternateTitles() As String
+        '    Get
+        '        Return m_AlternateTitles
+        '    End Get
+        '    Set(ByVal value As String)
+        '        m_AlternateTitles = value
+        '    End Set
+        'End Property
+        'Public Property TitleByFileName()
+        '    Get
+        '        Return m_TitleByFileName
+        '    End Get
+        '    Set(ByVal value)
+        '        m_TitleByFileName = value
+        '    End Set
+        'End Property
+        Public Property FileName() As String
+            Get
+                Return m_Filename
+            End Get
+            Set(ByVal value As String)
+                m_Filename = value
+            End Set
+        End Property
+        Public Property year() As String
+            Get
+                Return m_year
+            End Get
+            Set(ByVal value As String)
+                m_year = value
+            End Set
+        End Property
+        Public Property Rating() As Integer
+            Get
+                Return m_Rating
+            End Get
+            Set(ByVal value As Integer)
+                m_Rating = value
+            End Set
+        End Property
+        'Public Property Certification() As Integer
+        '    Get
+        '        Return m_Certification
+        '    End Get
+        '    Set(ByVal value As Integer)
+        '        m_Certification = value
+        '    End Set
+        'End Property
+        Public Property FanArt() As String
+            Get
+                Return m_FanArt
+            End Get
+            Set(ByVal value As String)
+                m_FanArt = value
+            End Set
+        End Property
+        Public Property Cover() As String
+            Get
+                Return m_Cover
+            End Get
+            Set(ByVal value As String)
+                m_Cover = value
+            End Set
+        End Property
+
+        Public Property summary() As String
+            Get
+                Return m_summary
+            End Get
+            Set(ByVal value As String)
+                m_summary = value
+            End Set
+        End Property
+        Public Property watched() As Boolean
+            Get
+                Return m_watched
+            End Get
+            Set(ByVal value As Boolean)
+                m_watched = value
+            End Set
+        End Property
+#End Region
+
+#Region "Retrieval"
+        ''' <summary>
+        ''' Alle Filme aus MovPic Db laden, ORDER BY Title ASC
+        ''' </summary>
+        Public Shared Function ListAll() As IList(Of myVideos)
+            Dim _SqlString As String = String.Format("{0} ORDER BY strTitle", _
+                                                     _SqlMovPicConstructor)
+
+            Return Helper.GetMovies(_SqlString)
+        End Function
+#End Region
+
+#Region "Class ConnectDB"
+        Public Class ConnectDB
+            Implements IDisposable
+#Region "Members"
+            Private _disposed As Boolean = False
+            Private _SqlString As String = String.Empty
+            Private m_db As SQLiteClient = Nothing
+#End Region
+
+#Region "Constructors"
+            Public Sub New(ByVal SQLstring As String)
+                _SqlString = SQLstring
+                OpenMovingPicturesDB()
+            End Sub
+
+            <MethodImpl(MethodImplOptions.Synchronized)> _
+            Private Sub OpenMovingPicturesDB()
                 Try
-                    m_db.Close()
-                    m_db.Dispose()
-                Catch generatedExceptionName As Exception
-                End Try
-                m_db = Nothing
-            End If
-        End If
-    End Sub
-    Private Shared Function InlineAssignHelper(Of T)(ByRef target As T, ByVal value As T) As T
-        target = value
-        Return value
-    End Function
+                    ' Maybe called by an exception
+                    If m_db IsNot Nothing Then
+                        Try
+                            m_db.Close()
+                            m_db.Dispose()
+                            MyLog.Debug("enrichEPG: [MyVideos]: Disposing current instance..")
+                        Catch generatedExceptionName As Exception
+                        End Try
+                    End If
 
+
+                    ' Open database
+                    If File.Exists(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3") = True Then
+
+                        m_db = New SQLiteClient(MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
+                        ' Retry 10 times on busy (DB in use or system resources exhausted)
+                        m_db.BusyRetries = 20
+                        ' Wait 100 ms between each try (default 10)
+                        m_db.BusyRetryDelay = 1000
+
+                        DatabaseUtility.SetPragmas(m_db)
+                    Else
+                        MyLog.[Error]("enrichEPG: [MyVideos]: MyVideos Database not found: {0}", MySettings.MpDatabasePath & "\VideoDatabaseV5.db3")
+                    End If
+
+                Catch ex As Exception
+                    MyLog.[Error]("enrichEPG: [MyVideos]: MyVideos Database exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                    OpenMovingPicturesDB()
+                End Try
+                'Mylog.Info("picture database opened")
+            End Sub
 #End Region
 
-End Class
+#Region "Functions"
+            Public Function Execute() As SQLiteResultSet
+                Try
+                    Return m_db.Execute(_SqlString)
+                Catch ex As Exception
+                    MyLog.Error("[MyVideos]: [Execute]: exception err:{0} stack:{1}", ex.Message, ex.StackTrace)
+                    Return Nothing
+                End Try
+            End Function
+#End Region
+
+#Region " IDisposable Support "
+            ' Dieser Code wird von Visual Basic hinzugefügt, um das Dispose-Muster richtig zu implementieren.
+            Public Sub Dispose() Implements IDisposable.Dispose
+                If Not _disposed Then
+                    _disposed = True
+                    If m_db IsNot Nothing Then
+                        Try
+                            m_db.Close()
+                            m_db.Dispose()
+                        Catch generatedExceptionName As Exception
+                        End Try
+                        m_db = Nothing
+                    End If
+                End If
+            End Sub
+#End Region
+        End Class
+#End Region
+
+#Region "Class Helper"
+        Public Class Helper
+            Public Shared Function allowedSigns(ByVal expression As String) As String
+                Return Replace(Replace(System.Text.RegularExpressions.Regex.Replace(expression, "[\?]", "_"), "|", ""), "'", "''")
+            End Function
+
+            ''' <summary>
+            ''' Daten aus table movie_Info laden
+            ''' </summary>
+            Public Shared Function GetMovies(ByVal SQLstring As String) As IList(Of myVideos)
+                'Daten aus TvSeriesDB laden
+                Dim _con As New ConnectDB(SQLstring)
+                Dim _Result As SQLiteResultSet = _con.Execute
+                _con.Dispose()
+
+
+                Return ConvertToMyMovingPicturesList(_Result)
+            End Function
+
+            Public Shared Function GetActors(ByVal SQLstring As String) As IList(Of myActors)
+                'Daten aus TvSeriesDB laden
+                Dim _con As New ConnectDB(SQLstring)
+                Dim _Result As SQLiteResultSet = _con.Execute
+                _con.Dispose()
+
+
+                Return ConvertToMyActorsList(_Result)
+            End Function
+
+            Private Shared Function ConvertToMyMovingPicturesList(ByVal Result As SQLiteResultSet) As IList(Of myVideos)
+                Return Result.Rows.ConvertAll(Of myVideos)(New Converter(Of SQLiteResultSet.Row, myVideos)(Function(c As SQLiteResultSet.Row) New myVideos() With { _
+                            .idMyVid = c.fields(0), _
+                            .Title = c.fields(1), _
+                            .imdb_id = c.fields(2), _
+                            .FileName = c.fields(3) & c.fields(4), _
+                            .Cover = c.fields(5), _
+                            .FanArt = c.fields(6), _
+                            .watched = If(Not String.IsNullOrEmpty(c.fields(7)), c.fields(7), False), _
+                            .m_summary = c.fields(8), _
+                            .Rating = c.fields(9), _
+                            .year = c.fields(10)}))
+            End Function
+
+            Private Shared Function ConvertToMyActorsList(ByVal Result As SQLiteResultSet) As IList(Of myActors)
+                Return Result.Rows.ConvertAll(Of myActors)(New Converter(Of SQLiteResultSet.Row, myActors)(Function(c As SQLiteResultSet.Row) New myActors() With { _
+                            .idActor = c.fields(0), _
+                            .strActor = c.fields(1), _
+                            .thumbURL = c.fields(2) _
+                            }))
+            End Function
+        End Class
+#End Region
+
+#Region "myActors"
+        Public Class myActors
+#Region "Member"
+            Private Shared _movie_InfoCoulumns As String = "idActor, strActor, (SELECT thumbURL FROM actorinfo where actorinfo.idActor = actors.idActor) as thumbURL"
+            Private Shared _SqlMovPicConstructor As String = String.Format("Select {0} FROM actors", _movie_InfoCoulumns)
+#End Region
+
+#Region "Properties"
+            Private m_idActor As Integer
+            Public Property idActor As Integer
+                Get
+                    Return m_idActor
+                End Get
+                Set(ByVal Value As Integer)
+                    m_idActor = Value
+                End Set
+            End Property
+
+            Private m_strActor As String
+            Public Property strActor As String
+                Get
+                    Return m_strActor
+                End Get
+                Set(ByVal Value As String)
+                    m_strActor = Value
+                End Set
+            End Property
+
+            Private m_thumbURL As String
+            Public Property thumbURL As String
+                Get
+                    Return m_thumbURL
+                End Get
+                Set(ByVal Value As String)
+                    m_thumbURL = Value
+                End Set
+            End Property
+#End Region
+
+#Region "Retrieval"
+            ''' <summary>
+            ''' Alle Filme aus MovPic Db laden, ORDER BY Title ASC
+            ''' </summary>
+            Public Shared Function ListAll() As IList(Of myActors)
+                Dim _SqlString As String = String.Format("{0} ORDER BY strActor", _
+                                                         _SqlMovPicConstructor)
+
+                Return Helper.GetActors(_SqlString)
+            End Function
+#End Region
+
+
+
+        End Class
+#End Region
+
+    End Class
+End Namespace
+
+

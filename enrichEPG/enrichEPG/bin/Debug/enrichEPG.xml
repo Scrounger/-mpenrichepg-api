@@ -138,6 +138,18 @@ enrichEPG
 	<summary>
  Instances of this class represent the properties and methods of a row in the table <b>TvMovieSeriesMapping</b>.
  </summary>
+</member><member name="M:enrichEPG.Database.myVideos.ListAll">
+	<summary>
+ Alle Filme aus MovPic Db laden, ORDER BY Title ASC
+ </summary>
+</member><member name="M:enrichEPG.Database.myVideos.Helper.GetMovies(System.String)">
+	<summary>
+ Daten aus table movie_Info laden
+ </summary>
+</member><member name="M:enrichEPG.Database.myVideos.myActors.ListAll">
+	<summary>
+ Alle Filme aus MovPic Db laden, ORDER BY Title ASC
+ </summary>
 </member><member name="P:enrichEPG.My.Resources.Resources.ResourceManager">
 	<summary>
   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
